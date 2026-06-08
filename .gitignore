@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+
+# Vercel
+.vercel/
+
+# Environment variables
+.env
+.env*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Source CVs and raw local assets.
+# The website uses public/hero.png, which should remain tracked.
+/Currículum Lucas López.docx
+/Resume Lucas Lopez Polywelder - Mech Fitter.pdf
+/hero.png
+/1.jpeg
+/2.jpeg
+/3.jpeg
+/4.jpeg
+/5.png

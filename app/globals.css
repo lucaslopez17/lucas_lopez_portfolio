@@ -461,8 +461,8 @@ a {
 }
 
 .skill-orb-2 {
-  right: 7%;
-  top: 11%;
+  left: 7%;
+  top: 31%;
   animation: floatB 7.2s var(--ease) infinite;
 }
 
@@ -1111,8 +1111,8 @@ a {
   }
 
   .skill-orb-2 {
-    right: 0;
-    top: 10%;
+    left: 0;
+    top: 19%;
   }
 
   .skill-orb-3 {
@@ -1224,7 +1224,8 @@ a {
   }
 
   .skill-orb-2 {
-    top: 13%;
+    left: 0;
+    top: 14%;
   }
 
   .skill-orb-3 {

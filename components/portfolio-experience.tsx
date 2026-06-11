@@ -216,9 +216,6 @@ function Hero({
           </motion.p>
         </div>
 
-        <div className="side-signal side-left">{t.hero.signalLeft}</div>
-        <div className="side-signal side-right">{t.hero.signalRight}</div>
-
         <div className="floating-nav" aria-label="Expertise navigation">
           {nodes.map((node, index) => {
             const Icon = expertiseIcons[node.id] ?? Factory;

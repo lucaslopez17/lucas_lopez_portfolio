@@ -52,8 +52,6 @@ export type PortfolioCopy = {
     name: string;
     roles: string[];
     tagline: string;
-    signalLeft: string;
-    signalRight: string;
     proofPoints: string[];
   };
   sections: {
@@ -117,8 +115,6 @@ export const copy: Record<Locale, PortfolioCopy> = {
       name: "Lucas Lopez",
       roles: ["Industrial Engineer", "Mechanical Fitter & Polywelder"],
       tagline: "Designed in engineering. Proven in the field.",
-      signalLeft: "Planning / systems / optimization",
-      signalRight: "Welding / maintenance / site execution",
       proofPoints: [
         "Mining dewatering",
         "HDPE pipeline systems",
@@ -505,8 +501,6 @@ export const copy: Record<Locale, PortfolioCopy> = {
       name: "Lucas Lopez",
       roles: ["Ingeniero Industrial", "Mechanical Fitter & Polywelder"],
       tagline: "Diseñado desde la ingeniería. Probado en campo.",
-      signalLeft: "Planificación / sistemas / optimización",
-      signalRight: "Soldadura / mantenimiento / ejecución en sitio",
       proofPoints: [
         "Dewatering minero",
         "Sistemas de tubería HDPE",

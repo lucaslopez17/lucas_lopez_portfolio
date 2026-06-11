@@ -411,7 +411,6 @@ function Hero({
 
           <section className="split-panel split-overview-panel" aria-labelledby="hero-title">
             <NetworkLines />
-            <span className="split-axis" />
             <div className="face-hotspots" aria-label="Split portrait navigation">
               <button
                 className="face-hotspot face-hotspot-engineering"

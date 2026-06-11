@@ -785,28 +785,6 @@ html[data-theme="dark"] .profile-experience-strip article {
   outline-offset: -8px;
 }
 
-.split-axis {
-  position: absolute;
-  top: 4%;
-  bottom: 8%;
-  left: 50%;
-  width: 1px;
-  background: linear-gradient(transparent, rgba(255, 255, 255, 0.92), var(--cyan), transparent);
-  box-shadow: 0 0 28px rgba(255, 255, 255, 0.78);
-  z-index: 4;
-  transition: background 280ms var(--ease), box-shadow 280ms var(--ease);
-}
-
-.portrait-stage.is-engineering-active .split-axis {
-  background: linear-gradient(transparent, var(--blue), rgba(255, 255, 255, 0.92), transparent);
-  box-shadow: 0 0 34px rgba(37, 99, 235, 0.78);
-}
-
-.portrait-stage.is-field-active .split-axis {
-  background: linear-gradient(transparent, var(--orange), rgba(255, 255, 255, 0.92), transparent);
-  box-shadow: 0 0 34px rgba(249, 115, 22, 0.72);
-}
-
 .scanline {
   display: none;
 }

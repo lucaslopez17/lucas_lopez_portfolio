@@ -2746,8 +2746,8 @@ html[data-theme="dark"] .software-meter {
     position: absolute;
     left: 50%;
     top: auto;
-    bottom: 2%;
-    transform: translateX(-50%);
+    bottom: 0;
+    transform: translate(-50%, 18%);
     order: 2;
     width: 100%;
     margin: 0;
@@ -2757,7 +2757,7 @@ html[data-theme="dark"] .software-meter {
   }
 
   .glitch-title {
-    font-size: clamp(2.65rem, 14.5vw, 4.2rem);
+    font-size: clamp(2.35rem, 13vw, 3.7rem);
     color: #f7fbff;
     text-shadow: 0 10px 34px rgba(0, 0, 0, 0.76);
   }
@@ -2770,7 +2770,7 @@ html[data-theme="dark"] .software-meter {
 
   .hero-tagline {
     max-width: 290px;
-    font-size: 0.9rem;
+    font-size: 0.84rem;
     color: rgba(255, 255, 255, 0.82);
     text-shadow: 0 4px 26px rgba(0, 0, 0, 0.86);
   }

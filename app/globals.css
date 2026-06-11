@@ -73,7 +73,7 @@ a {
     linear-gradient(rgba(247, 244, 239, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(247, 244, 239, 0.045) 1px, transparent 1px);
   background-size: 68px 68px;
-  opacity: 0.36;
+  opacity: 0.16;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 88%);
 }
 
@@ -213,7 +213,7 @@ a {
   inset: 8% 4%;
   border: 1px solid rgba(255, 255, 255, 0.28);
   transform: rotate(-2deg);
-  box-shadow: 0 0 110px rgba(198, 83, 69, 0.18), inset 0 0 90px rgba(198, 83, 69, 0.16);
+  box-shadow: 0 0 48px rgba(0, 0, 0, 0.42);
 }
 
 .portrait-frame {
@@ -261,7 +261,7 @@ a {
 
 .network-lines circle {
   fill: var(--orange);
-  filter: drop-shadow(0 0 18px rgba(198, 83, 69, 0.95));
+  filter: none;
 }
 
 .hero-copy {
@@ -314,7 +314,7 @@ a {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.18;
 }
 
 .glitch-title::before {
@@ -375,11 +375,9 @@ a {
   align-items: center;
   gap: 10px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 48%),
-    linear-gradient(135deg, rgba(18, 18, 18, 0.86), rgba(18, 18, 18, 0.55));
-  backdrop-filter: blur(16px);
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.36);
+  background: rgba(18, 18, 18, 0.82);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
   cursor: pointer;
   pointer-events: auto;
   color: var(--ink);
@@ -392,10 +390,9 @@ a {
   z-index: 12;
   border-color: rgba(198, 83, 69, 0.82);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 42%),
-    linear-gradient(315deg, rgba(198, 83, 69, 0.16), transparent 48%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
     rgba(18, 18, 18, 0.92);
-  box-shadow: 0 26px 90px rgba(198, 83, 69, 0.22);
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.38);
 }
 
 .skill-orb::before {
@@ -1184,17 +1181,22 @@ a {
 
   .portrait-orbit {
     width: calc(100% + 24px);
-    height: clamp(520px, 72svh, 660px);
+    height: clamp(430px, 58svh, 560px);
     min-height: 0;
     margin-inline: -12px;
   }
 
   .hero-copy {
-    left: 50%;
-    top: min(480px, 62svh);
-    width: min(94vw, 420px);
-    padding: 10px 12px;
-    background: linear-gradient(90deg, transparent, rgba(8, 8, 8, 0.72), transparent);
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    order: 2;
+    width: 100%;
+    margin: 14px 0 0;
+    padding: 0 4px;
+    background: none;
+    backdrop-filter: none;
   }
 
   .glitch-title {
@@ -1214,12 +1216,13 @@ a {
   .floating-nav {
     position: relative;
     inset: auto;
+    order: 3;
     z-index: 9;
     display: grid;
     grid-template-columns: 1fr;
     gap: 8px;
     width: 100%;
-    margin: 12px auto 0;
+    margin: 18px auto 0;
     pointer-events: auto;
   }
 
@@ -1234,7 +1237,10 @@ a {
     max-width: none;
     min-width: 0;
     min-height: 48px;
-    padding: 12px 14px;
+    padding: 13px 14px;
+    background: rgba(247, 244, 239, 0.055);
+    border-color: rgba(247, 244, 239, 0.16);
+    box-shadow: none;
   }
 
   .skill-orb.is-open {

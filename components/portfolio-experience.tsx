@@ -341,32 +341,36 @@ function ExperienceSection({
     >
       <div className="experience-console">
         <div className="experience-map" aria-label={t.sections.experience.title}>
-          {t.sections.experience.items.map((item, index) => (
-            <div className="experience-node-wrap" key={item.id}>
-              <button
-                type="button"
-                className={selected.id === item.id ? "experience-node is-active" : "experience-node"}
-                onClick={() => setActiveExperience(item)}
-                aria-expanded={selected.id === item.id}
-              >
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{item.role}</strong>
-                <small>{item.focus}</small>
-              </button>
-              <AnimatePresence>
-                {selected.id === item.id ? (
-                  <motion.article
-                    className="experience-inline"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                  >
-                    <ExperienceDetailBody t={t} selected={item} />
-                  </motion.article>
-                ) : null}
-              </AnimatePresence>
-            </div>
-          ))}
+          {t.sections.experience.items.map((item, index) => {
+            const isOpen = activeExperience?.id === item.id;
+
+            return (
+              <div className="experience-node-wrap" key={item.id}>
+                <button
+                  type="button"
+                  className={isOpen ? "experience-node is-active" : "experience-node"}
+                  onClick={() => setActiveExperience(isOpen ? null : item)}
+                  aria-expanded={isOpen}
+                >
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{item.role}</strong>
+                  <small>{item.focus}</small>
+                </button>
+                <AnimatePresence>
+                  {isOpen ? (
+                    <motion.article
+                      className="experience-inline"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                    >
+                      <ExperienceDetailBody t={t} selected={item} />
+                    </motion.article>
+                  ) : null}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
         <AnimatePresence mode="wait">
           <motion.article

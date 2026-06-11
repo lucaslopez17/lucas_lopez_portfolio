@@ -2519,6 +2519,17 @@ html[data-theme="dark"] .software-meter {
 }
 
 @media (min-width: 641px) and (max-width: 980px) {
+  .hero-copy {
+    position: absolute;
+    left: 50%;
+    top: auto;
+    bottom: 2%;
+    transform: translateX(-50%);
+    width: min(920px, 94vw);
+    margin: 0;
+    padding: 0 8px;
+  }
+
   .split-scroll-track {
     height: 100svh;
     display: flex;

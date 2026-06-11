@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  ArrowLeft,
-  ArrowRight,
   Languages,
   Mail,
   MapPin,
@@ -167,11 +165,41 @@ function Hero({
       return;
     }
 
-    requestAnimationFrame(() => {
-      track.scrollTo({ left: track.clientWidth, behavior: "auto" });
-      requestAnimationFrame(() => syncPortraitPosition(track));
+    const trackElement = track;
+
+    function centerTrack() {
+      trackElement.scrollTo({ left: trackElement.clientWidth, behavior: "auto" });
+      syncPortraitPosition(trackElement);
+    }
+
+    const frame = requestAnimationFrame(() => {
+      centerTrack();
+      window.setTimeout(centerTrack, 140);
     });
+
+    return () => cancelAnimationFrame(frame);
   }, []);
+
+  useEffect(() => {
+    function handleWindowScroll() {
+      const track = trackRef.current;
+      if (!track || window.scrollY < window.innerHeight * 0.72) {
+        return;
+      }
+
+      const overviewLeft = track.clientWidth;
+      if (Math.abs(track.scrollLeft - overviewLeft) > 8) {
+        track.scrollTo({ left: overviewLeft, behavior: "smooth" });
+      }
+
+      if (activeProfileSide) {
+        returnToOverview();
+      }
+    }
+
+    window.addEventListener("scroll", handleWindowScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleWindowScroll);
+  }, [activeProfileSide, returnToOverview]);
 
   function scrollToPanel(panel: "engineering" | "overview" | "field") {
     const track = trackRef.current;
@@ -202,6 +230,30 @@ function Hero({
     if (!side && activeProfileSide) {
       returnToOverview();
     }
+  }
+
+  function handleTrackWheel(event: React.WheelEvent<HTMLDivElement>) {
+    if (event.deltaY <= 14 || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
+      return;
+    }
+
+    const target = event.target as Element;
+    const contentScroller = target.closest(".split-panel-content") as HTMLElement | null;
+    const contentCanScroll =
+      contentScroller && contentScroller.scrollHeight > contentScroller.clientHeight + 8;
+    const contentHasRoom =
+      contentScroller &&
+      contentScroller.scrollTop < contentScroller.scrollHeight - contentScroller.clientHeight - 10;
+
+    if (contentCanScroll && contentHasRoom) {
+      return;
+    }
+
+    event.preventDefault();
+    scrollToPanel("overview");
+    window.setTimeout(() => {
+      window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+    }, activeProfileSide ? 220 : 0);
   }
 
   function ProfileCopy({ side }: { side: ProfileSide }) {
@@ -327,16 +379,10 @@ function Hero({
         {activeProfileSide ? (
           <button
             type="button"
-            className={`overview-back side-${activeProfileSide}`}
+            className={`overview-return-zone side-${activeProfileSide}`}
             onClick={() => scrollToPanel("overview")}
             aria-label={t.sections.profiles[activeProfileSide].back}
-          >
-            {activeProfileSide === "engineering" ? (
-              <ArrowRight size={20} aria-hidden="true" />
-            ) : (
-              <ArrowLeft size={20} aria-hidden="true" />
-            )}
-          </button>
+          />
         ) : null}
         <div className="continuous-portrait" aria-hidden="true">
           <div className="continuous-portrait-track" ref={portraitRef}>
@@ -350,7 +396,13 @@ function Hero({
             />
           </div>
         </div>
-        <div className="split-scroll-track" ref={trackRef} onScroll={handleTrackScroll} aria-label="Horizontal profile navigation">
+        <div
+          className="split-scroll-track"
+          ref={trackRef}
+          onScroll={handleTrackScroll}
+          onWheel={handleTrackWheel}
+          aria-label="Horizontal profile navigation"
+        >
           <section className="split-panel split-profile-panel engineering-page" aria-label={t.sections.profiles.engineering.title}>
             <div className="split-panel-content">
               <ProfileCopy side="engineering" />

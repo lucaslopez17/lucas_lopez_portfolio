@@ -476,14 +476,33 @@ html[data-theme="dark"] .field-page {
 
 .engineering-page .split-panel-content {
   grid-column: 1;
+  justify-self: start;
+  width: min(760px, 42vw);
 }
 
 .field-page .split-panel-content {
   grid-column: 2;
+  justify-self: start;
+  width: min(760px, 42vw);
+  text-align: left;
 }
 
 .profile-page-copy {
-  max-width: min(760px, 42vw);
+  max-width: 100%;
+}
+
+.field-page .profile-page-copy,
+.field-page .profile-points,
+.field-page .mode-list-block,
+.field-page .profile-skill-card,
+.field-page .profile-experience-strip article {
+  text-align: left;
+}
+
+.field-page .profile-points > div,
+.field-page .ticket-list,
+.field-page .skill-tags {
+  justify-content: flex-start;
 }
 
 .profile-page-copy h2 {
@@ -2215,6 +2234,8 @@ html[data-theme="dark"] .software-meter {
   .engineering-page .split-panel-content,
   .field-page .split-panel-content {
     grid-column: auto;
+    width: 100%;
+    justify-self: stretch;
   }
 
   .profile-page-copy h2 {
@@ -2566,10 +2587,14 @@ html[data-theme="dark"] .software-meter {
 
   .engineering-page .split-panel-content {
     grid-column: 1;
+    width: min(760px, 42vw);
+    justify-self: start;
   }
 
   .field-page .split-panel-content {
     grid-column: 2;
+    width: min(760px, 42vw);
+    justify-self: start;
   }
 
   .split-panel-portrait,

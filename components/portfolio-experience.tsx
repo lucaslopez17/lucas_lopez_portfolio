@@ -12,15 +12,19 @@ import {
   Languages,
   Mail,
   MapPin,
+  Moon,
   Pickaxe,
   Phone,
   ShieldCheck,
   Sparkles,
+  Sun,
   Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { copy, type Experience, type ExpertiseNode, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
+
+type ThemeMode = "dark" | "light";
 
 const expertiseIcons: Record<string, LucideIcon> = {
   "industrial-engineering": Factory,
@@ -40,8 +44,18 @@ function getInitialLocale(): Locale {
   return stored === "es" ? "es" : "en";
 }
 
+function getInitialTheme(): ThemeMode {
+  if (typeof window === "undefined") {
+    return "light";
+  }
+
+  const stored = window.localStorage.getItem("lucas-portfolio-theme");
+  return stored === "dark" ? "dark" : "light";
+}
+
 export default function PortfolioExperience() {
   const [locale, setLocale] = useState<Locale>("en");
+  const [theme, setTheme] = useState<ThemeMode>("light");
   const [activeNode, setActiveNode] = useState<ExpertiseNode | null>(null);
   const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
   const t = copy[locale];
@@ -55,12 +69,18 @@ export default function PortfolioExperience() {
 
   useEffect(() => {
     setLocale(getInitialLocale());
+    setTheme(getInitialTheme());
   }, []);
 
   useEffect(() => {
     document.documentElement.lang = locale;
     window.localStorage.setItem("lucas-portfolio-locale", locale);
   }, [locale]);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("lucas-portfolio-theme", theme);
+  }, [theme]);
 
   function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -71,7 +91,7 @@ export default function PortfolioExperience() {
   return (
     <main className="site-shell" onPointerMove={handlePointerMove}>
       <AmbientSystem />
-      <LanguageToggle locale={locale} setLocale={setLocale} label={t.ui.language} />
+      <ControlDock locale={locale} setLocale={setLocale} theme={theme} setTheme={setTheme} label={t.ui.language} />
       <Hero
         t={t}
         activeNode={activeNode}
@@ -89,19 +109,24 @@ export default function PortfolioExperience() {
   );
 }
 
-function LanguageToggle({
+function ControlDock({
   locale,
   setLocale,
+  theme,
+  setTheme,
   label,
 }: {
   locale: Locale;
   setLocale: (locale: Locale) => void;
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
   label: string;
 }) {
   return (
-    <div className="language-dock" aria-label={label}>
-      <span>{label}</span>
-      <div className="language-switch">
+    <div className="control-dock" aria-label={`${label} and theme controls`}>
+      <div className="control-group">
+        <span>{label}</span>
+        <div className="language-switch">
         {(["en", "es"] as Locale[]).map((option) => (
           <button
             key={option}
@@ -113,7 +138,18 @@ function LanguageToggle({
             {option.toUpperCase()}
           </button>
         ))}
+        </div>
       </div>
+      <button
+        className="theme-toggle"
+        type="button"
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+        aria-pressed={theme === "dark"}
+      >
+        {theme === "dark" ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
+        <span>{theme === "dark" ? "Light" : "Dark"}</span>
+      </button>
     </div>
   );
 }

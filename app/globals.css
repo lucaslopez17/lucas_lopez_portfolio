@@ -919,12 +919,12 @@ html[data-theme="dark"] .orb-expanded small {
 
 .software-list {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .software-row {
   display: grid;
-  gap: 7px;
+  gap: 8px;
 }
 
 .software-row-header {
@@ -939,17 +939,10 @@ html[data-theme="dark"] .orb-expanded small {
   line-height: 1.2;
 }
 
-.software-row-header span {
-  color: var(--blue);
-  font-family: var(--font-body), Arial, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
 .software-meter {
-  height: 7px;
+  height: 6px;
   border-radius: 999px;
-  background: rgba(20, 20, 20, 0.1);
+  background: rgba(20, 20, 20, 0.08);
   overflow: hidden;
 }
 
@@ -966,8 +959,9 @@ html[data-theme="dark"] .software-meter {
 
 .software-row small {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   line-height: 1.35;
+  text-align: right;
 }
 
 .skill-tags span,

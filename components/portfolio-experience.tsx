@@ -420,12 +420,11 @@ function SkillsSection({ t }: { t: PortfolioCopy }) {
                   <div className="software-row" key={item.name}>
                     <div className="software-row-header">
                       <strong>{item.name}</strong>
-                      <span>{item.level}%</span>
+                      <small>{item.note}</small>
                     </div>
                     <div className="software-meter" aria-label={`${item.name}: ${item.level}%`}>
                       <span style={{ width: `${item.level}%` }} />
                     </div>
-                    <small>{item.note}</small>
                   </div>
                 ))}
               </div>

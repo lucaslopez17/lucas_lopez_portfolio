@@ -908,6 +908,58 @@ html[data-theme="dark"] .orb-expanded small {
   gap: 8px;
 }
 
+.software-list {
+  display: grid;
+  gap: 14px;
+}
+
+.software-row {
+  display: grid;
+  gap: 7px;
+}
+
+.software-row-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.software-row-header strong {
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+.software-row-header span {
+  color: var(--blue);
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.82rem;
+}
+
+.software-meter {
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.1);
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .software-meter {
+  background: rgba(247, 244, 239, 0.14);
+}
+
+.software-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blue), var(--orange));
+}
+
+.software-row small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
 .skill-tags span,
 .credential-block span {
   display: inline-flex;

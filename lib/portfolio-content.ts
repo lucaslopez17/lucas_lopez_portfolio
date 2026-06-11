@@ -18,9 +18,16 @@ export type Experience = {
   achievements: string[];
 };
 
+export type SoftwareSkill = {
+  name: string;
+  level: number;
+  note: string;
+};
+
 export type SkillGroup = {
   title: string;
-  skills: string[];
+  skills?: string[];
+  software?: SoftwareSkill[];
 };
 
 export type EducationItem = {
@@ -72,6 +79,7 @@ export type PortfolioCopy = {
     skills: {
       title: string;
       eyebrow: string;
+      levelLabel: string;
       groups: SkillGroup[];
     };
     education: {
@@ -127,13 +135,13 @@ export const copy: Record<Locale, PortfolioCopy> = {
         title: "Two Operating Modes. One Technical Mind.",
         eyebrow: "Professional identity",
         intro:
-          "Lucas connects engineering analysis with practical execution: planning, process improvement, fabrication, welding, maintenance and mining operations.",
+          "Lucas connects engineering analysis with hands-on execution: planning, process improvement, fabrication, welding, maintenance and mining operations.",
         nodes: [
           {
             id: "industrial-engineering",
             label: "Industrial Engineering",
             side: "engineering",
-            summary: "Systems thinking for planning, quality and operational improvement.",
+            summary: "Systems thinking for planning, quality, documentation and operational improvement.",
             details: [
               "Bachelor of Industrial Engineering in progress at Universidad de Palermo.",
               "Background in mechanical engineering studies at Universidad Tecnológica Nacional.",
@@ -177,10 +185,10 @@ export const copy: Record<Locale, PortfolioCopy> = {
             id: "technical-documentation",
             label: "Technical Documentation",
             side: "engineering",
-            summary: "Manuals, drawings, CAD and machinery documentation.",
+            summary: "Manuals, mechanical drawings, CAD and machinery documentation.",
             details: [
               "Machine manuals for PET and RET production lines.",
-              "Mechanical drawings and administrative engineering tasks.",
+              "Mechanical drawing preparation and engineering support tasks.",
               "Advanced AutoCAD with Inventor and SolidWorks experience.",
             ],
           },
@@ -192,7 +200,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "HDPE spool and fitting fabrication.",
               "Pump, valve and flange installation support.",
-              "Use of hand and power tools in field conditions.",
+              "Use of hand tools, power tools and measuring equipment in field conditions.",
             ],
           },
         ],
@@ -300,14 +308,15 @@ export const copy: Record<Locale, PortfolioCopy> = {
       skills: {
         title: "Capability Matrix",
         eyebrow: "Skills, software and tools",
+        levelLabel: "Knowledge level",
         groups: [
           {
             title: "Engineering",
             skills: [
               "Industrial engineering",
               "Mechanical design",
-              "Technical drawing",
-              "Blueprint interpretation",
+              "Mechanical drafting",
+              "Mechanical drawing reading",
               "Quality support",
               "Technical documentation",
               "Process improvement",
@@ -315,14 +324,14 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Software",
-            skills: [
-              "Microsoft Office intermediate-advanced",
-              "AutoCAD advanced",
-              "Inventor intermediate-advanced",
-              "SolidWorks intermediate",
-              "Web design",
-              "Management software",
-              "Fulcrum weld records",
+            software: [
+              { name: "Microsoft Office", level: 84, note: "Intermediate-advanced" },
+              { name: "AutoCAD", level: 90, note: "Advanced" },
+              { name: "Autodesk Inventor", level: 78, note: "Intermediate-advanced" },
+              { name: "SolidWorks", level: 66, note: "Intermediate" },
+              { name: "Fulcrum", level: 70, note: "Weld records and field documentation" },
+              { name: "Management systems", level: 64, note: "Operational and engineering workflows" },
+              { name: "Web design", level: 58, note: "Working knowledge" },
             ],
           },
           {
@@ -345,7 +354,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
               "HDPE line installation",
               "Open pit environments",
               "Underground environments",
-              "Shutdowns",
+              "Maintenance shutdowns",
               "Tier 1 mining standards",
             ],
           },
@@ -367,7 +376,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             skills: [
               "Planning",
               "Problem solving",
-              "Site safety requirements",
+              "Site safety awareness",
               "Isolation procedures",
               "Technical communication",
               "Trilingual communication",
@@ -419,7 +428,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           "WHS Statutory Responsibilities for Mining Supervisors Course",
           "Mask Fit Test",
         ],
-        languages: ["Spanish - Native", "Portuguése - Fluent", "English - Fluent (IELTS C1 Nov 2025)"],
+        languages: ["Spanish - Native", "Portuguese - Fluent", "English - Fluent (IELTS C1 Nov 2025)"],
       },
       projects: {
         title: "Applied Work",
@@ -513,13 +522,13 @@ export const copy: Record<Locale, PortfolioCopy> = {
         title: "Dos Modos de Trabajo. Una Mente Técnica.",
         eyebrow: "Identidad profesional",
         intro:
-          "Lucas conecta análisis de ingeniería con ejecución practica: planificación, mejora de procesos, fabricación, soldadura, mantenimiento y operaciónes mineras.",
+          "Lucas conecta análisis de ingeniería con ejecución práctica: planificación, mejora de procesos, fabricación, soldadura, mantenimiento y operaciones mineras.",
         nodes: [
           {
             id: "industrial-engineering",
             label: "Ingeniería Industrial",
             side: "engineering",
-            summary: "Pensamiento sistemico para planificación, calidad y mejora operativa.",
+            summary: "Pensamiento sistémico para planificación, calidad, documentación y mejora operativa.",
             details: [
               "Ingeniería Industrial en curso en Universidad de Palermo.",
               "Base previa en Ingeniería Mecánica en Universidad Tecnológica Nacional.",
@@ -550,11 +559,11 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "mining-operations",
-            label: "Operaciónes Mineras",
+            label: "Operaciones Mineras",
             side: "field",
-            summary: "Experiencia open pit y underground bajo estandares Tier 1.",
+            summary: "Experiencia en entornos open pit y underground bajo estándares Tier 1.",
             details: [
-              "Sistemas de dewatering minero, reubicación de bombas e instalación de lineas HDPE.",
+              "Sistemas de dewatering minero, reubicación de bombas e instalación de líneas HDPE.",
               "Experiencia en shutdowns y trabajos de sitio de ritmo acelerado.",
               "Experiencia bajo estándares exigentes de sitio minero.",
             ],
@@ -563,22 +572,22 @@ export const copy: Record<Locale, PortfolioCopy> = {
             id: "technical-documentation",
             label: "Documentación Técnica",
             side: "engineering",
-            summary: "Manuales, plaños, CAD y documentación de maquinaria.",
+            summary: "Manuales, planos mecánicos, CAD y documentación de maquinaria.",
             details: [
-              "Manuales de maquinas para lineas productivas PET y RET.",
-              "Plaños mecánicos y tareas administrativas de ingeniería.",
+              "Manuales de máquinas para líneas productivas PET y RET.",
+              "Preparación de planos mecánicos y soporte de ingeniería.",
               "AutoCAD avanzado con experiencia en Inventor y SolidWorks.",
             ],
           },
           {
             id: "fabrication",
-            label: "Fabricacion",
+            label: "Fabricación",
             side: "field",
-            summary: "Fabricacion de spools y fittings con soporte de mechanical fitting.",
+            summary: "Fabricación de spools y fittings con soporte de mechanical fitting.",
             details: [
-              "Fabricacion de spools y fittings HDPE.",
+              "Fabricación de spools y fittings HDPE.",
               "Soporte en instalación de bombas, válvulas y bridas.",
-              "Uso de herramientas manuales y electricas en condiciones de campo.",
+              "Uso de herramientas manuales, eléctricas y de medición en condiciones de campo.",
             ],
           },
         ],
@@ -686,14 +695,15 @@ export const copy: Record<Locale, PortfolioCopy> = {
       skills: {
         title: "Matriz de Capacidades",
         eyebrow: "Skills, software y herramientas",
+        levelLabel: "Nivel de manejo",
         groups: [
           {
             title: "Ingeniería",
             skills: [
               "Ingeniería industrial",
               "Diseño mecánico",
-              "Dibujo técnico",
-              "Interpretación de plaños",
+              "Dibujo mecánico",
+              "Lectura de planos mecánicos",
               "Soporte de calidad",
               "Documentación técnica",
               "Mejora de procesos",
@@ -701,14 +711,14 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Software",
-            skills: [
-              "Microsoft Office medio-avanzado",
-              "AutoCAD avanzado",
-              "Inventor medio-avanzado",
-              "SolidWorks medio",
-              "Diseño web",
-              "Software de gestión",
-              "Registros de soldadura Fulcrum",
+            software: [
+              { name: "Microsoft Office", level: 84, note: "Intermedio-avanzado" },
+              { name: "AutoCAD", level: 90, note: "Avanzado" },
+              { name: "Autodesk Inventor", level: 78, note: "Intermedio-avanzado" },
+              { name: "SolidWorks", level: 66, note: "Intermedio" },
+              { name: "Fulcrum", level: 70, note: "Registros de soldadura y documentación de campo" },
+              { name: "Sistemas de gestión", level: 64, note: "Flujos operativos y de ingeniería" },
+              { name: "Diseño web", level: 58, note: "Conocimiento funcional" },
             ],
           },
           {
@@ -719,20 +729,20 @@ export const copy: Record<Locale, PortfolioCopy> = {
               "Extrusion and socket welding",
               "Hot air gun welding",
               "Interpretación de WPS",
-              "Control de parametros de soldadura",
+              "Control de parámetros de soldadura",
               "Tie-ins HDPE",
             ],
           },
           {
-            title: "Operaciónes de Campo",
+            title: "Operaciones de Campo",
             skills: [
               "Dewatering minero",
               "Reubicación de bombas",
-              "Instalación de lineas HDPE",
+              "Instalación de líneas HDPE",
               "Ambientes open pit",
               "Ambientes underground",
-              "Shutdowns",
-              "Estandares de mineria Tier 1",
+              "Shutdowns de mantenimiento",
+              "Estándares de minería Tier 1",
             ],
           },
           {
@@ -745,7 +755,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
               "Fresadoras",
               "Tornos CNC y centros de mecanizado",
               "Amoladoras y perforadoras",
-              "Calibres, micrómetros y calibres de altura",
+              "Calibres, micrómetros y medidores de altura",
             ],
           },
           {
@@ -753,17 +763,17 @@ export const copy: Record<Locale, PortfolioCopy> = {
             skills: [
               "Planificación",
               "Resolución de problemas",
-              "Requisitos de seguridad en sitio",
+              "Criterio de seguridad en sitio",
               "Procedimientos de aislamiento",
               "Comunicación técnica",
-              "Comunicación trilingue",
+              "Comunicación trilingüe",
             ],
           },
         ],
       },
       education: {
-        title: "Stack de Formacion",
-        eyebrow: "Educacion y credenciales",
+        title: "Stack de Formación",
+        eyebrow: "Educación y credenciales",
         items: [
           {
             title: "Ingeniería Industrial",
@@ -781,7 +791,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             detail: "2012 - 2020, parcialmente completada - 85%",
           },
           {
-            title: "Técnico Mecanico",
+            title: "Técnico Mecánico",
             institution: "Instituto Técnico Renault, Argentina",
             detail: "Egresado 2011 / Bachiller Técnico Metal-mecánico",
           },
@@ -809,14 +819,14 @@ export const copy: Record<Locale, PortfolioCopy> = {
       },
       projects: {
         title: "Trabajo Aplicado",
-        eyebrow: "Skills convertidas en resultados",
+        eyebrow: "Capacidades convertidas en resultados",
         items: [
           {
             title: "Sistemas HDPE para dewatering minero",
             context: "Ejecución HDPE en campo",
             details: [
-              "Instalación y reubicación de bombas y lineas HDPE.",
-              "Stringing, alineacion y tie-ins de tuberías HDPE.",
+              "Instalación y reubicación de bombas y líneas HDPE.",
+              "Stringing, alineación y tie-ins de tuberías HDPE.",
               "Trabajo en condiciones open pit y underground.",
             ],
           },
@@ -825,30 +835,30 @@ export const copy: Record<Locale, PortfolioCopy> = {
             context: "Mantenimiento en shutdown",
             details: [
               "Reemplazo de poleas, rodillos, impact beds y skirting.",
-              "Asistencia en remocion e instalación de equipos pesados de conveyor.",
+              "Asistencia en remoción e instalación de equipos pesados de conveyor.",
               "Trabajo segun programas de shutdown y requisitos de aislamiento.",
             ],
           },
           {
-            title: "Manuales de maquinas para lineas PET y RET",
+            title: "Manuales de máquinas para líneas PET y RET",
             context: "Documentación técnica",
             details: [
-              "Confeccion de manuales de maquinas para lineas de producción.",
-              "Conversion de información mecánica en documentación técnica clara.",
+              "Confección de manuales de máquinas para líneas de producción.",
+              "Conversión de información mecánica en documentación técnica clara.",
             ],
           },
           {
-            title: "Plaños mecánicos y soporte de ingeniería",
+            title: "Planos mecánicos y soporte de ingeniería",
             context: "Soporte de diseño mecánico",
             details: [
-              "Diseño y realizacion de plaños mecánicos.",
+              "Diseño y realización de planos mecánicos.",
               "Soporte a tareas administrativas y flujos de software de gestión.",
             ],
           },
           {
-            title: "Plaños para licitación de autovías",
-            context: "Soporte de plaños para licitación",
-            details: ["Participación en proyecto de licitación con tareas de diseño de plaños en 2010."],
+            title: "Planos para licitación de autovías",
+            context: "Soporte de planos para licitación",
+            details: ["Participación en proyecto de licitación con tareas de diseño de planos en 2010."],
           },
           {
             title: "Procedimientos para taller comunitario",

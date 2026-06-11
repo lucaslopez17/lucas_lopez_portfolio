@@ -414,11 +414,28 @@ function SkillsSection({ t }: { t: PortfolioCopy }) {
               <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <h3>{group.title}</h3>
-            <div className="skill-tags">
-              {group.skills.map((skill) => (
-                <span key={skill}>{skill}</span>
-              ))}
-            </div>
+            {group.software ? (
+              <div className="software-list" aria-label={`${group.title} - ${t.sections.skills.levelLabel}`}>
+                {group.software.map((item) => (
+                  <div className="software-row" key={item.name}>
+                    <div className="software-row-header">
+                      <strong>{item.name}</strong>
+                      <span>{item.level}%</span>
+                    </div>
+                    <div className="software-meter" aria-label={`${item.name}: ${item.level}%`}>
+                      <span style={{ width: `${item.level}%` }} />
+                    </div>
+                    <small>{item.note}</small>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="skill-tags">
+                {(group.skills ?? []).map((skill) => (
+                  <span key={skill}>{skill}</span>
+                ))}
+              </div>
+            )}
           </motion.article>
         ))}
       </div>

@@ -372,12 +372,11 @@ function ExperienceSection({
           >
             <div>
               <span className="detail-chip">{selected.focus}</span>
-              {selected.period ? <span className="detail-chip muted">{selected.period}</span> : null}
             </div>
             <h3>{selected.role}</h3>
             <div className="detail-columns">
               <div>
-                <h4>Scope</h4>
+                <h4>{t.sections.experience.scopeLabel}</h4>
                 <ul>
                   {selected.responsibilities.map((item) => (
                     <li key={item}>{item}</li>
@@ -385,7 +384,7 @@ function ExperienceSection({
                 </ul>
               </div>
               <div>
-                <h4>Signals</h4>
+                <h4>{t.sections.experience.signalsLabel}</h4>
                 <ul>
                   {selected.achievements.map((item) => (
                     <li key={item}>{item}</li>

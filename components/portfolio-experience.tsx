@@ -395,6 +395,8 @@ function ProfileFocusSection({
 }
 
 function ProfileFace({ profile, title }: { profile: ProfileSide; title: string }) {
+  const imageSrc = profile === "engineering" ? "/halfengineer.png" : "/halffield.png";
+
   return (
     <motion.div
       className="profile-face"
@@ -405,7 +407,7 @@ function ProfileFace({ profile, title }: { profile: ProfileSide; title: string }
     >
       <div className={`profile-face-frame ${profile}`}>
         <Image
-          src="/hero.png"
+          src={imageSrc}
           alt={`${title} portrait side`}
           fill
           sizes="(max-width: 980px) 92vw, 42vw"

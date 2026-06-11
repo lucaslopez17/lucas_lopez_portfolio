@@ -19,7 +19,7 @@ import {
   Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { copy, type Experience, type ExpertiseNode, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
 
 type ThemeMode = "dark" | "light";
@@ -193,205 +193,236 @@ function Hero({
 }) {
   const nodes = t.sections.identity.nodes;
   const displayedProfileSide = activeProfileSide ?? hoverProfileSide;
-  const activeProfile = activeProfileSide ? t.sections.profiles[activeProfileSide] : null;
   const softwareGroup = t.sections.skills.groups.find((group) => group.software);
   const fieldTickets = t.sections.education.certifications.filter((item) => !item.toLowerCase().includes("certificate iv"));
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
-  return (
-    <section id="overview" className={`hero-section ${displayedProfileSide ? `is-${displayedProfileSide}-active` : ""} ${activeProfileSide ? "is-profile-selected" : ""}`} aria-labelledby="hero-title">
-      <motion.div
-        className={`portrait-stage ${displayedProfileSide ? `is-${displayedProfileSide}-active` : ""} ${activeProfileSide ? "is-profile-selected" : ""}`}
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <NetworkLines />
-        <motion.div className="portrait-orbit" style={{ x: portraitX, y: portraitY }}>
-          <div className="portrait-halo" />
-          <div className="portrait-frame">
-            <Image
-              src="/hero.png"
-              alt="Lucas Lopez portrait split between engineering and field work"
-              fill
-              priority
-              sizes="(max-width: 768px) 92vw, 58vw"
-              className="portrait-image"
-            />
-            <span className="split-axis" />
-            <span className="scanline" />
-            <div className="face-hotspots" aria-label="Split portrait navigation">
-              <button
-                className="face-hotspot face-hotspot-engineering"
-                type="button"
-                aria-label={t.sections.profiles.engineering.title}
-                onPointerEnter={() => setHoverProfileSide("engineering")}
-                onPointerLeave={() => setHoverProfileSide(null)}
-                onFocus={() => setHoverProfileSide("engineering")}
-                onBlur={() => setHoverProfileSide(null)}
-                onClick={() => enterProfile("engineering")}
-              />
-              <button
-                className="face-hotspot face-hotspot-field"
-                type="button"
-                aria-label={t.sections.profiles.field.title}
-                onPointerEnter={() => setHoverProfileSide("field")}
-                onPointerLeave={() => setHoverProfileSide(null)}
-                onFocus={() => setHoverProfileSide("field")}
-                onBlur={() => setHoverProfileSide(null)}
-                onClick={() => enterProfile("field")}
-              />
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      track.scrollTo({ left: track.clientWidth, behavior: "auto" });
+    });
+  }, []);
+
+  function scrollToPanel(panel: "engineering" | "overview" | "field") {
+    const track = trackRef.current;
+    if (!track) {
+      return;
+    }
+
+    const index = panel === "engineering" ? 0 : panel === "overview" ? 1 : 2;
+    track.scrollTo({ left: track.clientWidth * index, behavior: "smooth" });
+
+    if (panel === "overview") {
+      returnToOverview();
+    } else {
+      enterProfile(panel);
+    }
+  }
+
+  function handleTrackScroll(event: React.UIEvent<HTMLDivElement>) {
+    const track = event.currentTarget;
+    const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+    const side = index === 0 ? "engineering" : index === 2 ? "field" : null;
+
+    if (side && activeProfileSide !== side) {
+      enterProfile(side);
+    }
+
+    if (!side && activeProfileSide) {
+      returnToOverview();
+    }
+  }
+
+  function ProfileCopy({ side }: { side: ProfileSide }) {
+    const profile = t.sections.profiles[side];
+    const isEngineering = side === "engineering";
+
+    return (
+      <div className="profile-page-copy">
+        <button className="back-overview" type="button" onClick={() => scrollToPanel("overview")}>
+          {profile.back}
+        </button>
+        <p className="section-eyebrow">{profile.eyebrow}</p>
+        <h2>{profile.title}</h2>
+        <p className="profile-intro">{profile.intro}</p>
+        <div className="profile-page-columns">
+          <div className="profile-points" aria-label={profile.pointsTitle}>
+            <h3>{profile.pointsTitle}</h3>
+            <div>
+              {profile.points.map((point) => (
+                <span key={point}>{point}</span>
+              ))}
             </div>
           </div>
-        </motion.div>
-
-        <div className="hero-copy">
-          <motion.p className="hero-kicker" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-            {t.hero.roles[0]}
-          </motion.p>
-          <motion.h1
-            id="hero-title"
-            className="glitch-title"
-            data-text={t.hero.name.toUpperCase()}
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.12 }}
-          >
-            {t.hero.name}
-          </motion.h1>
-          <motion.p className="hero-role" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-            {t.hero.roles[1]}
-          </motion.p>
-          <motion.p className="hero-tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.22 }}>
-            {t.hero.tagline}
-          </motion.p>
-        </div>
-
-        <div className="floating-nav" aria-label="Expertise navigation">
-          {nodes.map((node, index) => {
-            const Icon = expertiseIcons[node.id] ?? Factory;
-            const isEngineeringRelevant = node.side === "engineering" || node.side === "bridge";
-            const isProfileRelevant =
-              displayedProfileSide === "engineering" ? isEngineeringRelevant : displayedProfileSide === "field" ? node.side === "field" : false;
-            return (
-              <motion.button
-                key={node.id}
-                className={`skill-orb skill-orb-${index + 1} ${activeNode?.id === node.id ? "is-open" : ""} ${
-                  isProfileRelevant ? "is-profile-highlighted" : displayedProfileSide ? "is-profile-dimmed" : ""
-                }`}
-                type="button"
-                onClick={() => setActiveNode(activeNode?.id === node.id ? null : node)}
-                aria-expanded={activeNode?.id === node.id}
-                initial={{ opacity: 0, scale: 0.82 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.12 + index * 0.05 }}
-                whileHover={{ y: -6, scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                <span className="orb-heading">
-                  <Icon size={18} aria-hidden="true" />
-                  <span>{node.label}</span>
-                </span>
-                <AnimatePresence>
-                  {activeNode?.id === node.id ? (
-                    <motion.span
-                      className="orb-expanded"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                    >
-                      <span>{node.summary}</span>
-                      <small>{node.details[0]}</small>
-                    </motion.span>
-                  ) : null}
-                </AnimatePresence>
-              </motion.button>
-            );
-          })}
-        </div>
-
-        <AnimatePresence>
-          {activeProfile ? (
-            <motion.div
-              key={activeProfileSide}
-              className={`profile-mode-layer ${activeProfileSide === "engineering" ? "mode-engineering" : "mode-field"}`}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <motion.div
-                className="mode-copy"
-                initial={{ opacity: 0, x: activeProfileSide === "engineering" ? -70 : 70, filter: "blur(10px)" }}
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, x: activeProfileSide === "engineering" ? -40 : 40 }}
-                transition={{ delay: 0.08, duration: 0.58, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <button className="back-overview" type="button" onClick={returnToOverview}>
-                  {activeProfile.back}
-                </button>
-                <p className="section-eyebrow">{activeProfile.eyebrow}</p>
-                <h2>{activeProfile.title}</h2>
-                <p className="profile-intro">{activeProfile.intro}</p>
-                <div className="mode-columns">
-                  <div className="profile-points" aria-label={activeProfile.pointsTitle}>
-                    <h3>{activeProfile.pointsTitle}</h3>
-                    <div>
-                      {activeProfile.points.map((point) => (
-                        <span key={point}>{point}</span>
-                      ))}
+          {isEngineering && softwareGroup?.software ? (
+            <div className="mode-list-block">
+              <h3>{softwareGroup.title}</h3>
+              <div className="software-list compact">
+                {softwareGroup.software.map((item) => (
+                  <div className="software-row" key={item.name}>
+                    <div className="software-row-header">
+                      <strong>{item.name}</strong>
+                      <small>{item.note}</small>
+                    </div>
+                    <div className="software-meter" aria-label={`${item.name}: ${item.level}%`}>
+                      <span style={{ width: `${item.level}%` }} />
                     </div>
                   </div>
-                  {activeProfileSide === "engineering" && softwareGroup?.software ? (
-                    <div className="mode-list-block">
-                      <h3>{softwareGroup.title}</h3>
-                      <div className="software-list compact">
-                        {softwareGroup.software.map((item) => (
-                          <div className="software-row" key={item.name}>
-                            <div className="software-row-header">
-                              <strong>{item.name}</strong>
-                              <small>{item.note}</small>
-                            </div>
-                            <div className="software-meter" aria-label={`${item.name}: ${item.level}%`}>
-                              <span style={{ width: `${item.level}%` }} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null}
-                  {activeProfileSide === "field" ? (
-                    <div className="mode-list-block">
-                      <h3>Tickets</h3>
-                      <div className="ticket-list">
-                        {fieldTickets.map((item) => (
-                          <span key={item}>{item}</span>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
-              </motion.div>
-              <motion.div
-                className="mode-portrait"
-                initial={{ opacity: 0, x: activeProfileSide === "engineering" ? 120 : -120, filter: "blur(14px)" }}
-                animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, x: activeProfileSide === "engineering" ? 60 : -60 }}
-                transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
-              >
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {!isEngineering ? (
+            <div className="mode-list-block">
+              <h3>Tickets</h3>
+              <div className="ticket-list">
+                {fieldTickets.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <section id="overview" className={`hero-section ${displayedProfileSide ? `is-${displayedProfileSide}-active` : ""}`} aria-labelledby="hero-title">
+      <motion.div className="portrait-stage" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
+        <div className="split-scroll-track" ref={trackRef} onScroll={handleTrackScroll} aria-label="Horizontal profile navigation">
+          <section className="split-panel split-profile-panel engineering-page" aria-label={t.sections.profiles.engineering.title}>
+            <div className="split-panel-content">
+              <ProfileCopy side="engineering" />
+            </div>
+            <div className="split-panel-portrait portrait-at-right" aria-hidden="true">
+              <Image src="/hero.png" alt="" fill priority sizes="48vw" className="split-panel-image engineering-image" />
+              <span className="split-edge" />
+            </div>
+          </section>
+
+          <section className="split-panel split-overview-panel" aria-labelledby="hero-title">
+            <NetworkLines />
+            <motion.div className="portrait-orbit" style={{ x: portraitX, y: portraitY }}>
+              <div className="portrait-halo" />
+              <div className="portrait-frame">
                 <Image
-                  src={activeProfileSide === "engineering" ? "/halfengineer.png" : "/halffield.png"}
-                  alt={`${activeProfile.title} portrait side`}
+                  src="/hero.png"
+                  alt="Lucas Lopez portrait split between engineering and field work"
                   fill
                   priority
-                  sizes="(max-width: 980px) 92vw, 46vw"
-                  className="mode-portrait-image"
+                  sizes="(max-width: 768px) 92vw, 58vw"
+                  className="portrait-image"
                 />
-              </motion.div>
+                <span className="split-axis" />
+                <span className="scanline" />
+                <div className="face-hotspots" aria-label="Split portrait navigation">
+                  <button
+                    className="face-hotspot face-hotspot-engineering"
+                    type="button"
+                    aria-label={t.sections.profiles.engineering.title}
+                    onPointerEnter={() => setHoverProfileSide("engineering")}
+                    onPointerLeave={() => setHoverProfileSide(null)}
+                    onFocus={() => setHoverProfileSide("engineering")}
+                    onBlur={() => setHoverProfileSide(null)}
+                    onClick={() => scrollToPanel("engineering")}
+                  />
+                  <button
+                    className="face-hotspot face-hotspot-field"
+                    type="button"
+                    aria-label={t.sections.profiles.field.title}
+                    onPointerEnter={() => setHoverProfileSide("field")}
+                    onPointerLeave={() => setHoverProfileSide(null)}
+                    onFocus={() => setHoverProfileSide("field")}
+                    onBlur={() => setHoverProfileSide(null)}
+                    onClick={() => scrollToPanel("field")}
+                  />
+                </div>
+              </div>
             </motion.div>
-          ) : null}
-        </AnimatePresence>
-      </motion.div>
 
+            <div className="hero-copy">
+              <motion.p className="hero-kicker" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+                {t.hero.roles[0]}
+              </motion.p>
+              <motion.h1
+                id="hero-title"
+                className="glitch-title"
+                data-text={t.hero.name.toUpperCase()}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.12 }}
+              >
+                {t.hero.name}
+              </motion.h1>
+              <motion.p className="hero-role" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
+                {t.hero.roles[1]}
+              </motion.p>
+              <motion.p className="hero-tagline" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.22 }}>
+                {t.hero.tagline}
+              </motion.p>
+            </div>
+
+            <div className="floating-nav" aria-label="Expertise navigation">
+              {nodes.map((node, index) => {
+                const Icon = expertiseIcons[node.id] ?? Factory;
+                const isEngineeringRelevant = node.side === "engineering" || node.side === "bridge";
+                const isProfileRelevant =
+                  displayedProfileSide === "engineering" ? isEngineeringRelevant : displayedProfileSide === "field" ? node.side === "field" : false;
+                return (
+                  <motion.button
+                    key={node.id}
+                    className={`skill-orb skill-orb-${index + 1} ${activeNode?.id === node.id ? "is-open" : ""} ${
+                      isProfileRelevant ? "is-profile-highlighted" : displayedProfileSide ? "is-profile-dimmed" : ""
+                    }`}
+                    type="button"
+                    onClick={() => setActiveNode(activeNode?.id === node.id ? null : node)}
+                    aria-expanded={activeNode?.id === node.id}
+                    initial={{ opacity: 0, scale: 0.82 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.12 + index * 0.05 }}
+                    whileHover={{ y: -6, scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                  >
+                    <span className="orb-heading">
+                      <Icon size={18} aria-hidden="true" />
+                      <span>{node.label}</span>
+                    </span>
+                    <AnimatePresence>
+                      {activeNode?.id === node.id ? (
+                        <motion.span
+                          className="orb-expanded"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                        >
+                          <span>{node.summary}</span>
+                          <small>{node.details[0]}</small>
+                        </motion.span>
+                      ) : null}
+                    </AnimatePresence>
+                  </motion.button>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="split-panel split-profile-panel field-page" aria-label={t.sections.profiles.field.title}>
+            <div className="split-panel-portrait portrait-at-left" aria-hidden="true">
+              <Image src="/hero.png" alt="" fill priority sizes="48vw" className="split-panel-image field-image" />
+              <span className="split-edge" />
+            </div>
+            <div className="split-panel-content">
+              <ProfileCopy side="field" />
+            </div>
+          </section>
+        </div>
+      </motion.div>
     </section>
   );
 }

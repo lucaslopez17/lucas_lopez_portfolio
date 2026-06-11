@@ -354,6 +354,33 @@ a {
   pointer-events: none;
 }
 
+.continuous-portrait::before {
+  content: "";
+  position: absolute;
+  inset: -12%;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 34% 48%, rgba(37, 99, 235, 0.34), transparent 34%),
+    radial-gradient(circle at 66% 48%, rgba(249, 115, 22, 0.38), transparent 34%);
+  filter: blur(8px);
+}
+
+html[data-theme="dark"] .continuous-portrait::before {
+  background:
+    radial-gradient(circle at 34% 48%, rgba(147, 197, 253, 0.34), transparent 34%),
+    radial-gradient(circle at 66% 48%, rgba(251, 146, 60, 0.42), transparent 34%);
+}
+
+.hero-section.is-engineering-active .continuous-portrait::before,
+.hero-section.is-engineering-selected .continuous-portrait::before {
+  background: radial-gradient(circle at 74% 48%, rgba(147, 197, 253, 0.42), transparent 38%);
+}
+
+.hero-section.is-field-active .continuous-portrait::before,
+.hero-section.is-field-selected .continuous-portrait::before {
+  background: radial-gradient(circle at 26% 48%, rgba(251, 146, 60, 0.46), transparent 38%);
+}
+
 .continuous-portrait-track {
   position: absolute;
   top: 0;
@@ -362,6 +389,7 @@ a {
   height: 100%;
   transform: translate3d(calc(-50% + var(--portrait-shift, 0px)), 0, 0);
   will-change: transform;
+  z-index: 1;
 }
 
 .continuous-portrait-image {
@@ -399,28 +427,20 @@ a {
 
 .engineering-page {
   grid-template-columns: minmax(0, 1fr) 50vw;
-  background:
-    linear-gradient(90deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%),
-    radial-gradient(circle at 76% 48%, rgba(37, 99, 235, 0.28), transparent 42%);
+  background: linear-gradient(90deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%);
 }
 
 .field-page {
   grid-template-columns: 50vw minmax(0, 1fr);
-  background:
-    linear-gradient(270deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%),
-    radial-gradient(circle at 24% 48%, rgba(249, 115, 22, 0.32), transparent 42%);
+  background: linear-gradient(270deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%);
 }
 
 html[data-theme="dark"] .engineering-page {
-  background:
-    linear-gradient(90deg, rgba(8, 8, 8, 0.96), rgba(8, 8, 8, 0.72) 48%, transparent 74%),
-    radial-gradient(circle at 76% 48%, rgba(147, 197, 253, 0.26), transparent 42%);
+  background: linear-gradient(90deg, rgba(8, 8, 8, 0.96), rgba(8, 8, 8, 0.72) 48%, transparent 74%);
 }
 
 html[data-theme="dark"] .field-page {
-  background:
-    linear-gradient(270deg, rgba(8, 8, 8, 0.96), rgba(8, 8, 8, 0.72) 48%, transparent 74%),
-    radial-gradient(circle at 24% 48%, rgba(251, 146, 60, 0.3), transparent 42%);
+  background: linear-gradient(270deg, rgba(8, 8, 8, 0.96), rgba(8, 8, 8, 0.72) 48%, transparent 74%);
 }
 
 .split-panel-content {
@@ -445,7 +465,7 @@ html[data-theme="dark"] .field-page {
 }
 
 .profile-page-copy {
-  max-width: 760px;
+  max-width: min(760px, 42vw);
 }
 
 .profile-page-copy h2 {
@@ -460,7 +480,7 @@ html[data-theme="dark"] .field-page {
 .profile-page-columns {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.78fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
   align-items: start;
 }
@@ -530,7 +550,7 @@ html[data-theme="dark"] .profile-mini-card {
 .profile-skill-matrix {
   margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
@@ -539,6 +559,7 @@ html[data-theme="dark"] .profile-mini-card {
   background: rgba(255, 255, 255, 0.24);
   padding: 16px;
   border-radius: 8px;
+  min-width: 0;
 }
 
 html[data-theme="dark"] .profile-skill-card {
@@ -555,7 +576,7 @@ html[data-theme="dark"] .profile-skill-card {
 .profile-experience-strip {
   margin-top: 12px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 

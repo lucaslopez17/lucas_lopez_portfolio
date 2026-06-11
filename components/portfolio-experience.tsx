@@ -448,7 +448,6 @@ function EducationSection({ t }: { t: PortfolioCopy }) {
         </div>
         <div className="credential-grid">
           <CredentialBlock title="Certifications" icon={<ShieldCheck size={18} />} items={t.sections.education.certifications} />
-          <CredentialBlock title="Inductions" icon={<MapPin size={18} />} items={t.sections.education.inductions} />
           <CredentialBlock title="Languages" icon={<Languages size={18} />} items={t.sections.education.languages} />
         </div>
       </div>

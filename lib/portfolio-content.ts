@@ -79,7 +79,6 @@ export type PortfolioCopy = {
       eyebrow: string;
       items: EducationItem[];
       certifications: string[];
-      inductions: string[];
       languages: string[];
     };
     projects: {
@@ -173,7 +172,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Mining dewatering systems, pump relocation and HDPE line installation.",
               "Experience in fast-paced shutdowns and field works.",
-              "Inductions include Roy Hill, Mineral Resources, Northern Star Resources and Karara Mining.",
+              "Experience under demanding mining site standards.",
             ],
           },
           {
@@ -411,10 +410,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
           "First Aid & CPR",
           "WHS Statutory Responsibilities for Mining Supervisors Course",
           "Mask Fit Test",
-          "Automotive carburetion and ignition course - Instituto Técnico Renault, 2011",
         ],
-        inductions: ["Roy Hill", "Mineral Resources", "Northern Star Resources", "Karara Mining"],
-        languages: ["Spanish - Native", "Portuguése - Fluent", "English - Fluent (IELTS C1 Nov 2025)", "French - Basic"],
+        languages: ["Spanish - Native", "Portuguése - Fluent", "English - Fluent (IELTS C1 Nov 2025)"],
       },
       projects: {
         title: "Applied Work",
@@ -553,7 +550,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Sistemas de dewatering minero, reubicación de bombas e instalación de lineas HDPE.",
               "Experiencia en shutdowns y trabajos de sitio de ritmo acelerado.",
-              "Inducciones: Roy Hill, Mineral Resources, Northern Star Resources y Karara Mining.",
+              "Experiencia bajo estándares exigentes de sitio minero.",
             ],
           },
           {
@@ -791,10 +788,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
           "First Aid & CPR",
           "WHS Statutory Responsibilities for Mining Supervisors Course",
           "Mask Fit Test",
-          "Curso de carburacion y encendido del automotor - Instituto Técnico Renault, 2011",
         ],
-        inductions: ["Roy Hill", "Mineral Resources", "Northern Star Resources", "Karara Mining"],
-        languages: ["Español - Nativo", "Portugués - Fluido", "Inglés - Fluido (IELTS C1 Nov 2025)", "Francés - Básico"],
+        languages: ["Español - Nativo", "Portugués - Fluido", "Inglés - Fluido (IELTS C1 Nov 2025)"],
       },
       projects: {
         title: "Trabajo Aplicado",

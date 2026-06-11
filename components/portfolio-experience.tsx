@@ -233,6 +233,10 @@ function Hero({
   }
 
   function handleTrackWheel(event: React.WheelEvent<HTMLDivElement>) {
+    if (window.innerWidth <= 640) {
+      return;
+    }
+
     if (event.deltaY <= 14 || Math.abs(event.deltaY) <= Math.abs(event.deltaX)) {
       return;
     }

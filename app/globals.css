@@ -829,16 +829,8 @@ html[data-theme="dark"] .profile-experience-strip article {
   font-family: var(--font-display), sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: rgba(15, 23, 42, 0.82);
-  font-size: clamp(0.72rem, 1.2vw, 1rem);
-  text-shadow:
-    0 1px 14px rgba(255, 255, 255, 0.94),
-    0 6px 24px rgba(0, 0, 0, 0.22);
-}
-
-html[data-theme="dark"] .hero-kicker,
-html[data-theme="dark"] .hero-role {
   color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.72rem, 1.2vw, 1rem);
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9);
 }
 
@@ -851,13 +843,6 @@ html[data-theme="dark"] .hero-role {
   line-height: 0.82;
   letter-spacing: 0;
   white-space: nowrap;
-  color: #0f172a;
-  text-shadow:
-    0 2px 16px rgba(255, 255, 255, 0.92),
-    0 10px 34px rgba(0, 0, 0, 0.28);
-}
-
-html[data-theme="dark"] .glitch-title {
   color: #f7fbff;
   text-shadow: 0 10px 34px rgba(0, 0, 0, 0.76);
 }
@@ -888,15 +873,8 @@ html[data-theme="dark"] .glitch-title {
 .hero-tagline {
   max-width: 460px;
   margin-top: 14px;
-  color: rgba(15, 23, 42, 0.78);
-  font-size: clamp(1rem, 1.7vw, 1.34rem);
-  text-shadow:
-    0 1px 14px rgba(255, 255, 255, 0.94),
-    0 6px 24px rgba(0, 0, 0, 0.24);
-}
-
-html[data-theme="dark"] .hero-tagline {
   color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 1.7vw, 1.34rem);
   text-shadow: 0 4px 26px rgba(0, 0, 0, 0.86);
 }
 
@@ -2362,12 +2340,6 @@ html[data-theme="dark"] .software-meter {
 
   .glitch-title {
     font-size: clamp(3.1rem, 11vw, 6rem);
-    text-shadow:
-      0 1px 14px rgba(255, 255, 255, 0.92),
-      0 6px 24px rgba(0, 0, 0, 0.2);
-  }
-
-  html[data-theme="dark"] .glitch-title {
     text-shadow: 0 10px 34px rgba(0, 0, 0, 0.76);
   }
 
@@ -2743,20 +2715,21 @@ html[data-theme="dark"] .software-meter {
 
   .glitch-title {
     font-size: clamp(2.65rem, 14.5vw, 4.2rem);
-    text-shadow: none;
+    color: #f7fbff;
+    text-shadow: 0 10px 34px rgba(0, 0, 0, 0.76);
   }
 
   .hero-kicker,
   .hero-role {
-    color: var(--muted);
-    text-shadow: none;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.9);
   }
 
   .hero-tagline {
     max-width: 290px;
     font-size: 0.9rem;
-    color: var(--steel);
-    text-shadow: none;
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 4px 26px rgba(0, 0, 0, 0.86);
   }
 
   .network-lines {

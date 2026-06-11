@@ -342,16 +342,30 @@ function ExperienceSection({
       <div className="experience-console">
         <div className="experience-map" aria-label={t.sections.experience.title}>
           {t.sections.experience.items.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              className={selected.id === item.id ? "experience-node is-active" : "experience-node"}
-              onClick={() => setActiveExperience(item)}
-            >
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{item.role}</strong>
-              <small>{item.focus}</small>
-            </button>
+            <div className="experience-node-wrap" key={item.id}>
+              <button
+                type="button"
+                className={selected.id === item.id ? "experience-node is-active" : "experience-node"}
+                onClick={() => setActiveExperience(item)}
+                aria-expanded={selected.id === item.id}
+              >
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item.role}</strong>
+                <small>{item.focus}</small>
+              </button>
+              <AnimatePresence>
+                {selected.id === item.id ? (
+                  <motion.article
+                    className="experience-inline"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                  >
+                    <ExperienceDetailBody t={t} selected={item} />
+                  </motion.article>
+                ) : null}
+              </AnimatePresence>
+            </div>
           ))}
         </div>
         <AnimatePresence mode="wait">
@@ -362,32 +376,40 @@ function ExperienceSection({
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -18 }}
           >
-            <div>
-              <span className="detail-chip">{selected.focus}</span>
-            </div>
-            <h3>{selected.role}</h3>
-            <div className="detail-columns">
-              <div>
-                <h4>{t.sections.experience.scopeLabel}</h4>
-                <ul>
-                  {selected.responsibilities.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h4>{t.sections.experience.signalsLabel}</h4>
-                <ul>
-                  {selected.achievements.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <ExperienceDetailBody t={t} selected={selected} />
           </motion.article>
         </AnimatePresence>
       </div>
     </SectionFrame>
+  );
+}
+
+function ExperienceDetailBody({ t, selected }: { t: PortfolioCopy; selected: Experience }) {
+  return (
+    <>
+      <div>
+        <span className="detail-chip">{selected.focus}</span>
+      </div>
+      <h3>{selected.role}</h3>
+      <div className="detail-columns">
+        <div>
+          <h4>{t.sections.experience.scopeLabel}</h4>
+          <ul>
+            {selected.responsibilities.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4>{t.sections.experience.signalsLabel}</h4>
+          <ul>
+            {selected.achievements.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }
 

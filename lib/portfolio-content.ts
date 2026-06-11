@@ -187,7 +187,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Machine manuals for PET and RET production lines.",
               "Mechanical drawing preparation and engineering support tasks.",
-              "Advanced AutoCAD with Inventor and SolidWorks experience.",
+              "Strong CAD software experience for mechanical drawings and technical documentation.",
             ],
           },
           {
@@ -277,7 +277,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             focus: "Manuals / drawings / technical information",
             responsibilities: [
               "Produce and interpret mechanical drawings, manuals and technical documents.",
-              "Work with AutoCAD, Inventor, SolidWorks and management software.",
+              "Work with CAD software, AI tools and management systems.",
               "Translate machine and process information into documentation people can use.",
               "Keep technical information structured enough to support planning, maintenance and training.",
             ],
@@ -324,9 +324,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
             title: "Software",
             software: [
               { name: "Microsoft Office", level: 84, note: "Intermediate-advanced" },
-              { name: "AutoCAD", level: 90, note: "Advanced" },
-              { name: "Autodesk Inventor", level: 78, note: "Intermediate-advanced" },
-              { name: "SolidWorks", level: 66, note: "Intermediate" },
+              { name: "CAD software", level: 86, note: "Strong mechanical drawing workflow" },
+              { name: "AI tools", level: 82, note: "Strong working level" },
               { name: "Fulcrum", level: 70, note: "Weld records and field documentation" },
               { name: "Management systems", level: 64, note: "Operational and engineering workflows" },
               { name: "Web design", level: 58, note: "Working knowledge" },
@@ -573,7 +572,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Manuales de máquinas para líneas productivas PET y RET.",
               "Preparación de planos mecánicos y soporte de ingeniería.",
-              "AutoCAD avanzado con experiencia en Inventor y SolidWorks.",
+              "Buen manejo de software CAD para planos mecánicos y documentación técnica.",
             ],
           },
           {
@@ -663,7 +662,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             focus: "Manuales / planos / información técnica",
             responsibilities: [
               "Producir e interpretar planos mecánicos, manuales y documentos técnicos.",
-              "Trabajar con AutoCAD, Inventor, SolidWorks y software de gestión.",
+              "Trabajar con software CAD, herramientas de AI y sistemas de gestión.",
               "Traducir información de máquinas y procesos en documentación utilizable.",
               "Mantener información técnica ordenada para planificación, mantenimiento y capacitación.",
             ],
@@ -710,9 +709,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
             title: "Software",
             software: [
               { name: "Microsoft Office", level: 84, note: "Intermedio-avanzado" },
-              { name: "AutoCAD", level: 90, note: "Avanzado" },
-              { name: "Autodesk Inventor", level: 78, note: "Intermedio-avanzado" },
-              { name: "SolidWorks", level: 66, note: "Intermedio" },
+              { name: "Software CAD", level: 86, note: "Buen manejo para planos mecánicos" },
+              { name: "Herramientas de AI", level: 82, note: "Buen nivel de uso" },
               { name: "Fulcrum", level: 70, note: "Registros de soldadura y documentación de campo" },
               { name: "Sistemas de gestión", level: 64, note: "Flujos operativos y de ingeniería" },
               { name: "Diseño web", level: 58, note: "Conocimiento funcional" },

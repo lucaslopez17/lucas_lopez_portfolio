@@ -714,7 +714,13 @@ html[data-theme="dark"] .orb-expanded small {
   align-content: start;
 }
 
+.experience-node-wrap {
+  display: grid;
+  gap: 10px;
+}
+
 .experience-node {
+  width: 100%;
   min-height: 94px;
   padding: 16px;
   border: 1px solid var(--line);
@@ -725,6 +731,10 @@ html[data-theme="dark"] .orb-expanded small {
   cursor: pointer;
   transition: border-color 180ms var(--ease), background 180ms var(--ease), transform 180ms var(--ease);
   border-radius: 8px;
+}
+
+.experience-inline {
+  display: none;
 }
 
 .experience-node:hover,
@@ -1286,7 +1296,24 @@ html[data-theme="dark"] .software-meter {
   }
 
   .experience-detail {
+    display: none;
     min-height: auto;
+  }
+
+  .experience-inline {
+    display: block;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 36%),
+      linear-gradient(315deg, rgba(37, 99, 235, 0.08), transparent 42%),
+      var(--surface-strong);
+    padding: clamp(18px, 4vw, 26px);
+    border-radius: 8px;
+  }
+
+  .experience-inline h3 {
+    font-size: clamp(1.6rem, 6vw, 2.8rem);
   }
 }
 

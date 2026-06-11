@@ -288,12 +288,7 @@ a {
 }
 
 .overview-return-zone::before {
-  content: "";
-  position: absolute;
-  top: 16%;
-  bottom: 16%;
-  width: 1px;
-  background: linear-gradient(transparent, rgba(255, 255, 255, 0.44), transparent);
+  display: none;
 }
 
 .overview-return-zone::after {

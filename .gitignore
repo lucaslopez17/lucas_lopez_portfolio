@@ -25,6 +25,8 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+.claude/
+tsconfig.tsbuildinfo
 
 # Source CVs and raw local assets.
 # The website uses public/hero.png, which should remain tracked.

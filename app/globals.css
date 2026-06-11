@@ -339,14 +339,15 @@ a {
 .continuous-portrait-track {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 220vw;
+  left: 50%;
+  width: calc(100svh * 1.3223);
   height: 100%;
+  transform: translate3d(calc(-50% + var(--portrait-shift, 0px)), 0, 0);
   will-change: transform;
 }
 
 .continuous-portrait-image {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center center;
 }
 
@@ -408,9 +409,13 @@ html[data-theme="dark"] .field-page {
   max-height: calc(100svh - 128px);
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: thin;
+  scrollbar-width: none;
   position: relative;
   z-index: 3;
+}
+
+.split-panel-content::-webkit-scrollbar {
+  display: none;
 }
 
 .engineering-page .split-panel-content {
@@ -2873,5 +2878,4 @@ html[data-theme="dark"] .software-meter {
     transition-duration: 0.001ms !important;
   }
 }
-
 

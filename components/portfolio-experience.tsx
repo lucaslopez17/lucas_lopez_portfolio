@@ -156,8 +156,9 @@ function Hero({
     if (!portrait) {
       return;
     }
-    const offset = track.clientWidth * 0.09;
-    portrait.style.transform = `translate3d(${-track.scrollLeft * 0.55 - offset}px, 0, 0)`;
+    const progress = track.scrollLeft / Math.max(track.clientWidth, 1);
+    const shift = (1 - progress) * track.clientWidth * 0.5;
+    portrait.style.setProperty("--portrait-shift", `${shift}px`);
   }
 
   useEffect(() => {

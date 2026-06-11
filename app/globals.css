@@ -219,9 +219,7 @@ a {
   overflow: hidden;
 }
 
-.system-strip,
-.proof-grid,
-.scroll-cue {
+.system-strip {
   width: min(1180px, 100%);
   margin-inline: auto;
 }
@@ -549,48 +547,6 @@ html[data-theme="dark"] .orb-expanded small {
   right: 5.5%;
   top: 46%;
   animation: none;
-}
-
-.proof-grid {
-  position: absolute;
-  left: 50%;
-  bottom: 54px;
-  z-index: 6;
-  transform: translateX(-50%);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-top: 0;
-}
-
-.proof-grid span {
-  min-height: 54px;
-  display: grid;
-  place-items: center;
-  padding: 12px;
-  border-block: 1px solid var(--line);
-  color: var(--steel);
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  font-size: 0.76rem;
-}
-
-.scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: 18px;
-  z-index: 6;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: var(--muted);
-  margin-top: 0;
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
 .section-frame {
@@ -1317,7 +1273,6 @@ html[data-theme="dark"] .software-meter {
     color: var(--muted);
   }
 
-  .proof-grid,
   .identity-grid,
   .skills-grid,
   .project-track {
@@ -1497,24 +1452,6 @@ html[data-theme="dark"] .software-meter {
     bottom: auto;
   }
 
-  .proof-grid {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    z-index: 1;
-    transform: none;
-    margin-top: 16px;
-  }
-
-  .scroll-cue {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    transform: none;
-    margin-top: 16px;
-  }
-
-  .proof-grid,
   .identity-grid,
   .skills-grid,
   .project-track,

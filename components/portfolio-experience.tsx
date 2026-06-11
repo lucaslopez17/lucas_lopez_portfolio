@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import {
-  ArrowDown,
   Factory,
   FileText,
   Flame,
@@ -255,10 +254,6 @@ function Hero({
         </div>
       </motion.div>
 
-      <a className="scroll-cue" href="#identity">
-        <ArrowDown size={16} />
-        {t.ui.scroll}
-      </a>
     </section>
   );
 }

@@ -53,7 +53,6 @@ export type PortfolioCopy = {
     close: string;
     status: string;
     source: string;
-    scroll: string;
   };
   hero: {
     name: string;
@@ -117,7 +116,6 @@ export const copy: Record<Locale, PortfolioCopy> = {
       close: "Close",
       status: "System active",
       source: "Extracted from CVs",
-      scroll: "Scroll to explore",
     },
     hero: {
       name: "Lucas Lopez",
@@ -504,7 +502,6 @@ export const copy: Record<Locale, PortfolioCopy> = {
       close: "Cerrar",
       status: "Sistema activo",
       source: "Extraído de CVs",
-      scroll: "Scroll para explorar",
     },
     hero: {
       name: "Lucas Lopez",

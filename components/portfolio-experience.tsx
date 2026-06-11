@@ -6,7 +6,6 @@ import {
   Factory,
   FileText,
   Flame,
-  GraduationCap,
   Hammer,
   Languages,
   Mail,
@@ -14,13 +13,12 @@ import {
   Moon,
   Pickaxe,
   Phone,
-  Sparkles,
   Sun,
   Wrench,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { copy, type Experience, type ExpertiseNode, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
+import { copy, type ExpertiseNode, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
 
 type ThemeMode = "dark" | "light";
 type ProfileSide = "engineering" | "field";
@@ -56,7 +54,6 @@ export default function PortfolioExperience() {
   const [locale, setLocale] = useState<Locale>("en");
   const [theme, setTheme] = useState<ThemeMode>("light");
   const [activeNode, setActiveNode] = useState<ExpertiseNode | null>(null);
-  const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
   const [activeProfileSide, setActiveProfileSide] = useState<ProfileSide | null>(null);
   const [hoverProfileSide, setHoverProfileSide] = useState<ProfileSide | null>(null);
   const t = copy[locale];
@@ -113,10 +110,7 @@ export default function PortfolioExperience() {
         portraitX={portraitX}
         portraitY={portraitY}
       />
-      <IdentitySection t={t} activeNode={activeNode} setActiveNode={setActiveNode} />
-      <ExperienceSection t={t} activeExperience={activeExperience} setActiveExperience={setActiveExperience} />
-      <SkillsSection t={t} />
-      <EducationSection t={t} />
+      <LanguagesSection t={t} />
       <ProjectsSection t={t} />
       <ContactSection t={t} />
     </main>
@@ -241,6 +235,17 @@ function Hero({
   function ProfileCopy({ side }: { side: ProfileSide }) {
     const profile = t.sections.profiles[side];
     const isEngineering = side === "engineering";
+    const profileNodes = nodes.filter((node) => (isEngineering ? node.side !== "field" : node.side === "field"));
+    const profileExperience = t.sections.experience.items.filter((item) =>
+      isEngineering
+        ? ["planning-control", "documentation-cad", "quality-improvement"].includes(item.id)
+        : ["shutdown-execution", "hdpe-systems", "fabrication-fitting"].includes(item.id),
+    );
+    const profileSkillGroups = t.sections.skills.groups.filter((group) =>
+      isEngineering
+        ? ["Engineering", "Ingeniería", "Management and Communication", "Gestión y Comunicación"].includes(group.title)
+        : ["Polywelding", "Field Operations", "Operaciones de Campo", "Tools and Machines", "Herramientas y Máquinas"].includes(group.title),
+    );
 
     return (
       <div className="profile-page-copy">
@@ -250,6 +255,14 @@ function Hero({
         <p className="section-eyebrow">{profile.eyebrow}</p>
         <h2>{profile.title}</h2>
         <p className="profile-intro">{profile.intro}</p>
+        <div className="profile-mini-grid" aria-label={profile.pointsTitle}>
+          {profileNodes.map((node) => (
+            <article className={`profile-mini-card ${node.side}`} key={node.id}>
+              <strong>{node.label}</strong>
+              <span>{node.summary}</span>
+            </article>
+          ))}
+        </div>
         <div className="profile-page-columns">
           <div className="profile-points" aria-label={profile.pointsTitle}>
             <h3>{profile.pointsTitle}</h3>
@@ -259,6 +272,19 @@ function Hero({
               ))}
             </div>
           </div>
+          {isEngineering ? (
+            <div className="mode-list-block learning-block">
+              <h3>{t.sections.education.title}</h3>
+              <div className="profile-learning-list">
+                {t.sections.education.items.map((item) => (
+                  <span key={`${item.title}-${item.institution}`}>
+                    <strong>{item.title}</strong>
+                    <small>{item.institution}</small>
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
           {isEngineering && softwareGroup?.software ? (
             <div className="mode-list-block">
               <h3>{softwareGroup.title}</h3>
@@ -287,6 +313,43 @@ function Hero({
               </div>
             </div>
           ) : null}
+        </div>
+        <div className="profile-skill-matrix">
+          {profileSkillGroups.map((group) => (
+            <article className="profile-skill-card" key={group.title}>
+              <h3>{group.title}</h3>
+              {group.software ? (
+                <div className="software-list compact">
+                  {group.software.map((item) => (
+                    <div className="software-row" key={item.name}>
+                      <div className="software-row-header">
+                        <strong>{item.name}</strong>
+                        <small>{item.note}</small>
+                      </div>
+                      <div className="software-meter" aria-label={`${item.name}: ${item.level}%`}>
+                        <span style={{ width: `${item.level}%` }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="skill-tags">
+                  {(group.skills ?? []).map((skill) => (
+                    <span key={skill}>{skill}</span>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+        <div className="profile-experience-strip">
+          {profileExperience.map((item) => (
+            <article key={item.id}>
+              <strong>{item.role}</strong>
+              <span>{item.focus}</span>
+              <small>{item.achievements[0]}</small>
+            </article>
+          ))}
         </div>
       </div>
     );
@@ -441,219 +504,13 @@ function NetworkLines() {
   );
 }
 
-function IdentitySection({
-  t,
-  activeNode,
-  setActiveNode,
-}: {
-  t: PortfolioCopy;
-  activeNode: ExpertiseNode | null;
-  setActiveNode: (node: ExpertiseNode | null) => void;
-}) {
-  return (
-    <SectionFrame id="identity" eyebrow={t.sections.identity.eyebrow} title={t.sections.identity.title} intro={t.sections.identity.intro}>
-      <div className="identity-grid">
-        {t.sections.identity.nodes.map((node, index) => (
-          <motion.button
-            type="button"
-            key={node.id}
-            className={`identity-node ${node.side} ${activeNode?.id === node.id ? "is-open" : ""}`}
-            onClick={() => setActiveNode(activeNode?.id === node.id ? null : node)}
-            aria-expanded={activeNode?.id === node.id}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ delay: index * 0.04 }}
-          >
-            <span className="node-index">0{index + 1}</span>
-            <strong>{node.label}</strong>
-            <span className="node-summary">{node.summary}</span>
-            <AnimatePresence>
-              {activeNode?.id === node.id ? (
-                <motion.span
-                  className="identity-expanded"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                >
-                  {node.details.map((detail) => (
-                    <span key={detail}>{detail}</span>
-                  ))}
-                </motion.span>
-              ) : null}
-            </AnimatePresence>
-          </motion.button>
-        ))}
-      </div>
-    </SectionFrame>
-  );
-}
-
-function ExperienceSection({
-  t,
-  activeExperience,
-  setActiveExperience,
-}: {
-  t: PortfolioCopy;
-  activeExperience: Experience | null;
-  setActiveExperience: (item: Experience | null) => void;
-}) {
-  const selected = activeExperience;
+function LanguagesSection({ t }: { t: PortfolioCopy }) {
+  const title = t.sections.education.languages[0]?.startsWith("Español") ? "Idiomas" : "Languages";
 
   return (
-    <SectionFrame
-      id="experience"
-      eyebrow={t.sections.experience.eyebrow}
-      title={t.sections.experience.title}
-      intro={t.sections.experience.intro}
-    >
-      <div className={selected ? "experience-console has-detail" : "experience-console is-collapsed"}>
-        <div className="experience-map" aria-label={t.sections.experience.title}>
-          {t.sections.experience.items.map((item, index) => {
-            const isOpen = activeExperience?.id === item.id;
-
-            return (
-              <div className="experience-node-wrap" key={item.id}>
-                <button
-                  type="button"
-                  className={isOpen ? "experience-node is-active" : "experience-node"}
-                  onClick={() => setActiveExperience(isOpen ? null : item)}
-                  aria-expanded={isOpen}
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <strong>{item.role}</strong>
-                  <small>{item.focus}</small>
-                </button>
-                <AnimatePresence>
-                  {isOpen ? (
-                    <motion.article
-                      className="experience-inline"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                    >
-                      <ExperienceDetailBody t={t} selected={item} />
-                    </motion.article>
-                  ) : null}
-                </AnimatePresence>
-              </div>
-            );
-          })}
-        </div>
-        <AnimatePresence mode="wait">
-          {selected ? (
-            <motion.article
-              key={selected.id}
-              className="experience-detail"
-              initial={{ opacity: 0, x: 18 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -18 }}
-            >
-              <ExperienceDetailBody t={t} selected={selected} />
-            </motion.article>
-          ) : null}
-        </AnimatePresence>
-      </div>
-    </SectionFrame>
-  );
-}
-
-function ExperienceDetailBody({ t, selected }: { t: PortfolioCopy; selected: Experience }) {
-  return (
-    <>
-      <div>
-        <span className="detail-chip">{selected.focus}</span>
-      </div>
-      <h3>{selected.role}</h3>
-      <div className="detail-columns">
-        <div>
-          <h4>{t.sections.experience.scopeLabel}</h4>
-          <ul>
-            {selected.responsibilities.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4>{t.sections.experience.signalsLabel}</h4>
-          <ul>
-            {selected.achievements.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function SkillsSection({ t }: { t: PortfolioCopy }) {
-  const globalSkillGroups = t.sections.skills.groups.filter((group) => !group.software);
-
-  return (
-    <SectionFrame id="skills" eyebrow={t.sections.skills.eyebrow} title={t.sections.skills.title}>
-      <div className="skills-grid">
-        {globalSkillGroups.map((group, index) => (
-          <motion.article
-            className="skill-panel"
-            key={group.title}
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-70px" }}
-            transition={{ delay: index * 0.035 }}
-          >
-            <div className="panel-topline">
-              <Sparkles size={16} />
-              <span>{String(index + 1).padStart(2, "0")}</span>
-            </div>
-            <h3>{group.title}</h3>
-            {group.software ? (
-              <div className="software-list" aria-label={`${group.title} - ${t.sections.skills.levelLabel}`}>
-                {group.software.map((item) => (
-                  <div className="software-row" key={item.name}>
-                    <div className="software-row-header">
-                      <strong>{item.name}</strong>
-                      <small>{item.note}</small>
-                    </div>
-                    <div className="software-meter" aria-label={`${item.name}: ${item.level}%`}>
-                      <span style={{ width: `${item.level}%` }} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="skill-tags">
-                {(group.skills ?? []).map((skill) => (
-                  <span key={skill}>{skill}</span>
-                ))}
-              </div>
-            )}
-          </motion.article>
-        ))}
-      </div>
-    </SectionFrame>
-  );
-}
-
-function EducationSection({ t }: { t: PortfolioCopy }) {
-  return (
-    <SectionFrame id="education" eyebrow={t.sections.education.eyebrow} title={t.sections.education.title}>
-      <div className="education-layout">
-        <div className="education-stack">
-          {t.sections.education.items.map((item) => (
-            <article key={`${item.title}-${item.institution}`} className="education-item">
-              <GraduationCap size={20} />
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.institution}</p>
-                <span>{item.detail}</span>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="credential-grid">
-          <CredentialBlock title="Languages" icon={<Languages size={18} />} items={t.sections.education.languages} />
-        </div>
+    <SectionFrame id="languages" eyebrow={t.sections.education.eyebrow} title={title}>
+      <div className="credential-grid languages-only">
+        <CredentialBlock title={title} icon={<Languages size={18} />} items={t.sections.education.languages} />
       </div>
     </SectionFrame>
   );
@@ -705,7 +562,7 @@ function ProjectsSection({ t }: { t: PortfolioCopy }) {
 
 function ContactSection({ t }: { t: PortfolioCopy }) {
   return (
-    <section className="contact-band" aria-labelledby="contact-title">
+    <section id="contact" className="contact-band" aria-labelledby="contact-title">
       <div>
         <p className="section-eyebrow">Contact</p>
         <h2 id="contact-title">{t.sections.contact.title}</h2>

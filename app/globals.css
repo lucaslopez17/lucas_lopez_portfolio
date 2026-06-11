@@ -842,7 +842,7 @@ html[data-theme="dark"] .profile-experience-strip article {
   position: absolute;
   left: 50%;
   top: auto;
-  bottom: 6%;
+  bottom: 1.8%;
   transform: translateX(-50%);
   width: min(980px, 92vw);
   display: grid;
@@ -2746,7 +2746,7 @@ html[data-theme="dark"] .software-meter {
     position: absolute;
     left: 50%;
     top: auto;
-    bottom: 4%;
+    bottom: 2%;
     transform: translateX(-50%);
     order: 2;
     width: 100%;

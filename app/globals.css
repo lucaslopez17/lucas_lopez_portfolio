@@ -477,13 +477,13 @@ html[data-theme="dark"] .field-page {
 .engineering-page .split-panel-content {
   grid-column: 1;
   justify-self: start;
-  width: min(760px, 42vw);
+  width: min(1140px, 63vw);
 }
 
 .field-page .split-panel-content {
   grid-column: 2;
   justify-self: start;
-  width: min(760px, 42vw);
+  width: min(1140px, 63vw);
   text-align: left;
 }
 
@@ -2587,13 +2587,13 @@ html[data-theme="dark"] .software-meter {
 
   .engineering-page .split-panel-content {
     grid-column: 1;
-    width: min(760px, 42vw);
+    width: min(1140px, 63vw);
     justify-self: start;
   }
 
   .field-page .split-panel-content {
     grid-column: 2;
-    width: min(760px, 42vw);
+    width: min(1140px, 63vw);
     justify-self: start;
   }
 

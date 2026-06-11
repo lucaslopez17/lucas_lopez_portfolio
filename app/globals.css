@@ -444,12 +444,12 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
 }
 
 .engineering-page {
-  grid-template-columns: minmax(0, 1fr) 50vw;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   background: linear-gradient(90deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%);
 }
 
 .field-page {
-  grid-template-columns: 50vw minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   background: linear-gradient(270deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%);
 }
 
@@ -477,13 +477,13 @@ html[data-theme="dark"] .field-page {
 .engineering-page .split-panel-content {
   grid-column: 1;
   justify-self: start;
-  width: min(1140px, 63vw);
+  width: min(1140px, 63vw, 100%);
 }
 
 .field-page .split-panel-content {
   grid-column: 2;
-  justify-self: start;
-  width: min(1140px, 63vw);
+  justify-self: end;
+  width: min(1140px, 63vw, 100%);
   text-align: left;
 }
 
@@ -2572,11 +2572,11 @@ html[data-theme="dark"] .software-meter {
   }
 
   .engineering-page {
-    grid-template-columns: minmax(0, 1fr) 50vw;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .field-page {
-    grid-template-columns: 50vw minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .split-panel-content {
@@ -2587,14 +2587,14 @@ html[data-theme="dark"] .software-meter {
 
   .engineering-page .split-panel-content {
     grid-column: 1;
-    width: min(1140px, 63vw);
+    width: min(1140px, 63vw, 100%);
     justify-self: start;
   }
 
   .field-page .split-panel-content {
     grid-column: 2;
-    width: min(1140px, 63vw);
-    justify-self: start;
+    width: min(1140px, 63vw, 100%);
+    justify-self: end;
   }
 
   .split-panel-portrait,

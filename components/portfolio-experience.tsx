@@ -1,36 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
-  Factory,
-  FileText,
-  Flame,
-  Hammer,
+  ArrowLeft,
+  ArrowRight,
   Languages,
   Mail,
   MapPin,
   Moon,
-  Pickaxe,
   Phone,
   Sun,
-  Wrench,
 } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { copy, type ExpertiseNode, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
+import { copy, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
 
 type ThemeMode = "dark" | "light";
 type ProfileSide = "engineering" | "field";
-
-const expertiseIcons: Record<string, LucideIcon> = {
-  "industrial-engineering": Factory,
-  "maintenance-planning": Wrench,
-  polywelding: Flame,
-  "mining-operations": Pickaxe,
-  "technical-documentation": FileText,
-  fabrication: Hammer,
-};
 
 function getInitialLocale(): Locale {
   if (typeof window === "undefined") {
@@ -53,17 +39,9 @@ function getInitialTheme(): ThemeMode {
 export default function PortfolioExperience() {
   const [locale, setLocale] = useState<Locale>("en");
   const [theme, setTheme] = useState<ThemeMode>("light");
-  const [activeNode, setActiveNode] = useState<ExpertiseNode | null>(null);
   const [activeProfileSide, setActiveProfileSide] = useState<ProfileSide | null>(null);
   const [hoverProfileSide, setHoverProfileSide] = useState<ProfileSide | null>(null);
   const t = copy[locale];
-
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 90, damping: 24 });
-  const springY = useSpring(mouseY, { stiffness: 90, damping: 24 });
-  const portraitX = useTransform(springX, [-0.5, 0.5], [-16, 16]);
-  const portraitY = useTransform(springY, [-0.5, 0.5], [-10, 10]);
 
   useEffect(() => {
     setLocale(getInitialLocale());
@@ -80,12 +58,6 @@ export default function PortfolioExperience() {
     window.localStorage.setItem("lucas-portfolio-theme", theme);
   }, [theme]);
 
-  function handlePointerMove(event: React.PointerEvent<HTMLElement>) {
-    const rect = event.currentTarget.getBoundingClientRect();
-    mouseX.set((event.clientX - rect.left) / rect.width - 0.5);
-    mouseY.set((event.clientY - rect.top) / rect.height - 0.5);
-  }
-
   function enterProfile(side: ProfileSide) {
     setActiveProfileSide(side);
   }
@@ -95,20 +67,16 @@ export default function PortfolioExperience() {
   }
 
   return (
-    <main className="site-shell" onPointerMove={handlePointerMove}>
+    <main className={`site-shell ${activeProfileSide ? `is-${activeProfileSide}-selected` : ""}`}>
       <AmbientSystem />
       <ControlDock locale={locale} setLocale={setLocale} theme={theme} setTheme={setTheme} label={t.ui.language} />
       <Hero
         t={t}
-        activeNode={activeNode}
-        setActiveNode={setActiveNode}
         activeProfileSide={activeProfileSide}
         hoverProfileSide={hoverProfileSide}
         setHoverProfileSide={setHoverProfileSide}
         enterProfile={enterProfile}
         returnToOverview={returnToOverview}
-        portraitX={portraitX}
-        portraitY={portraitY}
       />
       <LanguagesSection t={t} />
       <ProjectsSection t={t} />
@@ -164,32 +132,33 @@ function ControlDock({
 
 function Hero({
   t,
-  activeNode,
-  setActiveNode,
   activeProfileSide,
   hoverProfileSide,
   setHoverProfileSide,
   enterProfile,
   returnToOverview,
-  portraitX,
-  portraitY,
 }: {
   t: PortfolioCopy;
-  activeNode: ExpertiseNode | null;
-  setActiveNode: (node: ExpertiseNode | null) => void;
   activeProfileSide: ProfileSide | null;
   hoverProfileSide: ProfileSide | null;
   setHoverProfileSide: (side: ProfileSide | null) => void;
   enterProfile: (side: ProfileSide) => void;
   returnToOverview: () => void;
-  portraitX: ReturnType<typeof useTransform<number, number>>;
-  portraitY: ReturnType<typeof useTransform<number, number>>;
 }) {
-  const nodes = t.sections.identity.nodes;
   const displayedProfileSide = activeProfileSide ?? hoverProfileSide;
   const softwareGroup = t.sections.skills.groups.find((group) => group.software);
   const fieldTickets = t.sections.education.certifications.filter((item) => !item.toLowerCase().includes("certificate iv"));
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const portraitRef = useRef<HTMLDivElement | null>(null);
+
+  function syncPortraitPosition(track: HTMLDivElement) {
+    const portrait = portraitRef.current;
+    if (!portrait) {
+      return;
+    }
+    const offset = track.clientWidth * 0.09;
+    portrait.style.transform = `translate3d(${-track.scrollLeft * 0.55 - offset}px, 0, 0)`;
+  }
 
   useEffect(() => {
     const track = trackRef.current;
@@ -199,6 +168,7 @@ function Hero({
 
     requestAnimationFrame(() => {
       track.scrollTo({ left: track.clientWidth, behavior: "auto" });
+      requestAnimationFrame(() => syncPortraitPosition(track));
     });
   }, []);
 
@@ -220,6 +190,7 @@ function Hero({
 
   function handleTrackScroll(event: React.UIEvent<HTMLDivElement>) {
     const track = event.currentTarget;
+    syncPortraitPosition(track);
     const index = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
     const side = index === 0 ? "engineering" : index === 2 ? "field" : null;
 
@@ -235,7 +206,6 @@ function Hero({
   function ProfileCopy({ side }: { side: ProfileSide }) {
     const profile = t.sections.profiles[side];
     const isEngineering = side === "engineering";
-    const profileNodes = nodes.filter((node) => (isEngineering ? node.side !== "field" : node.side === "field"));
     const profileExperience = t.sections.experience.items.filter((item) =>
       isEngineering
         ? ["planning-control", "documentation-cad", "quality-improvement"].includes(item.id)
@@ -243,26 +213,15 @@ function Hero({
     );
     const profileSkillGroups = t.sections.skills.groups.filter((group) =>
       isEngineering
-        ? ["Engineering", "Ingeniería", "Management and Communication", "Gestión y Comunicación"].includes(group.title)
+        ? ["Management and Communication", "Gestión y Comunicación"].includes(group.title)
         : ["Polywelding", "Field Operations", "Operaciones de Campo", "Tools and Machines", "Herramientas y Máquinas"].includes(group.title),
     );
 
     return (
       <div className="profile-page-copy">
-        <button className="back-overview" type="button" onClick={() => scrollToPanel("overview")}>
-          {profile.back}
-        </button>
         <p className="section-eyebrow">{profile.eyebrow}</p>
         <h2>{profile.title}</h2>
         <p className="profile-intro">{profile.intro}</p>
-        <div className="profile-mini-grid" aria-label={profile.pointsTitle}>
-          {profileNodes.map((node) => (
-            <article className={`profile-mini-card ${node.side}`} key={node.id}>
-              <strong>{node.label}</strong>
-              <span>{node.summary}</span>
-            </article>
-          ))}
-        </div>
         <div className="profile-page-columns">
           <div className="profile-points" aria-label={profile.pointsTitle}>
             <h3>{profile.pointsTitle}</h3>
@@ -356,58 +315,72 @@ function Hero({
   }
 
   return (
-    <section id="overview" className={`hero-section ${displayedProfileSide ? `is-${displayedProfileSide}-active` : ""}`} aria-labelledby="hero-title">
+    <section
+      id="overview"
+      className={`hero-section ${displayedProfileSide ? `is-${displayedProfileSide}-active` : ""} ${
+        activeProfileSide ? `is-${activeProfileSide}-selected` : ""
+      }`}
+      aria-labelledby="hero-title"
+    >
       <motion.div className="portrait-stage" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
+        {activeProfileSide ? (
+          <button
+            type="button"
+            className={`overview-back side-${activeProfileSide}`}
+            onClick={() => scrollToPanel("overview")}
+            aria-label={t.sections.profiles[activeProfileSide].back}
+          >
+            {activeProfileSide === "engineering" ? (
+              <ArrowRight size={20} aria-hidden="true" />
+            ) : (
+              <ArrowLeft size={20} aria-hidden="true" />
+            )}
+          </button>
+        ) : null}
+        <div className="continuous-portrait" aria-hidden="true">
+          <div className="continuous-portrait-track" ref={portraitRef}>
+            <Image
+              src="/hero.png"
+              alt="Lucas Lopez portrait split between engineering and field work"
+              fill
+              priority
+              sizes="100vw"
+              className="continuous-portrait-image"
+            />
+          </div>
+        </div>
         <div className="split-scroll-track" ref={trackRef} onScroll={handleTrackScroll} aria-label="Horizontal profile navigation">
           <section className="split-panel split-profile-panel engineering-page" aria-label={t.sections.profiles.engineering.title}>
             <div className="split-panel-content">
               <ProfileCopy side="engineering" />
             </div>
-            <div className="split-panel-portrait portrait-at-right" aria-hidden="true">
-              <Image src="/hero.png" alt="" fill priority sizes="48vw" className="split-panel-image engineering-image" />
-              <span className="split-edge" />
-            </div>
           </section>
 
           <section className="split-panel split-overview-panel" aria-labelledby="hero-title">
             <NetworkLines />
-            <motion.div className="portrait-orbit" style={{ x: portraitX, y: portraitY }}>
-              <div className="portrait-halo" />
-              <div className="portrait-frame">
-                <Image
-                  src="/hero.png"
-                  alt="Lucas Lopez portrait split between engineering and field work"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 92vw, 58vw"
-                  className="portrait-image"
-                />
-                <span className="split-axis" />
-                <span className="scanline" />
-                <div className="face-hotspots" aria-label="Split portrait navigation">
-                  <button
-                    className="face-hotspot face-hotspot-engineering"
-                    type="button"
-                    aria-label={t.sections.profiles.engineering.title}
-                    onPointerEnter={() => setHoverProfileSide("engineering")}
-                    onPointerLeave={() => setHoverProfileSide(null)}
-                    onFocus={() => setHoverProfileSide("engineering")}
-                    onBlur={() => setHoverProfileSide(null)}
-                    onClick={() => scrollToPanel("engineering")}
-                  />
-                  <button
-                    className="face-hotspot face-hotspot-field"
-                    type="button"
-                    aria-label={t.sections.profiles.field.title}
-                    onPointerEnter={() => setHoverProfileSide("field")}
-                    onPointerLeave={() => setHoverProfileSide(null)}
-                    onFocus={() => setHoverProfileSide("field")}
-                    onBlur={() => setHoverProfileSide(null)}
-                    onClick={() => scrollToPanel("field")}
-                  />
-                </div>
-              </div>
-            </motion.div>
+            <span className="split-axis" />
+            <div className="face-hotspots" aria-label="Split portrait navigation">
+              <button
+                className="face-hotspot face-hotspot-engineering"
+                type="button"
+                aria-label={t.sections.profiles.engineering.title}
+                onPointerEnter={() => setHoverProfileSide("engineering")}
+                onPointerLeave={() => setHoverProfileSide(null)}
+                onFocus={() => setHoverProfileSide("engineering")}
+                onBlur={() => setHoverProfileSide(null)}
+                onClick={() => scrollToPanel("engineering")}
+              />
+              <button
+                className="face-hotspot face-hotspot-field"
+                type="button"
+                aria-label={t.sections.profiles.field.title}
+                onPointerEnter={() => setHoverProfileSide("field")}
+                onPointerLeave={() => setHoverProfileSide(null)}
+                onFocus={() => setHoverProfileSide("field")}
+                onBlur={() => setHoverProfileSide(null)}
+                onClick={() => scrollToPanel("field")}
+              />
+            </div>
 
             <div className="hero-copy">
               <motion.p className="hero-kicker" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
@@ -431,55 +404,9 @@ function Hero({
               </motion.p>
             </div>
 
-            <div className="floating-nav" aria-label="Expertise navigation">
-              {nodes.map((node, index) => {
-                const Icon = expertiseIcons[node.id] ?? Factory;
-                const isEngineeringRelevant = node.side === "engineering" || node.side === "bridge";
-                const isProfileRelevant =
-                  displayedProfileSide === "engineering" ? isEngineeringRelevant : displayedProfileSide === "field" ? node.side === "field" : false;
-                return (
-                  <motion.button
-                    key={node.id}
-                    className={`skill-orb skill-orb-${index + 1} ${activeNode?.id === node.id ? "is-open" : ""} ${
-                      isProfileRelevant ? "is-profile-highlighted" : displayedProfileSide ? "is-profile-dimmed" : ""
-                    }`}
-                    type="button"
-                    onClick={() => setActiveNode(activeNode?.id === node.id ? null : node)}
-                    aria-expanded={activeNode?.id === node.id}
-                    initial={{ opacity: 0, scale: 0.82 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.12 + index * 0.05 }}
-                    whileHover={{ y: -6, scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                  >
-                    <span className="orb-heading">
-                      <Icon size={18} aria-hidden="true" />
-                      <span>{node.label}</span>
-                    </span>
-                    <AnimatePresence>
-                      {activeNode?.id === node.id ? (
-                        <motion.span
-                          className="orb-expanded"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                        >
-                          <span>{node.summary}</span>
-                          <small>{node.details[0]}</small>
-                        </motion.span>
-                      ) : null}
-                    </AnimatePresence>
-                  </motion.button>
-                );
-              })}
-            </div>
           </section>
 
           <section className="split-panel split-profile-panel field-page" aria-label={t.sections.profiles.field.title}>
-            <div className="split-panel-portrait portrait-at-left" aria-hidden="true">
-              <Image src="/hero.png" alt="" fill priority sizes="48vw" className="split-panel-image field-image" />
-              <span className="split-edge" />
-            </div>
             <div className="split-panel-content">
               <ProfileCopy side="field" />
             </div>

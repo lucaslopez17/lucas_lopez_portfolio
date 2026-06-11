@@ -109,7 +109,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
     meta: {
       title: "Lucas Lopez | Engineering Meets Field Execution",
       description:
-        "A premium interactive portfolio for Lucas Lopez, Industrial Engineer, Mechanical Fitter and Polywelder.",
+        "Portfolio for an Industrial Engineer, Mechanical Fitter and Polywelder profile focused on office-to-site execution.",
     },
     ui: {
       language: "Language",
@@ -135,7 +135,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
         title: "Two Operating Modes. One Technical Mind.",
         eyebrow: "Professional identity",
         intro:
-          "Lucas connects engineering analysis with hands-on execution: planning, process improvement, fabrication, welding, maintenance and mining operations.",
+          "I connect engineering analysis with hands-on execution: planning, process improvement, fabrication, welding, maintenance and mining operations.",
         nodes: [
           {
             id: "industrial-engineering",
@@ -209,7 +209,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
         title: "Applied Skill Map",
         eyebrow: "What I can execute",
         intro:
-          "A practical map of the capabilities Lucas brings together: engineering thinking, maintenance planning, field execution, fabrication, documentation and operational improvement.",
+          "A practical map of the capabilities I bring together: engineering thinking, maintenance planning, field execution, fabrication, documentation and operational improvement.",
         scopeLabel: "Skill base",
         signalsLabel: "Applied value",
         items: [
@@ -485,7 +485,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
       },
       contact: {
         title: "Ready for office-to-site problems.",
-        body: "Available for roles and projects where engineering thinking, mechanical skill and field execution need to operate together.",
+        body: "I am available for roles and projects where engineering thinking, mechanical skill and field execution need to operate together.",
         email: "lucaslopez.cba@gmail.com",
         phone: "+61 478 727 147",
         location: "Perth, WA",
@@ -496,7 +496,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
     meta: {
       title: "Lucas Lopez | Ingeniería y Ejecución en Campo",
       description:
-        "Portfolio interactivo premium de Lucas Lopez, Ingeniero Industrial, Mechanical Fitter y Polywelder.",
+        "Portfolio de un perfil de Ingeniería Industrial, Mechanical Fitting y Polywelding orientado a ejecución de oficina a campo.",
     },
     ui: {
       language: "Idioma",
@@ -522,7 +522,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
         title: "Dos Modos de Trabajo. Una Mente Técnica.",
         eyebrow: "Identidad profesional",
         intro:
-          "Lucas conecta análisis de ingeniería con ejecución práctica: planificación, mejora de procesos, fabricación, soldadura, mantenimiento y operaciones mineras.",
+          "Conecto análisis de ingeniería con ejecución práctica: planificación, mejora de procesos, fabricación, soldadura, mantenimiento y operaciones mineras.",
         nodes: [
           {
             id: "industrial-engineering",
@@ -596,7 +596,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
         title: "Mapa de Skills Aplicadas",
         eyebrow: "Lo que puedo ejecutar",
         intro:
-          "Un mapa práctico de las capacidades que Lucas combina: pensamiento de ingeniería, planificación de mantenimiento, ejecución en campo, fabricación, documentación y mejora operativa.",
+          "Un mapa práctico de las capacidades que combino: pensamiento de ingeniería, planificación de mantenimiento, ejecución en campo, fabricación, documentación y mejora operativa.",
         scopeLabel: "Base técnica",
         signalsLabel: "Valor aplicado",
         items: [
@@ -836,7 +836,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Reemplazo de poleas, rodillos, impact beds y skirting.",
               "Asistencia en remoción e instalación de equipos pesados de conveyor.",
-              "Trabajo segun programas de shutdown y requisitos de aislamiento.",
+              "Trabajo según programas de shutdown y requisitos de aislamiento.",
             ],
           },
           {
@@ -864,15 +864,15 @@ export const copy: Record<Locale, PortfolioCopy> = {
             title: "Procedimientos para taller comunitario",
             context: "Desarrollo de procedimientos",
             details: [
-              "Participación en desarrollo de procedimientos para sector carpinteria.",
-              "Aplicacion de organización técnica en entorno de trabajo comunitario.",
+              "Participación en desarrollo de procedimientos para sector carpintería.",
+              "Aplicación de organización técnica en entorno de trabajo comunitario.",
             ],
           },
         ],
       },
       contact: {
         title: "Listo para problemas de oficina a campo.",
-        body: "Disponible para roles y proyectos donde el pensamiento de ingeniería, la habilidad mecánica y la ejecución en campo necesitan trabajar juntos.",
+        body: "Estoy disponible para roles y proyectos donde el pensamiento de ingeniería, la habilidad mecánica y la ejecución en campo necesitan trabajar juntos.",
         email: "lucaslopez.cba@gmail.com",
         phone: "+61 478 727 147",
         location: "Perth, WA",

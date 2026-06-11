@@ -607,20 +607,22 @@ html[data-theme="dark"] .orb-expanded small {
 
 .section-eyebrow {
   margin: 0 0 10px;
-  color: var(--cyan);
-  font-family: var(--font-display), sans-serif;
+  color: var(--blue);
+  font-family: var(--font-body), Arial, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  font-size: 0.76rem;
+  font-weight: 700;
 }
 
 .section-heading h2,
 .contact-band h2 {
   margin: 0;
-  font-family: var(--font-display), sans-serif;
-  text-transform: uppercase;
-  font-size: clamp(2.4rem, 6vw, 5.5rem);
-  line-height: 0.9;
+  font-family: var(--font-body), Arial, sans-serif;
+  text-transform: none;
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  line-height: 1;
+  font-weight: 750;
   letter-spacing: 0;
 }
 
@@ -696,17 +698,19 @@ html[data-theme="dark"] .orb-expanded small {
 .node-index {
   display: block;
   color: var(--orange);
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   font-size: 0.85rem;
+  font-weight: 700;
   margin-bottom: 34px;
 }
 
 .identity-node strong {
   display: block;
-  font-family: var(--font-display), sans-serif;
-  font-size: 1.65rem;
-  line-height: 1;
-  text-transform: uppercase;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.08;
+  text-transform: none;
+  font-weight: 750;
 }
 
 .node-summary {
@@ -776,12 +780,13 @@ html[data-theme="dark"] .orb-expanded small {
 
 .experience-node span {
   color: var(--orange);
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-weight: 700;
 }
 
 .experience-node strong {
   font-size: 1rem;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .experience-node small {
@@ -819,10 +824,11 @@ html[data-theme="dark"] .orb-expanded small {
 
 .experience-detail h3 {
   margin: 8px 0 8px;
-  font-family: var(--font-display), sans-serif;
-  font-size: clamp(2rem, 4.4vw, 4.2rem);
-  line-height: 0.92;
-  text-transform: uppercase;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-size: clamp(2rem, 4vw, 3.7rem);
+  line-height: 1;
+  text-transform: none;
+  font-weight: 750;
 }
 
 .experience-detail > p {
@@ -839,9 +845,11 @@ html[data-theme="dark"] .orb-expanded small {
 
 .detail-columns h4 {
   margin: 0 0 12px;
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
+  font-size: 0.78rem;
+  color: var(--muted);
 }
 
 .detail-columns ul,
@@ -896,10 +904,11 @@ html[data-theme="dark"] .orb-expanded small {
 
 .skill-panel h3 {
   margin: 26px 0 18px;
-  font-family: var(--font-display), sans-serif;
-  font-size: 2rem;
-  line-height: 1;
-  text-transform: uppercase;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-size: 1.65rem;
+  line-height: 1.08;
+  text-transform: none;
+  font-weight: 750;
 }
 
 .skill-tags {
@@ -932,8 +941,9 @@ html[data-theme="dark"] .orb-expanded small {
 
 .software-row-header span {
   color: var(--blue);
-  font-family: var(--font-display), sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .software-meter {
@@ -1005,10 +1015,11 @@ html[data-theme="dark"] .software-meter {
 .education-item h3,
 .credential-block h3 {
   margin: 0 0 7px;
-  font-family: var(--font-display), sans-serif;
-  text-transform: uppercase;
-  font-size: 1.42rem;
-  line-height: 1;
+  font-family: var(--font-body), Arial, sans-serif;
+  text-transform: none;
+  font-size: 1.22rem;
+  line-height: 1.12;
+  font-weight: 750;
 }
 
 .education-item p {
@@ -1057,16 +1068,18 @@ html[data-theme="dark"] .software-meter {
 
 .project-card > span {
   color: var(--orange);
-  font-family: var(--font-display), sans-serif;
-  letter-spacing: 0.1em;
+  font-family: var(--font-body), Arial, sans-serif;
+  letter-spacing: 0.04em;
+  font-weight: 700;
 }
 
 .project-card h3 {
   margin: 32px 0 10px;
-  font-family: var(--font-display), sans-serif;
-  font-size: 1.88rem;
-  line-height: 1;
-  text-transform: uppercase;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.08;
+  text-transform: none;
+  font-weight: 750;
 }
 
 .project-card p {

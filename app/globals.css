@@ -708,6 +708,14 @@ html[data-theme="dark"] .orb-expanded small {
   align-items: stretch;
 }
 
+.experience-console.is-collapsed {
+  grid-template-columns: 1fr;
+}
+
+.experience-console.is-collapsed .experience-map {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .experience-map {
   display: grid;
   gap: 10px;
@@ -1292,6 +1300,10 @@ html[data-theme="dark"] .software-meter {
   .experience-console,
   .education-layout,
   .contact-band {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-console.is-collapsed .experience-map {
     grid-template-columns: 1fr;
   }
 

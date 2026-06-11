@@ -329,8 +329,7 @@ function ExperienceSection({
   activeExperience: Experience | null;
   setActiveExperience: (item: Experience | null) => void;
 }) {
-  const first = t.sections.experience.items[0];
-  const selected = activeExperience ?? first;
+  const selected = activeExperience;
 
   return (
     <SectionFrame
@@ -339,7 +338,7 @@ function ExperienceSection({
       title={t.sections.experience.title}
       intro={t.sections.experience.intro}
     >
-      <div className="experience-console">
+      <div className={selected ? "experience-console has-detail" : "experience-console is-collapsed"}>
         <div className="experience-map" aria-label={t.sections.experience.title}>
           {t.sections.experience.items.map((item, index) => {
             const isOpen = activeExperience?.id === item.id;
@@ -373,15 +372,17 @@ function ExperienceSection({
           })}
         </div>
         <AnimatePresence mode="wait">
-          <motion.article
-            key={selected.id}
-            className="experience-detail"
-            initial={{ opacity: 0, x: 18 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -18 }}
-          >
-            <ExperienceDetailBody t={t} selected={selected} />
-          </motion.article>
+          {selected ? (
+            <motion.article
+              key={selected.id}
+              className="experience-detail"
+              initial={{ opacity: 0, x: 18 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -18 }}
+            >
+              <ExperienceDetailBody t={t} selected={selected} />
+            </motion.article>
+          ) : null}
         </AnimatePresence>
       </div>
     </SectionFrame>

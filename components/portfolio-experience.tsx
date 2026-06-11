@@ -171,12 +171,6 @@ function Hero({
 
   return (
     <section className="hero-section" aria-labelledby="hero-title">
-      <div className="system-strip">
-        <span>{t.ui.status}</span>
-        <span>WA / CBA</span>
-        <span>{t.ui.source}</span>
-      </div>
-
       <motion.div
         className="portrait-stage"
         initial={{ opacity: 0, scale: 0.96 }}
@@ -263,12 +257,6 @@ function Hero({
           })}
         </div>
       </motion.div>
-
-      <div className="proof-grid">
-        {t.hero.proofPoints.map((point) => (
-          <span key={point}>{point}</span>
-        ))}
-      </div>
 
       <a className="scroll-cue" href="#identity">
         <ArrowDown size={16} />
@@ -369,8 +357,8 @@ function ExperienceSection({
               onClick={() => setActiveExperience(item)}
             >
               <span>{String(index + 1).padStart(2, "0")}</span>
-              <strong>{item.company}</strong>
-              <small>{item.role}</small>
+              <strong>{item.role}</strong>
+              <small>{item.focus}</small>
             </button>
           ))}
         </div>
@@ -387,7 +375,6 @@ function ExperienceSection({
               {selected.period ? <span className="detail-chip muted">{selected.period}</span> : null}
             </div>
             <h3>{selected.role}</h3>
-            <p>{selected.company}</p>
             <div className="detail-columns">
               <div>
                 <h4>Scope</h4>

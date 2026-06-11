@@ -140,18 +140,18 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Bachelor of Industrial Engineering in progress at Universidad de Palermo.",
               "Background in mechanical engineering studies at Universidad Tecnológica Nacional.",
-              "Experience in quality assistance, technical documentation and engineering department tasks.",
+              "Experience in quality assistance, technical documentation and engineering support tasks.",
             ],
           },
           {
             id: "maintenance-planning",
             label: "Maintenance Planning",
             side: "bridge",
-            summary: "Shutdown schedules, inspections and site safety requirements.",
+            summary: "Office-side planning for priorities, schedules, KPIs and execution control.",
             details: [
-              "Shutdown maintenance on stacker conveyor systems in mining environments.",
-              "Pulley, roller, impact bed and conveyor skirting replacement.",
-              "Basic alignment checks and mechanical inspections during maintenance activities.",
+              "Maintenance planning, work prioritisation and shutdown preparation.",
+              "KPI tracking for backlog, compliance, downtime and work execution.",
+              "Coordination between planning, documentation, field teams and site constraints.",
             ],
           },
           {
@@ -182,8 +182,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
             side: "engineering",
             summary: "Manuals, drawings, CAD and machinery documentation.",
             details: [
-              "Machine manuals for PET and RET lines at Coca Cola through Universidad Tecnológica Nacional.",
-              "Mechanical drawings and administrative engineering tasks at ME-PROMAES S.A.",
+              "Machine manuals for PET and RET production lines.",
+              "Mechanical drawings and administrative engineering tasks.",
               "Advanced AutoCAD with Inventor and SolidWorks experience.",
             ],
           },
@@ -201,14 +201,14 @@ export const copy: Record<Locale, PortfolioCopy> = {
         ],
       },
       experience: {
-        title: "Experience Network",
-        eyebrow: "Field record + engineering base",
+        title: "Capability Roadmap",
+        eyebrow: "Activities, not job titles",
         intro:
-          "Each node shows a different layer of the same profile: engineering office, quality, technical education, mining maintenance and HDPE field execution.",
+          "Each node shows a practical operating mode: planning, documentation, quality, technical communication, shutdown maintenance and HDPE field execution.",
         items: [
           {
             id: "king",
-            role: "Shutdown Mechanical Fitter",
+            role: "Shutdown Maintenance",
             company: "King Resources Group",
             focus: "Mining shutdown maintenance",
             responsibilities: [
@@ -225,7 +225,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "elixon7",
-            role: "Polywelder / Mechanical Fitter",
+            role: "HDPE Polywelding",
             company: "Elixon7",
             focus: "HDPE polywelding and field operations",
             responsibilities: [
@@ -244,7 +244,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "mega",
-            role: "Quality Assistant",
+            role: "Quality Support",
             company: "Mega-tecnologia S.A.",
             period: "25/03/2017 - 31/12/2017",
             focus: "Quality support",
@@ -253,18 +253,18 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "utn-cocacola",
-            role: "Technical Documentation Contributor",
+            role: "Technical Documentation",
             company: "Universidad Tecnológica Nacional / Coca Cola",
             period: "27/11/2015 - 01/03/2018",
             focus: "Machine manuals for PET and RET lines",
             responsibilities: [
-              "Prepared machine manuals for PET and RET lines at Coca Cola through Universidad Tecnológica Nacional.",
+              "Prepared machine manuals for PET and RET production lines.",
             ],
             achievements: ["Translated mechanical systems into usable technical documentation."],
           },
           {
             id: "mepromaes",
-            role: "Engineering Department Support",
+            role: "Engineering Support",
             company: "ME-PROMAES S.A.",
             period: "25/03/2014 - 02/01/2016",
             focus: "Administration, drawings and management software",
@@ -277,7 +277,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "teaching",
-            role: "Technical Teaching Support",
+            role: "Technical Communication",
             company: "Instituto Técnico Renault / Private classes",
             period: "2016",
             focus: "Mathematics and physics",
@@ -417,12 +417,12 @@ export const copy: Record<Locale, PortfolioCopy> = {
         languages: ["Spanish - Native", "Portuguése - Fluent", "English - Fluent (IELTS C1 Nov 2025)", "French - Basic"],
       },
       projects: {
-        title: "Project Signals",
-        eyebrow: "Work converted into outcomes",
+        title: "Applied Work",
+        eyebrow: "Skills converted into outcomes",
         items: [
           {
             title: "Mining dewatering HDPE systems",
-            context: "Elixon7",
+            context: "HDPE field execution",
             details: [
               "Installed and relocated pumps and HDPE lines.",
               "Performed HDPE stringing, alignment and tie-ins.",
@@ -431,7 +431,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Stacker conveyor shutdown maintenance",
-            context: "King Resources Group",
+            context: "Shutdown maintenance",
             details: [
               "Replaced pulleys, rollers, impact beds and skirting components.",
               "Assisted with heavy conveyor equipment removal and installation.",
@@ -440,7 +440,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "PET and RET line machine manuals",
-            context: "Universidad Tecnológica Nacional / Coca Cola",
+            context: "Technical documentation",
             details: [
               "Prepared machine manuals for production lines.",
               "Converted mechanical information into clear technical documentation.",
@@ -448,7 +448,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Mechanical drawings and engineering support",
-            context: "ME-PROMAES S.A.",
+            context: "Mechanical design support",
             details: [
               "Designed and produced mechanical drawings.",
               "Supported engineering administration and management software workflows.",
@@ -456,12 +456,12 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "San Luis highway tender drawings",
-            context: "Province of San Luis tender project",
+            context: "Tender drawing support",
             details: ["Participated in the highway project tender with drawing design tasks in 2010."],
           },
           {
             title: "Community workshop procedures",
-            context: "Villa el Libertador social cooperative",
+            context: "Procedure development",
             details: [
               "Participated in procedure development for the carpentry sector.",
               "Applied technical organization in a community work environment.",
@@ -520,18 +520,18 @@ export const copy: Record<Locale, PortfolioCopy> = {
             details: [
               "Ingeniería Industrial en curso en Universidad de Palermo.",
               "Base previa en Ingeniería Mecánica en Universidad Tecnológica Nacional.",
-              "Experiencia en calidad, documentación técnica y tareas de departamento de ingeniería.",
+              "Experiencia en calidad, documentación técnica y soporte de ingeniería.",
             ],
           },
           {
             id: "maintenance-planning",
             label: "Planificación de Mantenimiento",
             side: "bridge",
-            summary: "Paradas, inspecciones, procedimientos de aislamiento y seguridad de sitio.",
+            summary: "Planificación de oficina: prioridades, cronogramas, KPIs y control de ejecución.",
             details: [
-              "Mantenimiento de shutdown en sistemas de stacker conveyor en mineria.",
-              "Reemplazo de poleas, rodillos, impact beds y skirting de conveyor.",
-              "Inspecciones y chequeos básicos de alineacion durante mantenimiento.",
+              "Planificación de mantenimiento, priorización de trabajos y preparación de shutdowns.",
+              "Seguimiento de KPIs de backlog, cumplimiento, downtime y ejecución de tareas.",
+              "Coordinación entre planificación, documentación, equipos de campo y restricciones de sitio.",
             ],
           },
           {
@@ -562,8 +562,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
             side: "engineering",
             summary: "Manuales, plaños, CAD y documentación de maquinaria.",
             details: [
-              "Manuales de maquinas para lineas PET y RET en Coca Cola a traves de Universidad Tecnológica Nacional.",
-              "Plaños mecánicos y tareas administrativas de ingeniería en ME-PROMAES S.A.",
+              "Manuales de maquinas para lineas productivas PET y RET.",
+              "Plaños mecánicos y tareas administrativas de ingeniería.",
               "AutoCAD avanzado con experiencia en Inventor y SolidWorks.",
             ],
           },
@@ -581,14 +581,14 @@ export const copy: Record<Locale, PortfolioCopy> = {
         ],
       },
       experience: {
-        title: "Red de Experiencia",
-        eyebrow: "Campo actual + base de ingeniería",
+        title: "Mapa de Capacidades",
+        eyebrow: "Actividades, no cargos sueltos",
         intro:
-          "Cada nodo muestra una capa del mismo perfil: oficina técnica, calidad, educacion técnica, mantenimiento minero y ejecución HDPE en campo.",
+          "Cada nodo muestra un modo de trabajo: planificación, documentación, calidad, comunicación técnica, mantenimiento en shutdowns y ejecución HDPE en campo.",
         items: [
           {
             id: "king",
-            role: "Shutdown Mechanical Fitter",
+            role: "Mantenimiento en Shutdowns",
             company: "King Resources Group",
             focus: "Mantenimiento de shutdown en mineria",
             responsibilities: [
@@ -605,7 +605,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "elixon7",
-            role: "Polywelder / Mechanical Fitter",
+            role: "Polywelding HDPE",
             company: "Elixon7",
             focus: "HDPE polywelding y operaciónes de campo",
             responsibilities: [
@@ -624,7 +624,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "mega",
-            role: "Auxiliar de Calidad",
+            role: "Soporte de Calidad",
             company: "Mega-tecnologia S.A.",
             period: "25/03/2017 - 31/12/2017",
             focus: "Soporte de calidad",
@@ -633,18 +633,18 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "utn-cocacola",
-            role: "Contribuidor de Documentación Técnica",
+            role: "Documentación Técnica",
             company: "Universidad Tecnológica Nacional / Coca Cola",
             period: "27/11/2015 - 01/03/2018",
             focus: "Manuales de maquinas para lineas PET y RET",
             responsibilities: [
-              "Confeccion de manuales de maquinas en lineas PET y RET en Coca Cola a cargo de Universidad Tecnológica Nacional.",
+              "Confeccion de manuales de maquinas en lineas productivas PET y RET.",
             ],
             achievements: ["Tradujo sistemas mecánicos en documentación técnica utilizable."],
           },
           {
             id: "mepromaes",
-            role: "Soporte en Departamento de Ingeniería",
+            role: "Soporte de Ingeniería",
             company: "ME-PROMAES S.A.",
             period: "25/03/2014 - 02/01/2016",
             focus: "Administración, plaños y software de gestión",
@@ -657,7 +657,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             id: "teaching",
-            role: "Soporte Docente Técnico",
+            role: "Comunicación Técnica",
             company: "Instituto Técnico Renault / Clases particulares",
             period: "2016",
             focus: "Matemática y fisica",
@@ -797,12 +797,12 @@ export const copy: Record<Locale, PortfolioCopy> = {
         languages: ["Español - Nativo", "Portugués - Fluido", "Inglés - Fluido (IELTS C1 Nov 2025)", "Francés - Básico"],
       },
       projects: {
-        title: "Señales de Proyecto",
-        eyebrow: "Trabajo convertido en resultados",
+        title: "Trabajo Aplicado",
+        eyebrow: "Skills convertidas en resultados",
         items: [
           {
             title: "Sistemas HDPE para dewatering minero",
-            context: "Elixon7",
+            context: "Ejecución HDPE en campo",
             details: [
               "Instalación y reubicación de bombas y lineas HDPE.",
               "Stringing, alineacion y tie-ins de tuberías HDPE.",
@@ -811,7 +811,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Shutdown de stacker conveyor",
-            context: "King Resources Group",
+            context: "Mantenimiento en shutdown",
             details: [
               "Reemplazo de poleas, rodillos, impact beds y skirting.",
               "Asistencia en remocion e instalación de equipos pesados de conveyor.",
@@ -820,7 +820,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Manuales de maquinas para lineas PET y RET",
-            context: "Universidad Tecnológica Nacional / Coca Cola",
+            context: "Documentación técnica",
             details: [
               "Confeccion de manuales de maquinas para lineas de producción.",
               "Conversion de información mecánica en documentación técnica clara.",
@@ -828,7 +828,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Plaños mecánicos y soporte de ingeniería",
-            context: "ME-PROMAES S.A.",
+            context: "Soporte de diseño mecánico",
             details: [
               "Diseño y realizacion de plaños mecánicos.",
               "Soporte a tareas administrativas y flujos de software de gestión.",
@@ -836,12 +836,12 @@ export const copy: Record<Locale, PortfolioCopy> = {
           },
           {
             title: "Plaños para licitación de autovías",
-            context: "Proyecto de autovías de San Luis",
+            context: "Soporte de plaños para licitación",
             details: ["Participación en proyecto de licitación con tareas de diseño de plaños en 2010."],
           },
           {
             title: "Procedimientos para taller comunitario",
-            context: "Cooperativa social Villa el Libertador",
+            context: "Desarrollo de procedimientos",
             details: [
               "Participación en desarrollo de procedimientos para sector carpinteria.",
               "Aplicacion de organización técnica en entorno de trabajo comunitario.",

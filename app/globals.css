@@ -1,17 +1,17 @@
 ﻿:root {
-  --bg: #f4f1eb;
-  --bg-2: #ebe6dc;
-  --surface: rgba(255, 255, 255, 0.78);
-  --surface-strong: rgba(255, 255, 255, 0.94);
-  --ink: #141414;
-  --muted: #69645d;
+  --bg: #f7f7f4;
+  --bg-2: #ececea;
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-strong: rgba(255, 255, 255, 0.96);
+  --ink: #111111;
+  --muted: #656565;
   --line: rgba(20, 20, 20, 0.16);
   --cyan: #141414;
-  --blue: #8b8378;
-  --orange: #b4473b;
-  --lime: #9b6a42;
-  --steel: #34302c;
-  --shadow: 0 18px 54px rgba(24, 20, 16, 0.14);
+  --blue: #727272;
+  --orange: #e23d52;
+  --lime: #8a8a8a;
+  --steel: #2d2d2d;
+  --shadow: 0 18px 54px rgba(0, 0, 0, 0.12);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -43,9 +43,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.72), transparent 34%),
-    radial-gradient(circle at 82% 28%, rgba(180, 71, 59, 0.1), transparent 30%),
-    linear-gradient(180deg, #fbf8f2 0%, var(--bg) 52%, #e8e1d6 100%);
+    radial-gradient(circle at 82% 28%, rgba(226, 61, 82, 0.08), transparent 30%),
+    linear-gradient(180deg, #ffffff 0%, var(--bg) 52%, #e8e8e5 100%);
   color: var(--ink);
   font-family: var(--font-body), Arial, sans-serif;
   overflow-x: hidden;
@@ -73,7 +72,7 @@ a {
 }
 
 ::selection {
-  background: rgba(198, 83, 69, 0.34);
+  background: rgba(226, 61, 82, 0.28);
 }
 
 .site-shell {
@@ -159,8 +158,8 @@ a {
 .glitch-chip {
   min-width: 42px;
   min-height: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  background: rgba(247, 244, 239, 0.045);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.42);
   cursor: pointer;
   transition: border-color 180ms var(--ease), background 180ms var(--ease), color 180ms var(--ease);
   position: relative;
@@ -171,7 +170,7 @@ a {
   min-height: 34px;
   padding: 0 11px;
   border: 1px solid var(--line);
-  background: rgba(247, 244, 239, 0.08);
+  background: rgba(255, 255, 255, 0.5);
   color: var(--ink);
   display: inline-flex;
   align-items: center;
@@ -315,17 +314,18 @@ a {
 .hero-copy {
   position: absolute;
   left: 50%;
-  top: 66%;
-  transform: translate(-50%, -50%);
+  top: auto;
+  bottom: 54px;
+  transform: translateX(-50%);
   width: min(980px, 92vw);
   display: grid;
   justify-items: center;
   text-align: center;
   pointer-events: none;
   z-index: 6;
-  padding: clamp(10px, 1.6vw, 18px) clamp(14px, 2vw, 24px);
-  background: linear-gradient(90deg, transparent, rgba(5, 5, 5, 0.68), transparent);
-  backdrop-filter: blur(1px);
+  padding: 0 clamp(12px, 2vw, 22px);
+  background: none;
+  backdrop-filter: none;
 }
 
 .hero-kicker,
@@ -382,7 +382,7 @@ a {
 .hero-tagline {
   max-width: 460px;
   margin-top: 14px;
-  color: var(--steel);
+  color: rgba(255, 255, 255, 0.82);
   font-size: clamp(1rem, 1.7vw, 1.34rem);
   text-shadow: 0 4px 26px rgba(0, 0, 0, 0.86);
 }
@@ -416,48 +416,52 @@ a {
 .skill-orb {
   position: absolute;
   z-index: 11;
-  min-width: 172px;
-  min-height: 54px;
-  padding: 10px 14px;
+  min-width: 190px;
+  min-height: 44px;
+  padding: 8px 0;
   display: grid;
   align-items: center;
-  gap: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(18, 18, 18, 0.82);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+  gap: 8px;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
   cursor: pointer;
   pointer-events: auto;
-  color: var(--ink);
+  color: rgba(255, 255, 255, 0.92);
   text-align: left;
+  text-shadow: 0 3px 18px rgba(0, 0, 0, 0.82);
 }
 
 .skill-orb.is-open {
-  width: min(320px, calc(100vw - 32px));
-  min-height: 154px;
+  width: min(342px, calc(100vw - 32px));
+  min-height: 142px;
   z-index: 12;
-  border-color: rgba(198, 83, 69, 0.82);
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%),
-    rgba(18, 18, 18, 0.92);
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 42%),
+    rgba(10, 10, 10, 0.74);
+  backdrop-filter: blur(14px);
   box-shadow: 0 18px 54px rgba(0, 0, 0, 0.38);
 }
 
 .skill-orb::before {
   content: "";
   position: absolute;
-  inset: -1px;
-  border: 1px solid transparent;
-  background: linear-gradient(90deg, transparent, rgba(198, 83, 69, 0.58), transparent) border-box;
-  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 180ms var(--ease);
+  left: -18px;
+  top: 50%;
+  width: 10px;
+  height: 1px;
+  background: var(--orange);
+  opacity: 0.86;
+  transform: translateY(-50%);
+  transition: width 180ms var(--ease);
 }
 
 .skill-orb:hover::before,
 .skill-orb.is-open::before {
-  opacity: 1;
+  width: 18px;
 }
 
 .orb-heading {
@@ -468,14 +472,15 @@ a {
 
 .skill-orb svg {
   flex: 0 0 auto;
-  color: var(--cyan);
+  color: var(--orange);
 }
 
 .orb-heading > span {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   line-height: 1.05;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .orb-expanded {
@@ -485,13 +490,13 @@ a {
 }
 
 .orb-expanded > span {
-  color: var(--steel);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 0.82rem;
   line-height: 1.35;
 }
 
 .orb-expanded small {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.68);
   font-size: 0.72rem;
   line-height: 1.35;
 }
@@ -738,7 +743,7 @@ a {
   min-height: 94px;
   padding: 16px;
   border: 1px solid var(--line);
-  background: rgba(18, 18, 18, 0.66);
+  background: var(--surface);
   display: grid;
   gap: 5px;
   text-align: left;
@@ -750,7 +755,7 @@ a {
 .experience-node.is-active {
   transform: translateX(4px);
   border-color: rgba(198, 83, 69, 0.72);
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface-strong);
 }
 
 .experience-node span {
@@ -769,7 +774,7 @@ a {
 
 .experience-detail {
   min-height: 620px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--line);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 36%),
     linear-gradient(315deg, rgba(198, 83, 69, 0.1), transparent 42%),
@@ -888,8 +893,8 @@ a {
 .credential-block span {
   display: inline-flex;
   padding: 8px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.34);
   color: var(--steel);
   font-size: 0.84rem;
   line-height: 1.2;
@@ -1003,7 +1008,7 @@ a {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 38%),
     linear-gradient(315deg, rgba(198, 83, 69, 0.16), transparent 36%),
-    rgba(18, 18, 18, 0.9);
+    var(--surface-strong);
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 24px;
@@ -1243,6 +1248,7 @@ a {
     position: relative;
     left: auto;
     top: auto;
+    bottom: auto;
     transform: none;
     order: 2;
     width: 100%;
@@ -1254,11 +1260,20 @@ a {
 
   .glitch-title {
     font-size: clamp(2.65rem, 14.5vw, 4.2rem);
+    text-shadow: none;
+  }
+
+  .hero-kicker,
+  .hero-role {
+    color: var(--muted);
+    text-shadow: none;
   }
 
   .hero-tagline {
     max-width: 290px;
     font-size: 0.9rem;
+    color: var(--steel);
+    text-shadow: none;
   }
 
   .network-lines,
@@ -1291,9 +1306,11 @@ a {
     min-width: 0;
     min-height: 48px;
     padding: 13px 14px;
-    background: rgba(247, 244, 239, 0.055);
-    border-color: rgba(247, 244, 239, 0.16);
+    border-block: 1px solid var(--line);
+    background: transparent;
     box-shadow: none;
+    color: var(--ink);
+    text-shadow: none;
   }
 
   .skill-orb.is-open {
@@ -1301,10 +1318,20 @@ a {
     max-width: none;
     min-width: 0;
     min-height: auto;
+    background: var(--surface-strong);
+    color: var(--ink);
   }
 
   .skill-orb svg {
     display: block;
+  }
+
+  .orb-expanded > span {
+    color: var(--steel);
+  }
+
+  .orb-expanded small {
+    color: var(--muted);
   }
 
   .skill-orb-1 {

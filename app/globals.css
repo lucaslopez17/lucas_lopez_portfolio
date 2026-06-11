@@ -439,12 +439,12 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
 }
 
 .engineering-page {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.38fr) minmax(0, 1fr);
   background: linear-gradient(90deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%);
 }
 
 .field-page {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.38fr);
   background: linear-gradient(270deg, rgba(247, 247, 244, 0.96), rgba(247, 247, 244, 0.72) 48%, transparent 74%);
 }
 

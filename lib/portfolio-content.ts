@@ -42,6 +42,20 @@ export type ProjectItem = {
   details: string[];
 };
 
+export type ProfileFocus = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  back: string;
+  pointsTitle: string;
+  points: string[];
+  flowTitle: string;
+  flow: string[];
+  signalsTitle: string;
+  signals: string[];
+  diagramTitle: string;
+};
+
 export type PortfolioCopy = {
   meta: {
     title: string;
@@ -61,6 +75,10 @@ export type PortfolioCopy = {
     proofPoints: string[];
   };
   sections: {
+    profiles: {
+      engineering: ProfileFocus;
+      field: ProfileFocus;
+    };
     identity: {
       title: string;
       eyebrow: string;
@@ -129,6 +147,58 @@ export const copy: Record<Locale, PortfolioCopy> = {
       ],
     },
     sections: {
+      profiles: {
+        engineering: {
+          eyebrow: "Profile mode",
+          title: "Industrial Engineering",
+          intro:
+            "I turn operational complexity into structured plans, measurable processes and execution-ready systems.",
+          back: "Back to Overview",
+          pointsTitle: "Engineering focus",
+          points: [
+            "Process improvement",
+            "Continuous improvement",
+            "KPI analysis",
+            "Maintenance planning",
+            "Project management",
+            "Asset management",
+            "Systems and processes",
+            "Engineering tools",
+            "Data analysis",
+            "Leadership",
+          ],
+          flowTitle: "Process logic",
+          flow: ["Observe", "Measure", "Plan", "Improve", "Control"],
+          signalsTitle: "Decision signals",
+          signals: ["Backlog control", "Schedule compliance", "Downtime visibility", "Resource planning"],
+          diagramTitle: "Systems view",
+        },
+        field: {
+          eyebrow: "Profile mode",
+          title: "Mechanical Fitter & Polywelder",
+          intro:
+            "I execute practical solutions in demanding site conditions, from HDPE systems to mechanical support and shutdown work.",
+          back: "Back to Overview",
+          pointsTitle: "Field focus",
+          points: [
+            "Mechanical fitting",
+            "Polywelding",
+            "Shutdowns",
+            "Fabrication",
+            "Equipment maintenance",
+            "Site operations",
+            "Mining projects",
+            "Field problem solving",
+            "Structural work",
+            "Pressure systems",
+          ],
+          flowTitle: "Execution sequence",
+          flow: ["Prepare", "Isolate", "Fit", "Weld", "Verify"],
+          signalsTitle: "Operational signals",
+          signals: ["Safety readiness", "Tooling and access", "Weld traceability", "Practical completion"],
+          diagramTitle: "Field system",
+        },
+      },
       identity: {
         title: "Two Operating Modes. One Technical Mind.",
         eyebrow: "Professional identity",
@@ -514,6 +584,58 @@ export const copy: Record<Locale, PortfolioCopy> = {
       ],
     },
     sections: {
+      profiles: {
+        engineering: {
+          eyebrow: "Modo de perfil",
+          title: "Ingeniería Industrial",
+          intro:
+            "Transformo complejidad operativa en planes claros, procesos medibles y sistemas listos para ejecutar.",
+          back: "Volver al inicio",
+          pointsTitle: "Foco de ingeniería",
+          points: [
+            "Mejora de procesos",
+            "Mejora continua",
+            "Análisis de KPIs",
+            "Planificación de mantenimiento",
+            "Gestión de proyectos",
+            "Gestión de activos",
+            "Sistemas y procesos",
+            "Herramientas de ingeniería",
+            "Análisis de datos",
+            "Liderazgo",
+          ],
+          flowTitle: "Lógica de proceso",
+          flow: ["Observar", "Medir", "Planificar", "Mejorar", "Controlar"],
+          signalsTitle: "Señales de decisión",
+          signals: ["Control de backlog", "Cumplimiento del programa", "Visibilidad del downtime", "Planificación de recursos"],
+          diagramTitle: "Vista de sistemas",
+        },
+        field: {
+          eyebrow: "Modo de perfil",
+          title: "Mechanical Fitter & Polywelder",
+          intro:
+            "Ejecuto soluciones prácticas en condiciones exigentes de sitio, desde sistemas HDPE hasta soporte mecánico y trabajos de shutdown.",
+          back: "Volver al inicio",
+          pointsTitle: "Foco de campo",
+          points: [
+            "Mechanical fitting",
+            "Polywelding",
+            "Shutdowns",
+            "Fabricación",
+            "Mantenimiento de equipos",
+            "Operaciones de sitio",
+            "Proyectos mineros",
+            "Resolución de problemas en campo",
+            "Trabajo estructural",
+            "Sistemas de presión",
+          ],
+          flowTitle: "Secuencia de ejecución",
+          flow: ["Preparar", "Aislar", "Montar", "Soldar", "Verificar"],
+          signalsTitle: "Señales operativas",
+          signals: ["Seguridad lista", "Herramientas y acceso", "Trazabilidad de soldadura", "Cierre práctico"],
+          diagramTitle: "Sistema de campo",
+        },
+      },
       identity: {
         title: "Dos Modos de Trabajo. Una Mente Técnica.",
         eyebrow: "Identidad profesional",

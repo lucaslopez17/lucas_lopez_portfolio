@@ -8,7 +8,9 @@
   --line: rgba(20, 20, 20, 0.16);
   --cyan: #141414;
   --blue: #1d4ed8;
-  --orange: #2563eb;
+  --orange: #f97316;
+  --blue-soft: rgba(37, 99, 235, 0.12);
+  --orange-soft: rgba(249, 115, 22, 0.13);
   --lime: #8a8a8a;
   --steel: #2d2d2d;
   --shadow: 0 18px 54px rgba(0, 0, 0, 0.12);
@@ -25,7 +27,9 @@ html[data-theme="dark"] {
   --line: rgba(247, 244, 239, 0.18);
   --cyan: #f7f4ef;
   --blue: #93c5fd;
-  --orange: #60a5fa;
+  --orange: #fb923c;
+  --blue-soft: rgba(147, 197, 253, 0.13);
+  --orange-soft: rgba(251, 146, 60, 0.14);
   --lime: #d6a06a;
   --steel: #ded8cf;
   --shadow: 0 18px 64px rgba(0, 0, 0, 0.48);
@@ -269,11 +273,84 @@ a {
   inset: 0;
   overflow: hidden;
   filter: drop-shadow(0 42px 90px rgba(0, 0, 0, 0.62));
+  transition: filter 360ms var(--ease), transform 360ms var(--ease);
+}
+
+.portrait-frame::before,
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms var(--ease), background 280ms var(--ease);
+}
+
+.portrait-frame::before {
+  left: 0;
+}
+
+.portrait-frame::after {
+  right: 0;
+}
+
+.portrait-stage.is-engineering-active .portrait-frame {
+  filter: drop-shadow(0 44px 96px rgba(37, 99, 235, 0.34));
+}
+
+.portrait-stage.is-field-active .portrait-frame {
+  filter: drop-shadow(0 44px 96px rgba(249, 115, 22, 0.32));
+}
+
+.portrait-stage.is-engineering-active .portrait-frame::before {
+  opacity: 0.34;
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.36), rgba(37, 99, 235, 0.05));
+  mix-blend-mode: screen;
+}
+
+.portrait-stage.is-engineering-active .portrait-frame::after {
+  opacity: 0.32;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.portrait-stage.is-field-active .portrait-frame::after {
+  opacity: 0.35;
+  background: linear-gradient(270deg, rgba(249, 115, 22, 0.42), rgba(249, 115, 22, 0.06));
+  mix-blend-mode: screen;
+}
+
+.portrait-stage.is-field-active .portrait-frame::before {
+  opacity: 0.28;
+  background: rgba(0, 0, 0, 0.36);
 }
 
 .portrait-image {
   object-fit: cover;
   object-position: center center;
+}
+
+.face-hotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.face-hotspot {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  min-width: 0;
+  min-height: 0;
+}
+
+.face-hotspot:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -8px;
 }
 
 .split-axis {
@@ -284,6 +361,18 @@ a {
   width: 1px;
   background: linear-gradient(transparent, rgba(255, 255, 255, 0.92), var(--cyan), transparent);
   box-shadow: 0 0 28px rgba(255, 255, 255, 0.78);
+  z-index: 4;
+  transition: background 280ms var(--ease), box-shadow 280ms var(--ease);
+}
+
+.portrait-stage.is-engineering-active .split-axis {
+  background: linear-gradient(transparent, var(--blue), rgba(255, 255, 255, 0.92), transparent);
+  box-shadow: 0 0 34px rgba(37, 99, 235, 0.78);
+}
+
+.portrait-stage.is-field-active .split-axis {
+  background: linear-gradient(transparent, var(--orange), rgba(255, 255, 255, 0.92), transparent);
+  box-shadow: 0 0 34px rgba(249, 115, 22, 0.72);
 }
 
 .scanline {
@@ -438,6 +527,7 @@ html[data-theme="dark"] .hero-tagline {
   text-shadow:
     0 1px 14px rgba(255, 255, 255, 0.96),
     0 4px 22px rgba(255, 255, 255, 0.76);
+  transition: opacity 220ms var(--ease), color 220ms var(--ease), filter 220ms var(--ease), transform 220ms var(--ease);
 }
 
 html[data-theme="dark"] .skill-orb {
@@ -459,6 +549,32 @@ html[data-theme="dark"] .skill-orb {
   color: var(--ink);
   text-shadow: none;
   border-radius: 8px;
+}
+
+.skill-orb.is-profile-highlighted {
+  opacity: 1;
+  color: var(--ink);
+  filter: drop-shadow(0 12px 22px rgba(37, 99, 235, 0.24));
+}
+
+.hero-section.is-field-active .skill-orb.is-profile-highlighted {
+  filter: drop-shadow(0 12px 22px rgba(249, 115, 22, 0.28));
+}
+
+.skill-orb.is-profile-highlighted .orb-heading > span {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+  text-decoration-color: var(--blue);
+}
+
+.hero-section.is-field-active .skill-orb.is-profile-highlighted .orb-heading > span {
+  text-decoration-color: var(--orange);
+}
+
+.skill-orb.is-profile-dimmed {
+  opacity: 0.34;
+  filter: grayscale(1);
 }
 
 html[data-theme="dark"] .skill-orb.is-open {
@@ -547,6 +663,329 @@ html[data-theme="dark"] .orb-expanded small {
   right: 5.5%;
   top: 46%;
   animation: none;
+}
+
+.profile-section {
+  min-height: 100svh;
+  width: min(1280px, calc(100% - 36px));
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 104px) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-section::before {
+  content: "";
+  position: absolute;
+  inset: 26px 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background:
+    linear-gradient(90deg, transparent 0 49%, rgba(255, 255, 255, 0.18) 49% 50%, transparent 50%),
+    radial-gradient(circle at 20% 20%, var(--blue-soft), transparent 34%),
+    var(--surface);
+  z-index: -1;
+}
+
+.field-profile::before {
+  background:
+    linear-gradient(90deg, transparent 0 49%, rgba(255, 255, 255, 0.18) 49% 50%, transparent 50%),
+    radial-gradient(circle at 80% 24%, var(--orange-soft), transparent 36%),
+    var(--surface);
+}
+
+.profile-shell {
+  min-height: min(760px, 78svh);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+  align-items: center;
+  gap: clamp(26px, 5vw, 72px);
+  padding: clamp(28px, 4vw, 54px);
+}
+
+.field-profile .profile-shell {
+  grid-template-columns: minmax(320px, 0.82fr) minmax(0, 1fr);
+}
+
+.profile-content {
+  max-width: 640px;
+}
+
+.back-overview {
+  display: inline-flex;
+  margin: 0 0 26px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 180ms var(--ease), transform 180ms var(--ease);
+}
+
+.back-overview:hover {
+  color: var(--blue);
+  transform: translateX(-4px);
+}
+
+.field-profile .back-overview:hover {
+  color: var(--orange);
+}
+
+.profile-content h2 {
+  margin: 0;
+  font-family: var(--font-body), Arial, sans-serif;
+  font-size: clamp(2.8rem, 6vw, 6.2rem);
+  line-height: 0.95;
+  letter-spacing: 0;
+}
+
+.profile-intro {
+  max-width: 560px;
+  margin: 22px 0 0;
+  color: var(--steel);
+  font-size: clamp(1rem, 1.5vw, 1.22rem);
+  line-height: 1.62;
+}
+
+.profile-points {
+  margin-top: 34px;
+}
+
+.profile-points h3,
+.profile-flow-card h3,
+.profile-diagram-card h3,
+.profile-signal-card h3 {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.profile-points > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.profile-points span {
+  padding: 8px 10px;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--steel);
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.field-profile .profile-points span {
+  border-color: rgba(249, 115, 22, 0.26);
+}
+
+.profile-face {
+  position: relative;
+  min-height: min(720px, 76svh);
+}
+
+.profile-face-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #050505;
+  box-shadow: var(--shadow);
+}
+
+.profile-face-frame::before,
+.profile-face-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.profile-face-frame.engineering::before {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.34), transparent 40%),
+    linear-gradient(270deg, rgba(37, 99, 235, 0.28), transparent 62%);
+}
+
+.profile-face-frame.field::before {
+  background:
+    linear-gradient(270deg, rgba(0, 0, 0, 0.34), transparent 40%),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.3), transparent 62%);
+}
+
+.profile-face-frame.engineering::after {
+  left: auto;
+  width: 50%;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.profile-face-frame.field::after {
+  right: auto;
+  width: 50%;
+  background: rgba(0, 0, 0, 0.46);
+}
+
+.profile-face-image {
+  object-fit: cover;
+  object-position: center center;
+}
+
+.profile-face-axis {
+  position: absolute;
+  top: 6%;
+  bottom: 6%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.86), transparent);
+  z-index: 3;
+}
+
+.profile-graphics {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr 1fr;
+  gap: 14px;
+  padding: 0 clamp(28px, 4vw, 54px) clamp(28px, 4vw, 54px);
+}
+
+.profile-flow-card,
+.profile-diagram-card,
+.profile-signal-card {
+  min-height: 190px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  padding: 18px;
+  border-radius: 8px;
+}
+
+.profile-flow {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+  align-items: center;
+}
+
+.profile-flow span {
+  min-height: 84px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 9px;
+  border: 1px solid rgba(37, 99, 235, 0.22);
+  background: var(--blue-soft);
+  color: var(--ink);
+  border-radius: 7px;
+  font-size: 0.78rem;
+}
+
+.field-profile .profile-flow span {
+  border-color: rgba(249, 115, 22, 0.28);
+  background: var(--orange-soft);
+}
+
+.profile-diagram {
+  position: relative;
+  height: 124px;
+  border: 1px solid var(--line);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 28px 28px;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.profile-diagram::before,
+.profile-diagram::after {
+  content: "";
+  position: absolute;
+  background: var(--blue);
+}
+
+.field-profile .profile-diagram::before,
+.field-profile .profile-diagram::after {
+  background: var(--orange);
+}
+
+.profile-diagram::before {
+  left: 14%;
+  right: 14%;
+  top: 50%;
+  height: 1px;
+}
+
+.profile-diagram::after {
+  top: 18%;
+  bottom: 18%;
+  left: 50%;
+  width: 1px;
+}
+
+.profile-diagram span {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--blue);
+  background: var(--surface-strong);
+  border-radius: 50%;
+}
+
+.field-profile .profile-diagram span {
+  border-color: var(--orange);
+}
+
+.profile-diagram span:nth-child(1) {
+  left: 14%;
+  top: 46%;
+}
+
+.profile-diagram span:nth-child(2) {
+  left: 48%;
+  top: 16%;
+}
+
+.profile-diagram span:nth-child(3) {
+  right: 14%;
+  top: 46%;
+}
+
+.profile-diagram span:nth-child(4) {
+  left: 48%;
+  bottom: 16%;
+}
+
+.profile-diagram span:nth-child(5) {
+  left: 48%;
+  top: 46%;
+}
+
+.profile-signals {
+  display: grid;
+  gap: 12px;
+}
+
+.profile-signals span {
+  display: grid;
+  gap: 7px;
+  color: var(--steel);
+  font-size: 0.88rem;
+}
+
+.profile-signals i {
+  display: block;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), rgba(37, 99, 235, 0.18));
+}
+
+.field-profile .profile-signals i {
+  background: linear-gradient(90deg, var(--orange), rgba(249, 115, 22, 0.16));
 }
 
 .section-frame {
@@ -1297,6 +1736,50 @@ html[data-theme="dark"] .software-meter {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .profile-section {
+    width: min(100% - 28px, 1180px);
+    min-height: auto;
+    padding: 56px 0;
+  }
+
+  .profile-section::before {
+    inset: 18px 0;
+  }
+
+  .profile-shell,
+  .field-profile .profile-shell {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding: 22px;
+  }
+
+  .profile-face {
+    min-height: clamp(420px, 62svh, 650px);
+  }
+
+  .profile-content {
+    max-width: none;
+  }
+
+  .field-profile .profile-content {
+    order: 2;
+  }
+
+  .field-profile .profile-face {
+    order: 1;
+  }
+
+  .profile-graphics {
+    grid-template-columns: 1fr;
+    padding: 0 22px 22px;
+  }
+
+  .profile-flow {
+    grid-template-columns: repeat(5, minmax(84px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 2px;
+  }
+
   .experience-console,
   .education-layout,
   .contact-band {
@@ -1496,6 +1979,36 @@ html[data-theme="dark"] .software-meter {
   .project-track,
   .detail-columns {
     grid-template-columns: 1fr;
+  }
+
+  .profile-section {
+    width: min(100% - 24px, 1180px);
+    padding: 40px 0;
+  }
+
+  .profile-shell {
+    padding: 16px;
+    gap: 18px;
+  }
+
+  .profile-content h2 {
+    font-size: clamp(2.25rem, 12vw, 4rem);
+  }
+
+  .profile-face {
+    min-height: clamp(360px, 52svh, 520px);
+  }
+
+  .profile-points > div {
+    gap: 7px;
+  }
+
+  .profile-points span {
+    font-size: 0.82rem;
+  }
+
+  .profile-graphics {
+    padding: 0 16px 16px;
   }
 
   .section-frame,

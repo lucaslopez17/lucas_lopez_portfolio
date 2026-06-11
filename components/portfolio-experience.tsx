@@ -21,9 +21,10 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { copy, type Experience, type ExpertiseNode, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
+import { copy, type Experience, type ExpertiseNode, type Locale, type PortfolioCopy, type ProfileFocus } from "@/lib/portfolio-content";
 
 type ThemeMode = "dark" | "light";
+type ProfileSide = "engineering" | "field";
 
 const expertiseIcons: Record<string, LucideIcon> = {
   "industrial-engineering": Factory,
@@ -57,6 +58,7 @@ export default function PortfolioExperience() {
   const [theme, setTheme] = useState<ThemeMode>("light");
   const [activeNode, setActiveNode] = useState<ExpertiseNode | null>(null);
   const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
+  const [activeProfileSide, setActiveProfileSide] = useState<ProfileSide | null>(null);
   const t = copy[locale];
 
   const mouseX = useMotionValue(0);
@@ -87,6 +89,14 @@ export default function PortfolioExperience() {
     mouseY.set((event.clientY - rect.top) / rect.height - 0.5);
   }
 
+  function enterProfile(side: ProfileSide) {
+    setActiveProfileSide(side);
+  }
+
+  function returnToOverview() {
+    setActiveProfileSide(null);
+  }
+
   return (
     <main className="site-shell" onPointerMove={handlePointerMove}>
       <AmbientSystem />
@@ -95,9 +105,14 @@ export default function PortfolioExperience() {
         t={t}
         activeNode={activeNode}
         setActiveNode={setActiveNode}
+        activeProfileSide={activeProfileSide}
+        setActiveProfileSide={setActiveProfileSide}
+        enterProfile={enterProfile}
         portraitX={portraitX}
         portraitY={portraitY}
       />
+      <ProfileFocusSection profile="engineering" content={t.sections.profiles.engineering} onBack={returnToOverview} />
+      <ProfileFocusSection profile="field" content={t.sections.profiles.field} onBack={returnToOverview} />
       <IdentitySection t={t} activeNode={activeNode} setActiveNode={setActiveNode} />
       <ExperienceSection t={t} activeExperience={activeExperience} setActiveExperience={setActiveExperience} />
       <SkillsSection t={t} />
@@ -157,21 +172,27 @@ function Hero({
   t,
   activeNode,
   setActiveNode,
+  activeProfileSide,
+  setActiveProfileSide,
+  enterProfile,
   portraitX,
   portraitY,
 }: {
   t: PortfolioCopy;
   activeNode: ExpertiseNode | null;
   setActiveNode: (node: ExpertiseNode | null) => void;
+  activeProfileSide: ProfileSide | null;
+  setActiveProfileSide: (side: ProfileSide | null) => void;
+  enterProfile: (side: ProfileSide) => void;
   portraitX: ReturnType<typeof useTransform<number, number>>;
   portraitY: ReturnType<typeof useTransform<number, number>>;
 }) {
   const nodes = t.sections.identity.nodes;
 
   return (
-    <section className="hero-section" aria-labelledby="hero-title">
+    <section id="overview" className={`hero-section ${activeProfileSide ? `is-${activeProfileSide}-active` : ""}`} aria-labelledby="hero-title">
       <motion.div
-        className="portrait-stage"
+        className={`portrait-stage ${activeProfileSide ? `is-${activeProfileSide}-active` : ""}`}
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -190,6 +211,28 @@ function Hero({
             />
             <span className="split-axis" />
             <span className="scanline" />
+            <div className="face-hotspots" aria-label="Split portrait navigation">
+              <a
+                className="face-hotspot face-hotspot-engineering"
+                href="#industrial-profile"
+                aria-label={t.sections.profiles.engineering.title}
+                onPointerEnter={() => setActiveProfileSide("engineering")}
+                onPointerLeave={() => setActiveProfileSide(null)}
+                onFocus={() => setActiveProfileSide("engineering")}
+                onBlur={() => setActiveProfileSide(null)}
+                onClick={() => enterProfile("engineering")}
+              />
+              <a
+                className="face-hotspot face-hotspot-field"
+                href="#field-profile"
+                aria-label={t.sections.profiles.field.title}
+                onPointerEnter={() => setActiveProfileSide("field")}
+                onPointerLeave={() => setActiveProfileSide(null)}
+                onFocus={() => setActiveProfileSide("field")}
+                onBlur={() => setActiveProfileSide(null)}
+                onClick={() => enterProfile("field")}
+              />
+            </div>
           </div>
         </motion.div>
 
@@ -218,10 +261,15 @@ function Hero({
         <div className="floating-nav" aria-label="Expertise navigation">
           {nodes.map((node, index) => {
             const Icon = expertiseIcons[node.id] ?? Factory;
+            const isEngineeringRelevant = node.side === "engineering" || node.side === "bridge";
+            const isProfileRelevant =
+              activeProfileSide === "engineering" ? isEngineeringRelevant : activeProfileSide === "field" ? node.side === "field" : false;
             return (
               <motion.button
                 key={node.id}
-                className={`skill-orb skill-orb-${index + 1} ${activeNode?.id === node.id ? "is-open" : ""}`}
+                className={`skill-orb skill-orb-${index + 1} ${activeNode?.id === node.id ? "is-open" : ""} ${
+                  isProfileRelevant ? "is-profile-highlighted" : activeProfileSide ? "is-profile-dimmed" : ""
+                }`}
                 type="button"
                 onClick={() => setActiveNode(activeNode?.id === node.id ? null : node)}
                 aria-expanded={activeNode?.id === node.id}
@@ -255,6 +303,117 @@ function Hero({
       </motion.div>
 
     </section>
+  );
+}
+
+function ProfileFocusSection({
+  profile,
+  content,
+  onBack,
+}: {
+  profile: ProfileSide;
+  content: ProfileFocus;
+  onBack: () => void;
+}) {
+  const isEngineering = profile === "engineering";
+  const sectionId = isEngineering ? "industrial-profile" : "field-profile";
+
+  const contentBlock = (
+    <motion.div
+      className="profile-content"
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, amount: 0.32 }}
+      transition={{ duration: 0.62, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <a className="back-overview" href="#overview" onClick={onBack}>
+        {content.back}
+      </a>
+      <p className="section-eyebrow">{content.eyebrow}</p>
+      <h2 id={`${sectionId}-title`}>{content.title}</h2>
+      <p className="profile-intro">{content.intro}</p>
+      <div className="profile-points" aria-label={content.pointsTitle}>
+        <h3>{content.pointsTitle}</h3>
+        <div>
+          {content.points.map((point) => (
+            <span key={point}>{point}</span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  const faceBlock = <ProfileFace profile={profile} title={content.title} />;
+
+  return (
+    <section id={sectionId} className={`profile-section ${profile}-profile`} aria-labelledby={`${sectionId}-title`}>
+      <div className="profile-shell">
+        {isEngineering ? contentBlock : faceBlock}
+        {isEngineering ? faceBlock : contentBlock}
+      </div>
+      <motion.div
+        className="profile-graphics"
+        initial={{ opacity: 0, y: 32 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.22 }}
+        transition={{ duration: 0.68, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <article className="profile-flow-card">
+          <h3>{content.flowTitle}</h3>
+          <div className="profile-flow">
+            {content.flow.map((step, index) => (
+              <span key={step} style={{ "--step": index } as React.CSSProperties}>
+                {step}
+              </span>
+            ))}
+          </div>
+        </article>
+        <article className="profile-diagram-card">
+          <h3>{content.diagramTitle}</h3>
+          <div className="profile-diagram" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        </article>
+        <article className="profile-signal-card">
+          <h3>{content.signalsTitle}</h3>
+          <div className="profile-signals">
+            {content.signals.map((signal, index) => (
+              <span key={signal}>
+                <i style={{ width: `${92 - index * 11}%` }} />
+                {signal}
+              </span>
+            ))}
+          </div>
+        </article>
+      </motion.div>
+    </section>
+  );
+}
+
+function ProfileFace({ profile, title }: { profile: ProfileSide; title: string }) {
+  return (
+    <motion.div
+      className="profile-face"
+      initial={{ opacity: 0, filter: "blur(10px)", x: profile === "engineering" ? 34 : -34 }}
+      whileInView={{ opacity: 1, filter: "blur(0px)", x: 0 }}
+      viewport={{ once: false, amount: 0.24 }}
+      transition={{ duration: 0.76, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className={`profile-face-frame ${profile}`}>
+        <Image
+          src="/hero.png"
+          alt={`${title} portrait side`}
+          fill
+          sizes="(max-width: 980px) 92vw, 42vw"
+          className="profile-face-image"
+        />
+        <span className="profile-face-axis" />
+      </div>
+    </motion.div>
   );
 }
 

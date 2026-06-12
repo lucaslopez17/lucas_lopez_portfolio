@@ -34,18 +34,13 @@ export async function getRelevantKnowledge(message: string, language: string): P
   const keywords = extractKeywords(message).map(normalize);
   const supabaseServer = getSupabaseServer();
 
-  let query = supabaseServer
+  // Search across both languages — language detection from a short message
+  // is unreliable, and excluding the other language can hide keyword matches
+  // (e.g. an "es" entry when the message was misdetected as "en").
+  const { data, error } = await supabaseServer
     .from("profile_knowledge")
     .select("id, title, category, content, language, is_active, tags")
     .eq("is_active", true);
-
-  // Prefer rows in the detected language, but don't exclude the other
-  // language entirely (better to over-include than under-include context).
-  if (language === "en" || language === "es") {
-    query = query.eq("language", language);
-  }
-
-  const { data, error } = await query;
 
   if (error) {
     console.error("Supabase knowledge query failed:", error.message);

@@ -204,6 +204,7 @@ function Hero({
   const softwareGroup = t.sections.skills.groups.find((group) => group.software);
   const fieldTickets = t.sections.education.certifications.filter((item) => !item.toLowerCase().includes("certificate iv"));
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const contentTouchStartYRef = useRef<number | null>(null);
   const portraitRef = useRef<HTMLDivElement | null>(null);
 
   function syncPortraitPosition(track: HTMLDivElement) {
@@ -312,6 +313,31 @@ function Hero({
 
     event.preventDefault();
     scrollToNextSection();
+  }
+
+  function handleContentTouchStart(event: React.TouchEvent<HTMLDivElement>) {
+    contentTouchStartYRef.current = event.touches[0]?.clientY ?? null;
+  }
+
+  function handleContentTouchEnd(event: React.TouchEvent<HTMLDivElement>) {
+    const startY = contentTouchStartYRef.current;
+    contentTouchStartYRef.current = null;
+    if (startY == null) {
+      return;
+    }
+
+    const endY = event.changedTouches[0]?.clientY ?? startY;
+    const swipeUpDistance = startY - endY;
+    if (swipeUpDistance < 40) {
+      return;
+    }
+
+    const content = event.currentTarget;
+    const isScrollable = content.scrollHeight > content.clientHeight + 4;
+    const atBottom = content.scrollTop + content.clientHeight >= content.scrollHeight - 4;
+    if (isScrollable && atBottom) {
+      scrollToNextSection();
+    }
   }
 
   function scrollToNextSection() {
@@ -469,7 +495,7 @@ function Hero({
           aria-label="Horizontal profile navigation"
         >
           <section className="split-panel split-profile-panel engineering-page" aria-label={t.sections.profiles.engineering.title}>
-            <div className="split-panel-content">
+            <div className="split-panel-content" onTouchStart={handleContentTouchStart} onTouchEnd={handleContentTouchEnd}>
               <ProfileCopy side="engineering" />
             </div>
           </section>
@@ -528,7 +554,7 @@ function Hero({
           </section>
 
           <section className="split-panel split-profile-panel field-page" aria-label={t.sections.profiles.field.title}>
-            <div className="split-panel-content">
+            <div className="split-panel-content" onTouchStart={handleContentTouchStart} onTouchEnd={handleContentTouchEnd}>
               <ProfileCopy side="field" />
             </div>
           </section>

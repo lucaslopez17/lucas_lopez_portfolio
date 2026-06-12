@@ -172,10 +172,13 @@ a {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.42);
   cursor: pointer;
-  transition: border-color 180ms var(--ease), background 180ms var(--ease), color 180ms var(--ease);
+  transition: border-color 180ms var(--ease), background 180ms var(--ease), color 180ms var(--ease),
+    transform 180ms var(--ease), opacity 180ms var(--ease);
   position: relative;
   overflow: hidden;
   border-radius: 7px;
+  transform: scale(0.88);
+  opacity: 0.7;
 }
 
 .theme-toggle {
@@ -217,6 +220,8 @@ a {
   border-color: rgba(37, 99, 235, 0.72);
   background: rgba(37, 99, 235, 0.12);
   text-shadow: 1px 0 var(--blue), -1px 0 var(--orange);
+  transform: scale(1);
+  opacity: 1;
 }
 
 .hero-section {
@@ -2189,7 +2194,7 @@ html[data-theme="dark"] .software-meter {
 }
 
 .contact-actions svg {
-  color: var(--blue);
+  color: #60a5fa;
   flex: 0 0 auto;
 }
 

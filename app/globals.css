@@ -377,6 +377,21 @@ a {
   pointer-events: none;
 }
 
+.continuous-portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0.18), rgba(10, 10, 12, 0.5));
+  opacity: 0;
+  transition: opacity 600ms var(--ease);
+}
+
+.hero-section.is-engineering-selected .continuous-portrait::after,
+.hero-section.is-field-selected .continuous-portrait::after {
+  opacity: 1;
+}
+
 .continuous-portrait::before {
   content: "";
   position: absolute;
@@ -479,22 +494,6 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
   gap: clamp(24px, 5vw, 74px);
   padding: clamp(70px, 8vw, 108px) clamp(28px, 6vw, 86px) clamp(40px, 5vw, 72px);
   position: relative;
-}
-
-.site-shell::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(10, 10, 12, 0.18), rgba(10, 10, 12, 0.5));
-  opacity: 0;
-  transition: opacity 600ms var(--ease);
-}
-
-.site-shell.is-engineering-selected::after,
-.site-shell.is-field-selected::after {
-  opacity: 1;
 }
 
 .engineering-page {

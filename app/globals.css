@@ -476,6 +476,16 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
   align-items: center;
   gap: clamp(24px, 5vw, 74px);
   padding: clamp(70px, 8vw, 108px) clamp(28px, 6vw, 86px) clamp(40px, 5vw, 72px);
+  position: relative;
+}
+
+.split-profile-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(10, 10, 12, 0.18), rgba(10, 10, 12, 0.5));
 }
 
 .engineering-page {

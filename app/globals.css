@@ -481,14 +481,20 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
   position: relative;
 }
 
-.site-shell.is-engineering-selected::after,
-.site-shell.is-field-selected::after {
+.site-shell::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(180deg, rgba(10, 10, 12, 0.18), rgba(10, 10, 12, 0.5));
+  opacity: 0;
+  transition: opacity 600ms var(--ease);
+}
+
+.site-shell.is-engineering-selected::after,
+.site-shell.is-field-selected::after {
+  opacity: 1;
 }
 
 .engineering-page {

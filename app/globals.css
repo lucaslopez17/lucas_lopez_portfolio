@@ -479,7 +479,8 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
   position: relative;
 }
 
-.split-profile-panel::before {
+.site-shell.is-engineering-selected::after,
+.site-shell.is-field-selected::after {
   content: "";
   position: fixed;
   inset: 0;

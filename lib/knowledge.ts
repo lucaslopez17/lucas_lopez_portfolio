@@ -31,7 +31,7 @@ export type KnowledgeRow = {
  * ----------------------------------------------------
  */
 export async function getRelevantKnowledge(message: string, language: string): Promise<KnowledgeRow[]> {
-  const keywords = extractKeywords(message);
+  const keywords = extractKeywords(message).map(normalize);
   const supabaseServer = getSupabaseServer();
 
   let query = supabaseServer
@@ -45,27 +45,29 @@ export async function getRelevantKnowledge(message: string, language: string): P
     query = query.eq("language", language);
   }
 
-  if (keywords.length > 0) {
-    const orFilter = keywords
-      .flatMap((word) => [
-        `title.ilike.%${word}%`,
-        `category.ilike.%${word}%`,
-        `content.ilike.%${word}%`,
-        `tags.cs.{${word}}`,
-      ])
-      .join(",");
-    query = query.or(orFilter);
-  }
-
-  const { data, error } = await query.limit(8);
+  const { data, error } = await query;
 
   if (error) {
     console.error("Supabase knowledge query failed:", error.message);
     return [];
   }
 
-  if (data && data.length > 0) {
-    return data;
+  const rows = data ?? [];
+
+  if (keywords.length > 0) {
+    const matches = rows.filter((row) => {
+      const haystackWords = normalize(
+        `${row.title} ${row.category} ${row.content} ${(row.tags ?? []).join(" ")}`
+      ).split(/\s+/);
+
+      return keywords.some((word) =>
+        haystackWords.some((haystackWord) => wordsMatch(word, haystackWord))
+      );
+    });
+
+    if (matches.length > 0) {
+      return matches.slice(0, 8);
+    }
   }
 
   // Fallback: no keyword matches — return the "always relevant" rule rows
@@ -83,6 +85,26 @@ export async function getRelevantKnowledge(message: string, language: string): P
   }
 
   return fallback ?? [];
+}
+
+// Strips accents/diacritics and lowercases, so "hidráulico" matches "hidraulico".
+function normalize(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+}
+
+// Loose match for two normalized words: exact match, or one is a prefix of
+// the other (length >= 5) so plurals/conjugations like "hidraulicas" /
+// "hidraulico" or "reparaciones" / "reparar" still match.
+function wordsMatch(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (a.length >= 5 && b.length >= 5) {
+    const len = Math.min(a.length, b.length) - 1;
+    return a.slice(0, len) === b.slice(0, len);
+  }
+  return false;
 }
 
 // Pull out meaningful words from the user's message to use as search terms.

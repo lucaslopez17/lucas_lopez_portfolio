@@ -3,9 +3,13 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
+  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
   Languages,
   Mail,
   MapPin,
+  MessageCircle,
   Moon,
   Phone,
   Sun,
@@ -88,8 +92,49 @@ export default function PortfolioExperience() {
       <LanguagesSection t={t} />
       <ProjectsSection t={t} />
       <ContactSection t={t} />
+      <OnboardingHints />
       <LucasBot locale={locale} />
     </main>
+  );
+}
+
+// Brief, icon-only ghost hints shown once on first visit to nudge new
+// visitors toward the interactions available on the page: horizontal
+// scroll between profiles, scrolling down for more sections, and the
+// Lucas Bot chat toggle.
+function OnboardingHints() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.localStorage.getItem("lucas-portfolio-onboarding-seen")) return;
+
+    setVisible(true);
+
+    const timer = setTimeout(() => {
+      setVisible(false);
+      window.localStorage.setItem("lucas-portfolio-onboarding-seen", "1");
+    }, 3200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="onboarding-hints" aria-hidden="true">
+      <span className="onboarding-hint hint-left">
+        <ArrowLeft size={26} />
+      </span>
+      <span className="onboarding-hint hint-right">
+        <ArrowRight size={26} />
+      </span>
+      <span className="onboarding-hint hint-down">
+        <ArrowDown size={26} />
+      </span>
+      <span className="onboarding-hint hint-chat">
+        <MessageCircle size={26} />
+      </span>
+    </div>
   );
 }
 

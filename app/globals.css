@@ -3004,6 +3004,125 @@ html[data-theme="dark"] .software-meter {
 }
 
 /* ------------------------------------------------------------------ */
+/* Onboarding ghost hints (shown once on first visit)                   */
+/* ------------------------------------------------------------------ */
+
+.onboarding-hints {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+}
+
+.onboarding-hint {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  color: var(--ink);
+  opacity: 0;
+  animation: onboarding-fade 3.2s ease forwards;
+}
+
+.hint-left {
+  left: clamp(10px, 3vw, 24px);
+  top: 50%;
+  transform: translateY(-50%);
+  animation-name: onboarding-fade-left;
+}
+
+.hint-right {
+  right: clamp(10px, 3vw, 24px);
+  top: 50%;
+  transform: translateY(-50%);
+  animation-name: onboarding-fade-right;
+}
+
+.hint-down {
+  left: 50%;
+  bottom: clamp(28px, 6vh, 56px);
+  transform: translateX(-50%);
+  animation-name: onboarding-fade-down;
+}
+
+.hint-chat {
+  right: clamp(16px, 4vw, 28px);
+  bottom: clamp(88px, 14vh, 120px);
+  animation-name: onboarding-fade;
+}
+
+@keyframes onboarding-fade {
+  0% {
+    opacity: 0;
+  }
+  18%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes onboarding-fade-left {
+  0% {
+    opacity: 0;
+    transform: translate(10px, -50%);
+  }
+  18%,
+  75% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-10px, -50%);
+  }
+}
+
+@keyframes onboarding-fade-right {
+  0% {
+    opacity: 0;
+    transform: translate(-10px, -50%);
+  }
+  18%,
+  75% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, -50%);
+  }
+}
+
+@keyframes onboarding-fade-down {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  18%,
+  75% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
+
+@media (max-width: 640px) {
+  .hint-chat {
+    bottom: clamp(76px, 14vh, 100px);
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Lucas Bot floating chat widget                                       */
 /* ------------------------------------------------------------------ */
 

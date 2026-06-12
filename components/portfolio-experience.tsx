@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { copy, type Locale, type PortfolioCopy } from "@/lib/portfolio-content";
+import LucasBot from "@/components/lucas-bot";
 
 type ThemeMode = "dark" | "light";
 type ProfileSide = "engineering" | "field";
@@ -79,6 +80,7 @@ export default function PortfolioExperience() {
       <LanguagesSection t={t} />
       <ProjectsSection t={t} />
       <ContactSection t={t} />
+      <LucasBot locale={locale} />
     </main>
   );
 }

@@ -125,6 +125,26 @@ function extractKeywords(message: string): string[] {
 
 // Naive language detection: looks for Spanish-specific characters/words.
 export function detectLanguage(message: string): "en" | "es" {
-  const spanishMarkers = /[áéíóúñ¿¡]|(\bque\b|\bcomo\b|\bcual\b|\bdonde\b|\bporque\b|\bcuando\b)/i;
-  return spanishMarkers.test(message) ? "es" : "en";
+  const spanishWords = new Set([
+    "que", "como", "cual", "cuales", "donde", "porque", "cuando", "quien",
+    "quienes", "para", "con", "los", "las", "del", "una", "unos", "unas",
+    "tiene", "tienes", "tenes", "tengo", "eres", "sos", "esta", "estas",
+    "puedes", "podes", "puede", "sabes", "sabe", "conoces", "conoce", "dime",
+    "cuentame", "hablas", "habla", "toca", "tocas", "tocar", "le", "lo", "su",
+    "sus", "muy", "mas", "pero", "tambien", "trabaja", "trabajas", "trabajo",
+    "vive", "vives", "gusta", "gustan", "hace", "haces", "hizo", "es", "el",
+    "la", "de", "y", "en", "un", "se", "te", "mi", "si", "no", "esto", "eso",
+  ]);
+
+  if (/[áéíóúñ¿¡]/i.test(message)) {
+    return "es";
+  }
+
+  const words = message
+    .toLowerCase()
+    .replace(/[^\p{L}\s]/gu, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return words.some((word) => spanishWords.has(word)) ? "es" : "en";
 }

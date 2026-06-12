@@ -2043,6 +2043,23 @@ html[data-theme="dark"] .software-meter {
   border-radius: 999px;
 }
 
+.language-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.language-list span {
+  width: fit-content;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-flag {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
 .education-layout {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;

@@ -565,31 +565,44 @@ function Hero({
   );
 }
 
+const LANGUAGE_FLAGS: Record<string, string> = {
+  spanish: "🇪🇸",
+  español: "🇪🇸",
+  portuguese: "🇧🇷",
+  portugués: "🇧🇷",
+  english: "🇺🇸",
+  inglés: "🇺🇸",
+};
+
+function languageFlag(label: string): string {
+  const key = label.split(/[\s-]/)[0]?.toLowerCase() ?? "";
+  return LANGUAGE_FLAGS[key] ?? "";
+}
+
 function LanguagesSection({ t }: { t: PortfolioCopy }) {
   const title = t.sections.education.languages[0]?.startsWith("Español") ? "Idiomas" : "Languages";
 
   return (
     <SectionFrame id="languages" eyebrow={t.sections.education.eyebrow} title={title}>
       <div className="credential-grid languages-only">
-        <CredentialBlock title={title} icon={<Languages size={18} />} items={t.sections.education.languages} />
+        <article className="credential-block">
+          <h3>
+            <Languages size={18} />
+            {title}
+          </h3>
+          <div className="language-list">
+            {t.sections.education.languages.map((item) => (
+              <span key={item}>
+                <span className="language-flag" aria-hidden="true">
+                  {languageFlag(item)}
+                </span>
+                {item}
+              </span>
+            ))}
+          </div>
+        </article>
       </div>
     </SectionFrame>
-  );
-}
-
-function CredentialBlock({ title, icon, items }: { title: string; icon: React.ReactNode; items: string[] }) {
-  return (
-    <article className="credential-block">
-      <h3>
-        {icon}
-        {title}
-      </h3>
-      <div>
-        {items.map((item) => (
-          <span key={item}>{item}</span>
-        ))}
-      </div>
-    </article>
   );
 }
 

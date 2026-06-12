@@ -3187,3 +3187,237 @@ html[data-theme="dark"] .software-meter {
     height: min(420px, calc(100dvh - 150px), 58vh);
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Admin page (Lucas Bot knowledge base management)                    */
+/* ------------------------------------------------------------------ */
+
+.admin-page {
+  min-height: 100vh;
+  padding: clamp(24px, 5vw, 48px);
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body), sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.admin-login {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  width: 100%;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.admin-login h1 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.3rem;
+}
+
+.admin-login p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-header h1 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.6rem;
+}
+
+.admin-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-strong);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.admin-card h2 {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+}
+
+.admin-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="password"],
+.admin-form select,
+.admin-form textarea,
+.admin-login input {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.admin-form textarea {
+  resize: vertical;
+}
+
+.admin-checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px !important;
+}
+
+.admin-checkbox input {
+  width: auto;
+}
+
+.admin-form button,
+.admin-login button,
+.admin-logout {
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 22px;
+  background: var(--blue);
+  color: #f7f4ef;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 200ms var(--ease);
+}
+
+.admin-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.admin-logout {
+  background: transparent;
+  color: var(--ink);
+}
+
+.admin-error {
+  color: var(--orange);
+  font-size: 0.85rem;
+}
+
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-2);
+}
+
+.admin-row.is-inactive {
+  opacity: 0.55;
+}
+
+.admin-row-main h3 {
+  font-size: 1rem;
+  margin: 6px 0;
+}
+
+.admin-row-main p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: pre-wrap;
+}
+
+.admin-row-meta {
+  display: flex;
+  gap: 6px;
+}
+
+.admin-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.admin-tag-lang {
+  color: var(--blue);
+}
+
+.admin-tag-inactive {
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+.admin-row-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.admin-row-actions button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.admin-delete {
+  color: var(--orange);
+  border-color: var(--orange) !important;
+}
+
+@media (max-width: 640px) {
+  .admin-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-row {
+    flex-direction: column;
+  }
+
+  .admin-row-actions {
+    flex-direction: row;
+  }
+}

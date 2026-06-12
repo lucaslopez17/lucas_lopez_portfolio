@@ -464,9 +464,12 @@ function Hero({
               type="button"
               className="scroll-down-button"
               aria-label="Scroll to next section"
-              onClick={() =>
-                document.getElementById("languages")?.scrollIntoView({ behavior: "smooth" })
-              }
+              onClick={() => {
+                const target = document.getElementById("languages");
+                if (!target) return;
+                const top = target.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({ top, behavior: "smooth" });
+              }}
             >
               <ArrowDown size={20} aria-hidden="true" />
             </button>

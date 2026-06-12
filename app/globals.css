@@ -1638,6 +1638,10 @@ html[data-theme="dark"] .mode-list-block {
   font-weight: 700;
 }
 
+.field-page .section-eyebrow {
+  color: var(--orange);
+}
+
 .section-heading h2,
 .contact-band h2 {
   margin: 0;

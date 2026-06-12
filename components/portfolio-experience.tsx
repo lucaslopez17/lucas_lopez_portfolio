@@ -17,6 +17,10 @@ import LucasBot from "@/components/lucas-bot";
 type ThemeMode = "dark" | "light";
 type ProfileSide = "engineering" | "field";
 
+// Light mode is disabled for now — the site is dark-only. Flip this back to
+// `true` to re-enable the theme toggle and let visitors switch to light mode.
+const THEME_TOGGLE_ENABLED = false;
+
 function getInitialLocale(): Locale {
   if (typeof window === "undefined") {
     return "en";
@@ -27,6 +31,10 @@ function getInitialLocale(): Locale {
 }
 
 function getInitialTheme(): ThemeMode {
+  if (!THEME_TOGGLE_ENABLED) {
+    return "dark";
+  }
+
   if (typeof window === "undefined") {
     return "light";
   }
@@ -37,7 +45,7 @@ function getInitialTheme(): ThemeMode {
 
 export default function PortfolioExperience() {
   const [locale, setLocale] = useState<Locale>("en");
-  const [theme, setTheme] = useState<ThemeMode>("light");
+  const [theme, setTheme] = useState<ThemeMode>(THEME_TOGGLE_ENABLED ? "light" : "dark");
   const [activeProfileSide, setActiveProfileSide] = useState<ProfileSide | null>(null);
   const [hoverProfileSide, setHoverProfileSide] = useState<ProfileSide | null>(null);
   const t = copy[locale];
@@ -116,16 +124,18 @@ function ControlDock({
         ))}
         </div>
       </div>
-      <button
-        className="theme-toggle"
-        type="button"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-        aria-pressed={theme === "dark"}
-      >
-        {theme === "dark" ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
-        <span>{theme === "dark" ? "Light" : "Dark"}</span>
-      </button>
+      {THEME_TOGGLE_ENABLED && (
+        <button
+          className="theme-toggle"
+          type="button"
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          aria-pressed={theme === "dark"}
+        >
+          {theme === "dark" ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
+          <span>{theme === "dark" ? "Light" : "Dark"}</span>
+        </button>
+      )}
     </div>
   );
 }

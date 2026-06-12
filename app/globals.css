@@ -2056,8 +2056,10 @@ html[data-theme="dark"] .software-meter {
 }
 
 .language-flag {
-  font-size: 1.2rem;
-  line-height: 1;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 50%;
 }
 
 .education-layout {

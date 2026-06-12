@@ -565,18 +565,51 @@ function Hero({
   );
 }
 
-const LANGUAGE_FLAGS: Record<string, string> = {
-  spanish: "🇪🇸",
-  español: "🇪🇸",
-  portuguese: "🇧🇷",
-  portugués: "🇧🇷",
-  english: "🇺🇸",
-  inglés: "🇺🇸",
+function FlagSpain() {
+  return (
+    <svg viewBox="0 0 36 36" className="language-flag" aria-hidden="true">
+      <circle cx="18" cy="18" r="18" fill="#c60b1e" />
+      <rect x="0" y="11" width="36" height="14" fill="#ffc400" />
+    </svg>
+  );
+}
+
+function FlagBrazil() {
+  return (
+    <svg viewBox="0 0 36 36" className="language-flag" aria-hidden="true">
+      <circle cx="18" cy="18" r="18" fill="#009b3a" />
+      <polygon points="18,6 32,18 18,30 4,18" fill="#fedf00" />
+      <circle cx="18" cy="18" r="6.5" fill="#002776" />
+    </svg>
+  );
+}
+
+function FlagUSA() {
+  return (
+    <svg viewBox="0 0 36 36" className="language-flag" aria-hidden="true">
+      <circle cx="18" cy="18" r="18" fill="#b22234" />
+      <rect x="0" y="6" width="36" height="3.4" fill="#fff" />
+      <rect x="0" y="12.8" width="36" height="3.4" fill="#fff" />
+      <rect x="0" y="19.6" width="36" height="3.4" fill="#fff" />
+      <rect x="0" y="26.4" width="36" height="3.4" fill="#fff" />
+      <rect x="0" y="6" width="18" height="14" fill="#3c3b6e" />
+    </svg>
+  );
+}
+
+const LANGUAGE_FLAGS: Record<string, () => React.JSX.Element> = {
+  spanish: FlagSpain,
+  español: FlagSpain,
+  portuguese: FlagBrazil,
+  portugués: FlagBrazil,
+  english: FlagUSA,
+  inglés: FlagUSA,
 };
 
-function languageFlag(label: string): string {
+function LanguageFlag({ label }: { label: string }) {
   const key = label.split(/[\s-]/)[0]?.toLowerCase() ?? "";
-  return LANGUAGE_FLAGS[key] ?? "";
+  const Flag = LANGUAGE_FLAGS[key];
+  return Flag ? <Flag /> : null;
 }
 
 function LanguagesSection({ t }: { t: PortfolioCopy }) {
@@ -593,9 +626,7 @@ function LanguagesSection({ t }: { t: PortfolioCopy }) {
           <div className="language-list">
             {t.sections.education.languages.map((item) => (
               <span key={item}>
-                <span className="language-flag" aria-hidden="true">
-                  {languageFlag(item)}
-                </span>
+                <LanguageFlag label={item} />
                 {item}
               </span>
             ))}

@@ -414,7 +414,6 @@ function Hero({
           </section>
 
           <section className="split-panel split-overview-panel" aria-labelledby="hero-title">
-            <NetworkLines />
             <div className="face-hotspots" aria-label="Split portrait navigation">
               <button
                 className="face-hotspot face-hotspot-engineering"
@@ -470,20 +469,6 @@ function Hero({
         </div>
       </motion.div>
     </section>
-  );
-}
-
-function NetworkLines() {
-  return (
-    <svg className="network-lines" viewBox="0 0 1000 700" aria-hidden="true">
-      <path d="M140 260 C310 190 370 250 500 340 S760 445 880 300" />
-      <path d="M110 470 C300 360 390 520 520 360 S740 180 905 450" />
-      <path d="M500 88 L500 630" />
-      <circle cx="140" cy="260" r="5" />
-      <circle cx="880" cy="300" r="5" />
-      <circle cx="110" cy="470" r="5" />
-      <circle cx="905" cy="450" r="5" />
-    </svg>
   );
 }
 

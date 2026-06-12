@@ -803,26 +803,41 @@ html[data-theme="dark"] .profile-experience-strip article {
   display: none;
 }
 
-.network-lines {
+.split-overview-panel::before,
+.split-overview-panel::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  opacity: 0.28;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(2px);
+  animation: ambient-pulse 16s ease-in-out infinite;
 }
 
-.network-lines path {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.28);
-  stroke-width: 1.2;
-  stroke-dasharray: 9 13;
-  animation: none;
+.split-overview-panel::before {
+  left: 8%;
+  top: 18%;
+  background: radial-gradient(circle, var(--blue-soft), transparent 70%);
 }
 
-.network-lines circle {
-  fill: var(--orange);
-  filter: none;
+.split-overview-panel::after {
+  right: 8%;
+  bottom: 12%;
+  background: radial-gradient(circle, var(--orange-soft), transparent 70%);
+  animation-delay: -8s;
+}
+
+@keyframes ambient-pulse {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.18) translate(3%, -3%);
+    opacity: 0.9;
+  }
 }
 
 .hero-copy {
@@ -1068,9 +1083,7 @@ html[data-theme="dark"] .orb-expanded small {
 }
 
 .hero-section.is-engineering-selected .hero-copy,
-.hero-section.is-field-selected .hero-copy,
-.hero-section.is-engineering-selected .network-lines,
-.hero-section.is-field-selected .network-lines {
+.hero-section.is-field-selected .hero-copy {
   opacity: 0;
   pointer-events: none;
   transition: opacity 260ms var(--ease), filter 260ms var(--ease);

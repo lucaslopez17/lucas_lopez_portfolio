@@ -2180,10 +2180,16 @@ html[data-theme="dark"] .software-meter {
   gap: 10px;
   color: var(--steel);
   border-radius: 8px;
+  transition: border-color 200ms var(--ease), background 200ms var(--ease);
+}
+
+.contact-actions a:hover {
+  border-color: var(--blue);
+  background: rgba(37, 99, 235, 0.1);
 }
 
 .contact-actions svg {
-  color: var(--cyan);
+  color: var(--blue);
   flex: 0 0 auto;
 }
 
@@ -3181,6 +3187,7 @@ html[data-theme="dark"] .software-meter {
   backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .lucas-bot-header {

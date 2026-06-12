@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   ArrowRight,
   Languages,
+  Linkedin,
   Mail,
   MapPin,
   MessageCircle,
@@ -636,6 +637,10 @@ function ContactSection({ t }: { t: PortfolioCopy }) {
         <a href={`tel:${t.sections.contact.phone.replace(/\s/g, "")}`}>
           <Phone size={18} />
           {t.sections.contact.phone}
+        </a>
+        <a href="https://www.linkedin.com/in/lucas-f-lopez/" target="_blank" rel="noopener noreferrer">
+          <Linkedin size={18} />
+          LinkedIn
         </a>
         <span>
           <MapPin size={18} />

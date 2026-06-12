@@ -495,7 +495,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           "WHS Statutory Responsibilities for Mining Supervisors Course",
           "Mask Fit Test",
         ],
-        languages: ["Spanish - Native", "Portuguese - Fluent", "English - Fluent (IELTS C1 Nov 2025)"],
+        languages: ["Spanish · Native", "Portuguese · Advanced", "English · Advanced (IELTS C1 Nov 2025)"],
       },
       projects: {
         title: "Applied Work",
@@ -932,7 +932,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           "WHS Statutory Responsibilities for Mining Supervisors Course",
           "Mask Fit Test",
         ],
-        languages: ["Español - Nativo", "Portugués - Fluido", "Inglés - Fluido (IELTS C1 Nov 2025)"],
+        languages: ["Español · Nativo", "Portugués · Avanzado", "Inglés · Avanzado (IELTS C1 Nov 2025)"],
       },
       projects: {
         title: "Trabajo Aplicado",

@@ -3029,12 +3029,9 @@ html[data-theme="dark"] .software-meter {
   place-items: center;
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--surface-strong);
-  color: var(--ink);
+  color: #fff;
   opacity: 0;
-  animation: onboarding-fade 3.2s ease forwards;
+  animation: onboarding-fade 5s ease forwards;
 }
 
 .hint-left {
@@ -3068,8 +3065,8 @@ html[data-theme="dark"] .software-meter {
   0% {
     opacity: 0;
   }
-  18%,
-  75% {
+  15%,
+  55% {
     opacity: 1;
   }
   100% {
@@ -3082,8 +3079,8 @@ html[data-theme="dark"] .software-meter {
     opacity: 0;
     transform: translate(10px, -50%);
   }
-  18%,
-  75% {
+  15%,
+  55% {
     opacity: 1;
     transform: translate(0, -50%);
   }
@@ -3098,8 +3095,8 @@ html[data-theme="dark"] .software-meter {
     opacity: 0;
     transform: translate(-10px, -50%);
   }
-  18%,
-  75% {
+  15%,
+  55% {
     opacity: 1;
     transform: translate(0, -50%);
   }
@@ -3114,8 +3111,8 @@ html[data-theme="dark"] .software-meter {
     opacity: 0;
     transform: translate(-50%, -10px);
   }
-  18%,
-  75% {
+  15%,
+  55% {
     opacity: 1;
     transform: translate(-50%, 0);
   }

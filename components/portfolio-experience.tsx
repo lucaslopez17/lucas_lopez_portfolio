@@ -114,7 +114,7 @@ function OnboardingHints() {
     const timer = setTimeout(() => {
       setVisible(false);
       window.localStorage.setItem("lucas-portfolio-onboarding-seen", "1");
-    }, 3200);
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 

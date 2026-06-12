@@ -11,7 +11,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const body = await request.json();
-  const { title, category, content, language, is_active } = body;
+  const { title, category, content, language, is_active, tags } = body;
 
   const update: Record<string, unknown> = {};
   if (title !== undefined) update.title = title;
@@ -19,6 +19,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   if (content !== undefined) update.content = content;
   if (language !== undefined) update.language = language;
   if (is_active !== undefined) update.is_active = is_active;
+  if (tags !== undefined) update.tags = tags;
 
   const { data, error } = await getSupabaseServer()
     .from("profile_knowledge")

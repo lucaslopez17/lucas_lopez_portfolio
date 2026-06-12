@@ -11,7 +11,7 @@ export async function GET() {
 
   const { data, error } = await getSupabaseServer()
     .from("profile_knowledge")
-    .select("id, title, category, content, language, is_active, created_at, updated_at")
+    .select("id, title, category, content, language, is_active, tags, created_at, updated_at")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const { title, category, content, language, is_active } = body;
+  const { title, category, content, language, is_active, tags } = body;
 
   if (!title || !category || !content || !language) {
     return NextResponse.json({ error: "title, category, content and language are required" }, { status: 400 });
@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
   const { data, error } = await getSupabaseServer()
     .from("profile_knowledge")
-    .insert({ title, category, content, language, is_active: is_active ?? true })
+    .insert({ title, category, content, language, is_active: is_active ?? true, tags: tags ?? [] })
     .select()
     .single();
 

@@ -3386,6 +3386,18 @@ html[data-theme="dark"] .software-meter {
   border-color: var(--orange);
 }
 
+.admin-row-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.admin-tag-label {
+  color: var(--ink);
+  background: var(--surface-strong);
+}
+
 .admin-row-actions {
   display: flex;
   flex-direction: column;

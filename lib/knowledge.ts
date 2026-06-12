@@ -7,6 +7,7 @@ export type KnowledgeRow = {
   content: string;
   language: string;
   is_active: boolean;
+  tags: string[];
 };
 
 /**
@@ -35,7 +36,7 @@ export async function getRelevantKnowledge(message: string, language: string): P
 
   let query = supabaseServer
     .from("profile_knowledge")
-    .select("id, title, category, content, language, is_active")
+    .select("id, title, category, content, language, is_active, tags")
     .eq("is_active", true);
 
   // Prefer rows in the detected language, but don't exclude the other
@@ -50,6 +51,7 @@ export async function getRelevantKnowledge(message: string, language: string): P
         `title.ilike.%${word}%`,
         `category.ilike.%${word}%`,
         `content.ilike.%${word}%`,
+        `tags.cs.{${word}}`,
       ])
       .join(",");
     query = query.or(orFilter);
@@ -70,7 +72,7 @@ export async function getRelevantKnowledge(message: string, language: string): P
   // plus the "About Lucas" overview so Gemini still has something to work with.
   const { data: fallback, error: fallbackError } = await getSupabaseServer()
     .from("profile_knowledge")
-    .select("id, title, category, content, language, is_active")
+    .select("id, title, category, content, language, is_active, tags")
     .eq("is_active", true)
     .eq("language", language === "es" ? "es" : "en")
     .in("category", ["About Lucas", "Response Rules", "Contact Rules"]);

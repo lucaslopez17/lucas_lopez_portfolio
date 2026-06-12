@@ -9,6 +9,7 @@ type KnowledgeRow = {
   content: string;
   language: string;
   is_active: boolean;
+  tags: string[];
   created_at: string;
   updated_at: string;
 };
@@ -34,6 +35,7 @@ const EMPTY_FORM = {
   category: "Work Experience",
   language: "en",
   content: "",
+  tags: "",
   is_active: true,
 };
 
@@ -107,11 +109,16 @@ export default function AdminPage() {
       return;
     }
 
+    const tags = form.tags
+      .split(",")
+      .map((t) => t.trim().toLowerCase())
+      .filter(Boolean);
+
     setSubmitting(true);
     const res = await fetch("/api/admin/knowledge", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({ ...form, tags }),
     });
     setSubmitting(false);
 
@@ -212,6 +219,16 @@ export default function AdminPage() {
           </div>
 
           <label>
+            Tags (comma-separated, e.g. polywelding, iso, machinery)
+            <input
+              type="text"
+              value={form.tags}
+              onChange={(e) => setForm({ ...form, tags: e.target.value })}
+              placeholder="polywelding, iso, machinery"
+            />
+          </label>
+
+          <label>
             Content (description, dates, skills used, responsibilities, etc.)
             <textarea
               value={form.content}
@@ -251,6 +268,15 @@ export default function AdminPage() {
                 </div>
                 <h3>{row.title}</h3>
                 <p>{row.content}</p>
+                {row.tags?.length > 0 && (
+                  <div className="admin-row-tags">
+                    {row.tags.map((tag) => (
+                      <span key={tag} className="admin-tag admin-tag-label">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="admin-row-actions">
                 <button onClick={() => toggleActive(row)}>

@@ -30,7 +30,10 @@ export async function askLucasBot(userMessage: string, context: KnowledgeRow[], 
   const contextBlock =
     context.length > 0
       ? context
-          .map((row) => `[${row.category}] ${row.title}\n${row.content}`)
+          .map((row) => {
+            const tagsLine = row.tags?.length ? `\nTags: ${row.tags.join(", ")}` : "";
+            return `[${row.category}] ${row.title}${tagsLine}\n${row.content}`;
+          })
           .join("\n\n")
       : "(no matching knowledge base entries found)";
 

@@ -1645,6 +1645,14 @@ html[data-theme="dark"] .mode-list-block {
   position: relative;
 }
 
+#languages.section-frame {
+  padding-bottom: 24px;
+}
+
+#projects.section-frame {
+  padding-top: 24px;
+}
+
 .section-heading {
   max-width: 760px;
   margin-bottom: 34px;

@@ -465,10 +465,10 @@ function Hero({
               className="scroll-down-button"
               aria-label="Scroll to next section"
               onClick={() => {
-                const target = document.getElementById("languages");
-                if (!target) return;
-                const top = target.getBoundingClientRect().top + window.scrollY;
-                window.scrollTo({ top, behavior: "smooth" });
+                scrollToPanel("overview");
+                window.setTimeout(() => {
+                  window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
+                }, 50);
               }}
             >
               <ArrowDown size={20} aria-hidden="true" />

@@ -3184,6 +3184,6 @@ html[data-theme="dark"] .software-meter {
 
   .lucas-bot-panel {
     width: calc(100vw - 28px);
-    height: min(480px, calc(100dvh - 150px));
+    height: min(420px, calc(100dvh - 150px), 58vh);
   }
 }

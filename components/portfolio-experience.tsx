@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  ArrowDown,
   Languages,
   Mail,
   MapPin,
@@ -459,20 +458,6 @@ function Hero({
                 {t.hero.tagline}
               </motion.p>
             </div>
-
-            <button
-              type="button"
-              className="scroll-down-button"
-              aria-label="Scroll to next section"
-              onClick={() => {
-                scrollToPanel("overview");
-                window.setTimeout(() => {
-                  window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
-                }, 50);
-              }}
-            >
-              <ArrowDown size={20} aria-hidden="true" />
-            </button>
           </section>
 
           <section className="split-panel split-profile-panel field-page" aria-label={t.sections.profiles.field.title}>

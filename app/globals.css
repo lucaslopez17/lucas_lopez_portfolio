@@ -864,44 +864,6 @@ html[data-theme="dark"] .profile-experience-strip article {
   }
 }
 
-.scroll-down-button {
-  position: absolute;
-  right: 5%;
-  bottom: 5%;
-  z-index: 7;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  cursor: pointer;
-  animation: scroll-down-bounce 2.4s ease-in-out infinite;
-  transition: border-color 200ms var(--ease), color 200ms var(--ease);
-}
-
-.scroll-down-button:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-}
-
-@keyframes scroll-down-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
-}
-
-.hero-section.is-engineering-selected .scroll-down-button,
-.hero-section.is-field-selected .scroll-down-button {
-  opacity: 0;
-  pointer-events: none;
-}
-
 .hero-copy {
   position: absolute;
   left: 50%;

@@ -229,6 +229,34 @@ a {
   overflow: hidden;
 }
 
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    var(--blue-soft) 0deg,
+    transparent 90deg,
+    var(--orange-soft) 180deg,
+    transparent 270deg,
+    var(--blue-soft) 360deg
+  );
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: aurora-spin 40s linear infinite;
+}
+
+@keyframes aurora-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .system-strip {
   width: min(1180px, 100%);
   margin-inline: auto;

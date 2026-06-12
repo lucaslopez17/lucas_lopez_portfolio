@@ -366,28 +366,48 @@ html[data-theme="dark"] .continuous-portrait::before {
     radial-gradient(circle at 66% 48%, rgba(251, 146, 60, 0.42), transparent 34%);
 }
 
-.hero-section.is-engineering-active .continuous-portrait::before,
+.hero-section.is-engineering-active .continuous-portrait::before {
+  background:
+    radial-gradient(circle at 34% 48%, rgba(37, 99, 235, 0.48), transparent 36%),
+    radial-gradient(circle at 66% 48%, rgba(249, 115, 22, 0.38), transparent 34%);
+}
+
+.hero-section.is-field-active .continuous-portrait::before {
+  background:
+    radial-gradient(circle at 34% 48%, rgba(37, 99, 235, 0.34), transparent 34%),
+    radial-gradient(circle at 66% 48%, rgba(249, 115, 22, 0.52), transparent 36%);
+}
+
+html[data-theme="dark"] .hero-section.is-engineering-active .continuous-portrait::before {
+  background:
+    radial-gradient(circle at 34% 48%, rgba(147, 197, 253, 0.5), transparent 36%),
+    radial-gradient(circle at 66% 48%, rgba(251, 146, 60, 0.42), transparent 34%);
+}
+
+html[data-theme="dark"] .hero-section.is-field-active .continuous-portrait::before {
+  background:
+    radial-gradient(circle at 34% 48%, rgba(147, 197, 253, 0.34), transparent 34%),
+    radial-gradient(circle at 66% 48%, rgba(251, 146, 60, 0.58), transparent 36%);
+}
+
 .hero-section.is-engineering-selected .continuous-portrait::before {
   background:
     radial-gradient(circle at 34% 48%, rgba(249, 115, 22, 0.38), transparent 34%),
     radial-gradient(circle at 66% 48%, rgba(37, 99, 235, 0.48), transparent 36%);
 }
 
-.hero-section.is-field-active .continuous-portrait::before,
 .hero-section.is-field-selected .continuous-portrait::before {
   background:
     radial-gradient(circle at 34% 48%, rgba(249, 115, 22, 0.52), transparent 36%),
     radial-gradient(circle at 66% 48%, rgba(37, 99, 235, 0.34), transparent 34%);
 }
 
-html[data-theme="dark"] .hero-section.is-engineering-active .continuous-portrait::before,
 html[data-theme="dark"] .hero-section.is-engineering-selected .continuous-portrait::before {
   background:
     radial-gradient(circle at 34% 48%, rgba(251, 146, 60, 0.42), transparent 34%),
     radial-gradient(circle at 66% 48%, rgba(147, 197, 253, 0.5), transparent 36%);
 }
 
-html[data-theme="dark"] .hero-section.is-field-active .continuous-portrait::before,
 html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::before {
   background:
     radial-gradient(circle at 34% 48%, rgba(251, 146, 60, 0.58), transparent 36%),

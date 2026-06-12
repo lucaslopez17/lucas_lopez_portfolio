@@ -25,7 +25,7 @@ function getClient() {
 }
 
 export async function askLucasBot(userMessage: string, context: KnowledgeRow[], language: "en" | "es") {
-  const model = getClient().getGenerativeModel({ model: "gemini-2.0-flash" });
+  const model = getClient().getGenerativeModel({ model: "gemini-2.5-flash" });
 
   const contextBlock =
     context.length > 0

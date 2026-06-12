@@ -107,13 +107,13 @@ function OnboardingHints() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.localStorage.getItem("lucas-portfolio-onboarding-seen")) return;
+    if (window.sessionStorage.getItem("lucas-portfolio-onboarding-seen")) return;
 
     setVisible(true);
 
     const timer = setTimeout(() => {
       setVisible(false);
-      window.localStorage.setItem("lucas-portfolio-onboarding-seen", "1");
+      window.sessionStorage.setItem("lucas-portfolio-onboarding-seen", "1");
     }, 5000);
     return () => clearTimeout(timer);
   }, []);

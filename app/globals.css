@@ -2729,6 +2729,13 @@ html[data-theme="dark"] .software-meter {
     scroll-snap-stop: normal;
   }
 
+  .split-panel-content {
+    max-height: calc(100svh - 116px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .split-profile-panel,
   .engineering-page,
   .field-page {

@@ -2810,11 +2810,11 @@ html[data-theme="dark"] .software-meter {
     left: 50%;
     top: auto;
     bottom: 0;
-    transform: translate(-50%, 18%);
+    transform: translate(-50%, 0);
     order: 2;
     width: 100%;
     margin: 0;
-    padding: 0 4px;
+    padding: 0 4px 14px;
     background: none;
     backdrop-filter: none;
   }

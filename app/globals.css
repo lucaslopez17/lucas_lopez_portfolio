@@ -1989,7 +1989,7 @@ html[data-theme="dark"] .software-meter {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--blue), var(--orange));
+  background: var(--blue);
 }
 
 .software-row small {

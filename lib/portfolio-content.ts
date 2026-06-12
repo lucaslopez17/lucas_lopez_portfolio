@@ -393,7 +393,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           {
             title: "Software",
             software: [
-              { name: "Microsoft Office", level: 84, note: "Intermediate-advanced" },
+              { name: "Microsoft Office", level: 92, note: "Intermediate-advanced" },
               { name: "CAD software", level: 86, note: "Strong mechanical drawing workflow" },
               { name: "AI tools", level: 82, note: "Strong working level" },
               { name: "Fulcrum", level: 70, note: "Weld records and field documentation" },
@@ -830,7 +830,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           {
             title: "Software",
             software: [
-              { name: "Microsoft Office", level: 84, note: "Intermedio-avanzado" },
+              { name: "Microsoft Office", level: 92, note: "Intermedio-avanzado" },
               { name: "Software CAD", level: 86, note: "Buen manejo para planos mecánicos" },
               { name: "Herramientas de AI", level: 82, note: "Buen nivel de uso" },
               { name: "Fulcrum", level: 70, note: "Registros de soldadura y documentación de campo" },

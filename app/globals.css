@@ -1646,11 +1646,11 @@ html[data-theme="dark"] .mode-list-block {
 }
 
 #languages.section-frame {
-  padding-bottom: 24px;
+  padding-bottom: 48px;
 }
 
 #projects.section-frame {
-  padding-top: 24px;
+  padding-top: 48px;
 }
 
 .section-heading {

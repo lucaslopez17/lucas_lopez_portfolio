@@ -443,6 +443,8 @@ html[data-theme="dark"] .hero-section.is-field-selected .continuous-portrait::be
   transform: translate3d(calc(-50% + var(--portrait-shift, 0px)), 0, 0);
   will-change: transform;
   z-index: 1;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
 }
 
 .continuous-portrait-image {

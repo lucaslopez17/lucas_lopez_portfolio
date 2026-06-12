@@ -397,8 +397,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
               { name: "CAD software", level: 86, note: "Strong mechanical drawing workflow" },
               { name: "AI tools", level: 82, note: "Strong working level" },
               { name: "Data Analysis & Reporting", level: 70, note: "Weld records and field documentation" },
-              { name: "Project management tools", level: 64, note: "Operational and engineering workflows" },
-              { name: "Web design", level: 58, note: "Working knowledge" },
+              { name: "Project management tools", level: 80, note: "Operational and engineering workflows" },
+              { name: "Web design", level: 80, note: "Working knowledge" },
             ],
           },
           {
@@ -834,8 +834,8 @@ export const copy: Record<Locale, PortfolioCopy> = {
               { name: "Software CAD", level: 86, note: "Buen manejo para planos mecánicos" },
               { name: "Herramientas de AI", level: 82, note: "Buen nivel de uso" },
               { name: "Análisis de datos y reportes", level: 70, note: "Registros de soldadura y documentación de campo" },
-              { name: "Herramientas de gestión de proyectos", level: 64, note: "Flujos operativos y de ingeniería" },
-              { name: "Diseño web", level: 58, note: "Conocimiento funcional" },
+              { name: "Herramientas de gestión de proyectos", level: 80, note: "Flujos operativos y de ingeniería" },
+              { name: "Diseño web", level: 80, note: "Conocimiento funcional" },
             ],
           },
           {

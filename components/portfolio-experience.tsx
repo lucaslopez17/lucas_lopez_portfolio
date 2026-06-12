@@ -311,6 +311,10 @@ function Hero({
     }
 
     event.preventDefault();
+    scrollToNextSection();
+  }
+
+  function scrollToNextSection() {
     scrollToPanel("overview");
     window.setTimeout(() => {
       window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
@@ -491,6 +495,12 @@ function Hero({
                 onFocus={() => setHoverProfileSide("field")}
                 onBlur={() => setHoverProfileSide(null)}
                 onClick={() => scrollToPanel("field")}
+              />
+              <button
+                className="face-hotspot face-hotspot-down"
+                type="button"
+                aria-label={t.sections.education.eyebrow}
+                onClick={() => scrollToNextSection()}
               />
             </div>
 

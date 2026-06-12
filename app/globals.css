@@ -2712,6 +2712,12 @@ html[data-theme="dark"] .software-meter {
   .split-scroll-track {
     touch-action: pan-x pan-y;
     overscroll-behavior-x: auto;
+    scroll-snap-type: none;
+  }
+
+  .split-panel {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 
   .split-profile-panel,

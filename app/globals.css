@@ -3332,6 +3332,22 @@ html[data-theme="dark"] .software-meter {
   color: var(--ink);
 }
 
+.admin-form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-cancel {
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 22px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .admin-error {
   color: var(--orange);
   font-size: 0.85rem;

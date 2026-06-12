@@ -50,6 +50,7 @@ export default function AdminPage() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   const loadRows = async () => {
     setLoadingRows(true);
@@ -115,11 +116,17 @@ export default function AdminPage() {
       .filter(Boolean);
 
     setSubmitting(true);
-    const res = await fetch("/api/admin/knowledge", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, tags }),
-    });
+    const res = editingId
+      ? await fetch(`/api/admin/knowledge/${editingId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...form, tags }),
+        })
+      : await fetch("/api/admin/knowledge", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...form, tags }),
+        });
     setSubmitting(false);
 
     if (!res.ok) {
@@ -129,7 +136,28 @@ export default function AdminPage() {
     }
 
     setForm(EMPTY_FORM);
+    setEditingId(null);
     loadRows();
+  };
+
+  const startEdit = (row: KnowledgeRow) => {
+    setEditingId(row.id);
+    setFormError("");
+    setForm({
+      title: row.title,
+      category: row.category,
+      language: row.language,
+      content: row.content,
+      tags: row.tags?.join(", ") ?? "",
+      is_active: row.is_active,
+    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setFormError("");
+    setForm(EMPTY_FORM);
   };
 
   const toggleActive = async (row: KnowledgeRow) => {
@@ -181,7 +209,7 @@ export default function AdminPage() {
       </header>
 
       <section className="admin-card">
-        <h2>Add new entry</h2>
+        <h2>{editingId ? "Edit entry" : "Add new entry"}</h2>
         <form className="admin-form" onSubmit={handleSubmit}>
           <div className="admin-form-row">
             <label>
@@ -249,9 +277,16 @@ export default function AdminPage() {
 
           {formError && <p className="admin-error">{formError}</p>}
 
-          <button type="submit" disabled={submitting}>
-            {submitting ? "Saving..." : "Add entry"}
-          </button>
+          <div className="admin-form-actions">
+            <button type="submit" disabled={submitting}>
+              {submitting ? "Saving..." : editingId ? "Save changes" : "Add entry"}
+            </button>
+            {editingId && (
+              <button type="button" className="admin-cancel" onClick={cancelEdit}>
+                Cancel
+              </button>
+            )}
+          </div>
         </form>
       </section>
 
@@ -279,6 +314,7 @@ export default function AdminPage() {
                 )}
               </div>
               <div className="admin-row-actions">
+                <button onClick={() => startEdit(row)}>Edit</button>
                 <button onClick={() => toggleActive(row)}>
                   {row.is_active ? "Deactivate" : "Activate"}
                 </button>

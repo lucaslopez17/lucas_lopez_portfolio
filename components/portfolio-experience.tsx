@@ -137,6 +137,11 @@ function OnboardingHints({
           className="onboarding-hint hint-down"
           aria-label="Scroll down"
           onClick={() => {
+            const scroller = document.querySelector<HTMLElement>(".split-panel-content");
+            if (activeProfileSide && scroller) {
+              scroller.scrollBy({ top: scroller.clientHeight * 0.6, behavior: "smooth" });
+              return;
+            }
             document.querySelector<HTMLButtonElement>(".face-hotspot-down")?.click();
           }}
         >

@@ -71,6 +71,10 @@ export default function PortfolioExperience() {
 
   function enterProfile(side: ProfileSide) {
     setActiveProfileSide(side);
+    const pageSelector = side === "field" ? ".field-page" : ".engineering-page";
+    const panel = document.querySelector<HTMLElement>(pageSelector);
+    panel?.scrollTo({ top: 0 });
+    panel?.querySelector<HTMLElement>(".split-panel-content")?.scrollTo({ top: 0 });
   }
 
   function returnToOverview() {

@@ -181,7 +181,7 @@ export default function LucasBot({ locale }: { locale: Locale }) {
 
       <button
         type="button"
-        className="lucas-bot-toggle"
+        className={`lucas-bot-toggle ${isOpen ? "is-open" : ""}`}
         onClick={() => setIsOpen((value) => !value)}
         aria-label={copy.title}
         aria-expanded={isOpen}

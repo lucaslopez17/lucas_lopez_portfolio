@@ -3074,102 +3074,55 @@ html[data-theme="dark"] .software-meter {
   place-items: center;
   width: 48px;
   height: 48px;
-  color: #fff;
-  opacity: 0;
-  animation: onboarding-fade 5s ease forwards;
+  color: rgba(255, 255, 255, 0.85);
+  opacity: 1;
 }
 
 .hint-left {
   left: clamp(10px, 3vw, 24px);
   top: 50%;
   transform: translateY(-50%);
-  animation-name: onboarding-fade-left;
+  animation: hint-bounce-left 2.2s ease-in-out infinite;
 }
 
 .hint-right {
   right: clamp(10px, 3vw, 24px);
   top: 50%;
   transform: translateY(-50%);
-  animation-name: onboarding-fade-right;
+  animation: hint-bounce-right 2.2s ease-in-out infinite;
 }
 
 .hint-down {
   left: 50%;
   bottom: clamp(28px, 6vh, 56px);
   transform: translateX(-50%);
-  animation-name: onboarding-fade-down;
+  animation: hint-bounce-down 2.2s ease-in-out infinite;
 }
 
-.hint-chat {
-  right: clamp(16px, 4vw, 28px);
-  bottom: clamp(88px, 14vh, 120px);
-  animation-name: onboarding-fade;
-}
-
-@keyframes onboarding-fade {
-  0% {
-    opacity: 0;
-  }
-  15%,
-  55% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes onboarding-fade-left {
-  0% {
-    opacity: 0;
-    transform: translate(10px, -50%);
-  }
-  15%,
-  55% {
-    opacity: 1;
+@keyframes hint-bounce-left {
+  0%, 100% {
     transform: translate(0, -50%);
   }
-  100% {
-    opacity: 0;
+  50% {
     transform: translate(-10px, -50%);
   }
 }
 
-@keyframes onboarding-fade-right {
-  0% {
-    opacity: 0;
-    transform: translate(-10px, -50%);
-  }
-  15%,
-  55% {
-    opacity: 1;
+@keyframes hint-bounce-right {
+  0%, 100% {
     transform: translate(0, -50%);
   }
-  100% {
-    opacity: 0;
+  50% {
     transform: translate(10px, -50%);
   }
 }
 
-@keyframes onboarding-fade-down {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -10px);
-  }
-  15%,
-  55% {
-    opacity: 1;
+@keyframes hint-bounce-down {
+  0%, 100% {
     transform: translate(-50%, 0);
   }
-  100% {
-    opacity: 0;
+  50% {
     transform: translate(-50%, 10px);
-  }
-}
-
-@media (max-width: 640px) {
-  .hint-chat {
-    bottom: clamp(76px, 14vh, 100px);
   }
 }
 
@@ -3200,12 +3153,26 @@ html[data-theme="dark"] .software-meter {
   cursor: pointer;
   box-shadow: var(--shadow);
   transition: border-color 200ms var(--ease), color 200ms var(--ease), transform 200ms var(--ease);
+  animation: bot-toggle-pulse 8s ease-in-out infinite;
 }
 
 .lucas-bot-toggle:hover {
   border-color: var(--blue);
   color: var(--blue);
   transform: translateY(-2px);
+}
+
+.lucas-bot-toggle.is-open {
+  animation: none;
+}
+
+@keyframes bot-toggle-pulse {
+  0%, 70%, 100% {
+    box-shadow: var(--shadow), 0 0 0 0 var(--blue-soft);
+  }
+  78%, 92% {
+    box-shadow: var(--shadow), 0 0 0 10px var(--blue-soft);
+  }
 }
 
 .lucas-bot-panel {

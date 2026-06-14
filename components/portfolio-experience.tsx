@@ -10,7 +10,6 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  MessageCircle,
   Moon,
   Phone,
   Sun,
@@ -99,28 +98,11 @@ export default function PortfolioExperience() {
   );
 }
 
-// Brief, icon-only ghost hints shown once on first visit to nudge new
-// visitors toward the interactions available on the page: horizontal
-// scroll between profiles, scrolling down for more sections, and the
-// Lucas Bot chat toggle.
+// Persistent, icon-only ghost hints that nudge visitors toward the
+// interactions available on the page: horizontal scroll between profiles
+// and scrolling down for more sections. They stay visible with a looping
+// bounce animation so the gestures keep reading as "interactive".
 function OnboardingHints() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.sessionStorage.getItem("lucas-portfolio-onboarding-seen")) return;
-
-    setVisible(true);
-
-    const timer = setTimeout(() => {
-      setVisible(false);
-      window.sessionStorage.setItem("lucas-portfolio-onboarding-seen", "1");
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (!visible) return null;
-
   return (
     <div className="onboarding-hints" aria-hidden="true">
       <span className="onboarding-hint hint-left">
@@ -131,9 +113,6 @@ function OnboardingHints() {
       </span>
       <span className="onboarding-hint hint-down">
         <ArrowDown size={26} />
-      </span>
-      <span className="onboarding-hint hint-chat">
-        <MessageCircle size={26} />
       </span>
     </div>
   );

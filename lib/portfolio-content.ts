@@ -577,7 +577,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
       roles: ["Ingeniero Industrial", "Mechanical Fitter & Polywelder"],
       tagline: "Diseñado desde la ingeniería. Probado en campo.",
       proofPoints: [
-        "Dewatering minero",
+        "Desagotamiento minero",
         "Sistemas de tubería HDPE",
         "Paradas de mantenimiento",
         "Diseño mecánico y documentación",
@@ -681,7 +681,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
             side: "field",
             summary: "Experiencia en entornos open pit y underground bajo estándares Tier 1.",
             details: [
-              "Sistemas de dewatering minero, reubicación de bombas e instalación de líneas HDPE.",
+              "Sistemas de desagotamiento minero, reubicación de bombas e instalación de líneas HDPE.",
               "Experiencia en shutdowns y trabajos de sitio de ritmo acelerado.",
               "Experiencia bajo estándares exigentes de sitio minero.",
             ],
@@ -853,7 +853,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
           {
             title: "Operaciones de Campo",
             skills: [
-              "Dewatering minero",
+              "Desagotamiento minero",
               "Reubicación de bombas",
               "Instalación de líneas HDPE",
               "Ambientes open pit",
@@ -939,7 +939,7 @@ export const copy: Record<Locale, PortfolioCopy> = {
         eyebrow: "Capacidades convertidas en resultados",
         items: [
           {
-            title: "Sistemas HDPE para dewatering minero",
+            title: "Sistemas HDPE para desagotamiento minero",
             context: "Ejecución HDPE en campo",
             details: [
               "Instalación y reubicación de bombas y líneas HDPE.",

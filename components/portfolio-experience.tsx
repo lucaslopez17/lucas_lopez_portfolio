@@ -81,9 +81,7 @@ export default function PortfolioExperience() {
 
   useEffect(() => {
     function handleScroll() {
-      if (window.scrollY > window.innerHeight * 0.4) {
-        setHasScrolledDown(true);
-      }
+      setHasScrolledDown(window.scrollY > window.innerHeight * 0.4);
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);

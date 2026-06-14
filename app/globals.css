@@ -3097,6 +3097,11 @@ html[data-theme="dark"] .software-meter {
   bottom: clamp(28px, 6vh, 56px);
   transform: translateX(-50%);
   animation: hint-bounce-down 2.2s ease-in-out infinite;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 @keyframes hint-bounce-left {

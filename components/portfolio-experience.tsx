@@ -120,21 +120,28 @@ function OnboardingHints({
   hasScrolledDown: boolean;
 }) {
   return (
-    <div className="onboarding-hints" aria-hidden="true">
+    <div className="onboarding-hints">
       {!hasScrolledDown && activeProfileSide !== "engineering" && (
-        <span className="onboarding-hint hint-left">
+        <span className="onboarding-hint hint-left" aria-hidden="true">
           <ArrowLeft size={26} />
         </span>
       )}
       {!hasScrolledDown && activeProfileSide !== "field" && (
-        <span className="onboarding-hint hint-right">
+        <span className="onboarding-hint hint-right" aria-hidden="true">
           <ArrowRight size={26} />
         </span>
       )}
       {!hasScrolledDown && (
-        <span className="onboarding-hint hint-down">
+        <button
+          type="button"
+          className="onboarding-hint hint-down"
+          aria-label="Scroll down"
+          onClick={() => {
+            document.querySelector<HTMLButtonElement>(".face-hotspot-down")?.click();
+          }}
+        >
           <ArrowDown size={26} />
-        </span>
+        </button>
       )}
     </div>
   );

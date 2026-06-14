@@ -77,6 +77,18 @@ export default function PortfolioExperience() {
     setActiveProfileSide(null);
   }
 
+  const [hasScrolledDown, setHasScrolledDown] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > window.innerHeight * 0.4) {
+        setHasScrolledDown(true);
+      }
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <main className={`site-shell ${activeProfileSide ? `is-${activeProfileSide}-selected` : ""}`}>
       <AmbientSystem />
@@ -92,7 +104,7 @@ export default function PortfolioExperience() {
       <LanguagesSection t={t} />
       <ProjectsSection t={t} />
       <ContactSection t={t} />
-      <OnboardingHints />
+      <OnboardingHints activeProfileSide={activeProfileSide} hasScrolledDown={hasScrolledDown} />
       <LucasBot locale={locale} />
     </main>
   );
@@ -102,18 +114,30 @@ export default function PortfolioExperience() {
 // interactions available on the page: horizontal scroll between profiles
 // and scrolling down for more sections. They stay visible with a looping
 // bounce animation so the gestures keep reading as "interactive".
-function OnboardingHints() {
+function OnboardingHints({
+  activeProfileSide,
+  hasScrolledDown,
+}: {
+  activeProfileSide: ProfileSide | null;
+  hasScrolledDown: boolean;
+}) {
   return (
     <div className="onboarding-hints" aria-hidden="true">
-      <span className="onboarding-hint hint-left">
-        <ArrowLeft size={26} />
-      </span>
-      <span className="onboarding-hint hint-right">
-        <ArrowRight size={26} />
-      </span>
-      <span className="onboarding-hint hint-down">
-        <ArrowDown size={26} />
-      </span>
+      {activeProfileSide !== "engineering" && (
+        <span className="onboarding-hint hint-left">
+          <ArrowLeft size={26} />
+        </span>
+      )}
+      {activeProfileSide !== "field" && (
+        <span className="onboarding-hint hint-right">
+          <ArrowRight size={26} />
+        </span>
+      )}
+      {!hasScrolledDown && (
+        <span className="onboarding-hint hint-down">
+          <ArrowDown size={26} />
+        </span>
+      )}
     </div>
   );
 }

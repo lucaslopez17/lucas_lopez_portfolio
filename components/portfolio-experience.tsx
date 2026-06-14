@@ -274,7 +274,8 @@ function Hero({
 
       const overviewLeft = track.clientWidth;
       if (Math.abs(track.scrollLeft - overviewLeft) > 8) {
-        track.scrollTo({ left: overviewLeft, behavior: "smooth" });
+        track.scrollTo({ left: overviewLeft, behavior: "auto" });
+        syncPortraitPosition(track);
       }
 
       if (activeProfileSide) {

@@ -9,8 +9,40 @@ const NOT_ENOUGH_INFO = {
   es: "No tengo suficiente información para responder eso con precisión. Podés contactar a Lucas directamente para confirmarlo.",
 };
 
+const RATE_LIMIT_MAX = 10;
+const RATE_LIMIT_WINDOW_MS = 5 * 60 * 1000;
+const requestLog = new Map<string, number[]>();
+
+const TOO_MANY_REQUESTS = {
+  en: "You're sending messages too quickly. Please wait a few minutes and try again.",
+  es: "Estás enviando mensajes muy rápido. Esperá unos minutos y volvé a intentar.",
+};
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (requestLog.get(ip) ?? []).filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    requestLog.set(ip, timestamps);
+    return true;
+  }
+
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+  return false;
+}
+
 export async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+
+    if (isRateLimited(ip)) {
+      const body = await request.json().catch(() => ({}));
+      const message = typeof body?.message === "string" ? body.message : "";
+      const language = detectLanguage(message);
+      return NextResponse.json({ reply: TOO_MANY_REQUESTS[language] }, { status: 429 });
+    }
+
     const body = await request.json();
     const message = typeof body?.message === "string" ? body.message.trim() : "";
 

@@ -3312,6 +3312,35 @@ html[data-theme="dark"] .software-meter {
   }
 }
 
+.lucas-bot-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 12px 12px;
+}
+
+.lucas-bot-suggestion {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--cyan);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-family: var(--font-body), Arial, sans-serif;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.lucas-bot-suggestion:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.lucas-bot-suggestion:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .lucas-bot-input-row {
   display: flex;
   gap: 8px;

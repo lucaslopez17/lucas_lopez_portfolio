@@ -10,13 +10,23 @@ type ChatMessage = {
   text: string;
 };
 
-const COPY: Record<Locale, { title: string; intro: string; placeholder: string; error: string }> = {
+const COPY: Record<
+  Locale,
+  { title: string; intro: string; placeholder: string; error: string; suggestions: { label: string; question: string }[] }
+> = {
   en: {
     title: "Lucas Bot",
     intro:
       "Hey, I'm Lucas Bot. Ask me anything about Lucas's engineering background, field experience, software skills or projects.",
     placeholder: "Ask me about Lucas...",
     error: "Something went wrong talking to Lucas Bot. Please try again.",
+    suggestions: [
+      { label: "Mining experience", question: "What experience does Lucas have in mining?" },
+      { label: "Polywelding & ISO", question: "What is Lucas's experience with polywelding and ISO standards?" },
+      { label: "Software skills", question: "What software skills does Lucas have?" },
+      { label: "Industrial engineering", question: "What is Lucas's background in industrial engineering?" },
+      { label: "Languages & education", question: "What languages does Lucas speak and what is his education?" },
+    ],
   },
   es: {
     title: "Lucas Bot",
@@ -24,6 +34,13 @@ const COPY: Record<Locale, { title: string; intro: string; placeholder: string; 
       "Hola, soy Lucas Bot. Preguntame lo que quieras sobre la experiencia de Lucas en ingeniería, terreno, software o proyectos.",
     placeholder: "Preguntame sobre Lucas...",
     error: "Algo salió mal hablando con Lucas Bot. Intentá de nuevo.",
+    suggestions: [
+      { label: "Experiencia en minería", question: "¿Qué experiencia tiene Lucas en minería?" },
+      { label: "Polywelding e ISO", question: "¿Qué experiencia tiene Lucas con polywelding y normas ISO?" },
+      { label: "Skills de software", question: "¿Qué habilidades de software tiene Lucas?" },
+      { label: "Ingeniería industrial", question: "¿Cuál es la experiencia de Lucas en ingeniería industrial?" },
+      { label: "Idiomas y educación", question: "¿Qué idiomas habla Lucas y cuál es su formación?" },
+    ],
   },
 };
 
@@ -50,8 +67,8 @@ export default function LucasBot({ locale }: { locale: Locale }) {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, isLoading, isOpen]);
 
-  async function sendMessage() {
-    const text = input.trim();
+  async function sendMessage(overrideText?: string) {
+    const text = (overrideText ?? input).trim();
     if (!text || isLoading) return;
 
     setMessages((current) => [...current, { role: "user", text }]);
@@ -124,6 +141,22 @@ export default function LucasBot({ locale }: { locale: Locale }) {
             {errorText ? <div className="lucas-bot-message is-error">{errorText}</div> : null}
           </div>
 
+          {messages.length === 1 ? (
+            <div className="lucas-bot-suggestions">
+              {copy.suggestions.map((suggestion) => (
+                <button
+                  key={suggestion.label}
+                  type="button"
+                  className="lucas-bot-suggestion"
+                  onClick={() => sendMessage(suggestion.question)}
+                  disabled={isLoading}
+                >
+                  {suggestion.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
+
           <div className="lucas-bot-input-row">
             <input
               type="text"
@@ -136,7 +169,7 @@ export default function LucasBot({ locale }: { locale: Locale }) {
             />
             <button
               type="button"
-              onClick={sendMessage}
+              onClick={() => sendMessage()}
               disabled={isLoading || !input.trim()}
               aria-label="Send message"
             >

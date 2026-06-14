@@ -141,8 +141,11 @@ function OnboardingHints({
               activeProfileSide === "field" ? ".field-page .split-panel-content" : ".engineering-page .split-panel-content"
             );
             if (activeProfileSide && scroller) {
-              scroller.scrollBy({ top: scroller.clientHeight * 0.6, behavior: "smooth" });
-              return;
+              const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 4;
+              if (!atBottom) {
+                scroller.scrollBy({ top: scroller.clientHeight * 0.6, behavior: "smooth" });
+                return;
+              }
             }
             document.querySelector<HTMLButtonElement>(".face-hotspot-down")?.click();
           }}

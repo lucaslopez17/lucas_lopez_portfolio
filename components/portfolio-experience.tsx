@@ -137,9 +137,13 @@ function OnboardingHints({
           className="onboarding-hint hint-down"
           aria-label="Scroll down"
           onClick={() => {
-            const scroller = document.querySelector<HTMLElement>(
-              activeProfileSide === "field" ? ".field-page .split-panel-content" : ".engineering-page .split-panel-content"
+            const pageSelector = activeProfileSide === "field" ? ".field-page" : ".engineering-page";
+            const panel = document.querySelector<HTMLElement>(pageSelector);
+            const content = panel?.querySelector<HTMLElement>(".split-panel-content") ?? null;
+            const scroller = [content, panel].find(
+              (el): el is HTMLElement => !!el && el.scrollHeight > el.clientHeight + 1
             );
+
             if (activeProfileSide && scroller) {
               const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 4;
               if (!atBottom) {

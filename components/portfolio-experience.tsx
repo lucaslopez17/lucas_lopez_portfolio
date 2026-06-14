@@ -123,12 +123,12 @@ function OnboardingHints({
 }) {
   return (
     <div className="onboarding-hints" aria-hidden="true">
-      {activeProfileSide !== "engineering" && (
+      {!hasScrolledDown && activeProfileSide !== "engineering" && (
         <span className="onboarding-hint hint-left">
           <ArrowLeft size={26} />
         </span>
       )}
-      {activeProfileSide !== "field" && (
+      {!hasScrolledDown && activeProfileSide !== "field" && (
         <span className="onboarding-hint hint-right">
           <ArrowRight size={26} />
         </span>
